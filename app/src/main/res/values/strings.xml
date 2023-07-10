@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">ELearningApp</string>
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="register_string">Register</string>
+    <string name="app_string">app</string>
+    <string name="create_your_account_string">Create your account</string>
+    <string name="enter_your_full_name_string">Enter your full name</string>
+    <string name="confirm_password_string">Confirm password</string>
+    <string name="create_password_string">Create password</string>
+    <string name="enter_you_email_string">Enter Your email</string>
+    <string name="do_you_have_an_account__sign_in_string">Do you have an account? Sign In</string>
+    <string name="sent_email_string">Sent email</string>
+    <string name="already_have_an_account__sign_up_string">Already have an account? Sign Up</string>
+    <string name="enter_your_email_string">Enter your email</string>
+    <string name="login_string">Login</string>
+    <string name="forget_password__string">Forget Password?</string>
+    <string name="enter_you_email_ek1_string">Enter you email</string>
+    <string name="welcome_back__string">Welcome back!</string>
 </resources>

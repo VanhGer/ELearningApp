@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- register colors -->
+    <color name="_bg__register_color">#F5F5F5</color>
+    <color name="register_color">#FFFFFF</color>
+    <color name="_bg__forget_color">#F5F5F5</color>
+    <color name="rectangle_257_color">#2D5289</color>
+    <color name="sent_email_color">#FFFFFF</color>
+    <color name="already_have_an_account__sign_up_color">#000000</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="_bg__login_color">#F5F5F5</color>
+    <color name="login_color">#FFFFFF</color>
+    <color name="app_color">#000000</color>
+    <color name="forget_password__color">#55BBAF</color>
 </resources>
