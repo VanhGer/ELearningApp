@@ -1,0 +1,131 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <RelativeLayout android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+
+        <View
+            android:id="@+id/_bg__forget"
+            android:layout_width="match_parent"
+            android:layout_height="720dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/_bg__forget_shape" />
+
+        <RelativeLayout android:id="@+id/button"
+            android:layout_marginTop="479dp"
+            android:layout_marginStart="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+
+        </RelativeLayout>
+
+        <Button android:id="@+id/already_have_an_account__sign_up"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/forget_password__color"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="510dp"
+            android:layout_width="320dp"
+            android:layout_height="53dp"
+            android:text="@string/already_have_an_account__sign_up_string"
+            android:background="@android:color/transparent"
+            />
+        <Button android:id="@+id/do_you_have_an_account__sign_in"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/app_color"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="560dp"
+            android:layout_width="350dp"
+            android:layout_height="53dp"
+            android:text="@string/do_you_have_an_account__sign_in_string"
+            android:background="@android:color/transparent"
+            />
+
+
+
+        <TextView
+            android:id="@+id/app"
+            android:layout_width="343dp"
+            android:layout_height="64.5dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="90dp"
+            android:gravity="center"
+            android:text="Check your email!"
+            android:textColor="@color/app_color"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/enter_your_email1"
+            android:layout_width="343dp"
+            android:layout_height="64.5dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="150dp"
+            android:gravity="center"
+            android:text="We’ve sent a password recover instruction to your email"
+            android:textColor="@color/already_have_an_account__sign_up_color"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/enter_your_email"
+            android:layout_width="343dp"
+            android:layout_height="64.5dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="610dp"
+            android:gravity="center"
+            android:text="Didn’t get any email? Check your spam
+folder or try again with a valid email."
+            android:textColor="@color/already_have_an_account__sign_up_color"
+            android:textSize="14sp"
+            />
+
+        <ImageView android:id="@+id/vector"
+            android:src="@drawable/vector"
+            android:contentDescription="vector"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="35dp"
+            android:layout_width="21.88dp"
+            android:layout_height="21.32dp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/forget"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="220dp"
+            />
+
+        <Button
+            android:id="@+id/button5"
+            android:background="@drawable/rectangle_257_shape"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="450dp"
+            android:layout_width="318dp"
+            android:layout_height="54dp"
+            android:text="Open your email"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/sent_email_color"
+            android:layout_marginLeft="51dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
