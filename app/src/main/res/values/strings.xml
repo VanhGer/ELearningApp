@@ -17,4 +17,22 @@
     <string name="enter_you_email_ek1_string">Enter you email</string>
     <string name="welcome_back__string">Welcome back!</string>
     <string name="searchTitle">Search</string>
+
+    <string name="lesson_tongquan">Tổng quan</string>
+    <string name="lesson_baihoc">Bài học</string>
+    <string name="lessonTitle">Lesson Title</string>
+    <string name="courseName">Course Name</string>
+    <string name="authorName">Author Name</string>
+    <string name="courseIntro">etting the height of the child to match that of a ScrollView parent is contradictory to what the component is meant to do. What we want most of the time is for some dynamic sized content to be scrollable when it is larger than a screen/frame; matching the height with the parent ScrollView would force all the content to be displayed into a fixed frame (the height of the parent) hence invalidating any scrolling functionality.
+
+This also happens when regular direct child components are set to layout_height="match_parent".
+
+If you want the child of the ScrollView to match the height of the parent when there is not enough content, simply set android:fillViewport to true for the ScrollView.
+    etting the height of the child to match that of a ScrollView parent is contradictory to what the component is meant to do. What we want most of the time is for some dynamic sized content to be scrollable when it is larger than a screen/frame; matching the height with the parent ScrollView would force all the content to be displayed into a fixed frame (the height of the parent) hence invalidating any scrolling functionality.
+
+This also happens when regular direct child components are set to layout_height="match_parent".
+
+If you want the child of the ScrollView to match the height of the parent when there is not enough content, simply set android:fillViewport to true for the ScrollView.</string>
+
+
 </resources>

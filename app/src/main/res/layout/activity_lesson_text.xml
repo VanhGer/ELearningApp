@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:paddingStart="20dp"
+    android:paddingLeft="20dp"
+    android:paddingTop="32dp"
+    android:paddingEnd="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp">
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/return_btn"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
         android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,82 +23,93 @@
 
     <TextView
         android:id="@+id/lesson_title2"
-        android:layout_width="305dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="Vip lesson"
+        android:text="@string/lessonTitle"
         android:textAllCaps="true"
-        android:textColor="#3A3838"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/return_btn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_lesson"
-        android:layout_width="0dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="📖 Content"
+        android:background="@drawable/courses_bg"
+        android:text="📖 Nội dung"
         android:textAllCaps="true"
-        android:textColor="#2196F3"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lesson_title2" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-        android:background="#E1DEDE"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:text="text lesson"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_pre_lesson"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bgr_2"
+        android:paddingLeft="4dp"
+        android:paddingTop="4dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="4dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_lesson" />
+        app:layout_constraintTop_toBottomOf="@+id/text_lesson"
+        app:layout_constraintVertical_bias="0.25">
 
-    <Button
-        android:id="@+id/btn_pre_lesson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#2196F3"
-        android:text="Pre"
-        app:iconTint="#FAFAFA"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <TextView
+            android:id="@+id/lesson_script"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bgr_2"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:text="text lessonslknskdnksdnfksdfhlskadfjkasdjfklsadjflasdjfklasdjfalsdjfalsdfjsadlfjasdlfjasdlfjasdlfjasdlfjsadlfjasdflasdfjsldfjasdlf lalsjfalsdfj sldf"
+            android:textSize="16sp" />
+    </ScrollView>
 
-    <Button
-        android:id="@+id/btn_next_lesson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#2196F3"
-        android:text="Next"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_pre_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#B388FF"
+            android:text="Pre "
+            app:iconTint="#FAFAFA"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_next_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#B388FF"
+            android:text="Next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
