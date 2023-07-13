@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#202AAC6F">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="411dp"
+        android:layout_height="102dp"
+        android:background="#1316C3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="65dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/settingvector" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="46dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/backbuttom" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="145dp"
+        android:layout_marginBottom="1dp"
+        android:text="Name user"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="150dp"
+        android:gravity="center"
+        android:text="Bio of user"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView13"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:srcCompat="@drawable/instagram" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="40dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/button8"
+        app:layout_constraintEnd_toStartOf="@+id/imageView13"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:srcCompat="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="40dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="99dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:srcCompat="@drawable/telegram" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="19dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="9dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/imageView14"
+        app:layout_constraintStart_toEndOf="@+id/button7" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="11dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/imageView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button8" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="182dp"
+        android:layout_height="144dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7"
+        app:srcCompat="@drawable/course1" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="238dp"
+        android:layout_height="139dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/course2" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="189dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14"
+        app:srcCompat="@drawable/course3" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="411dp"
+        android:layout_height="118dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/avatarmain" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

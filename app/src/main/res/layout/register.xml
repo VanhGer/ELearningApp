@@ -1,0 +1,139 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center"
+	android:orientation="vertical">
+
+	<RelativeLayout android:id="@+id/content_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" >
+
+			<View
+				android:id="@+id/_bg__register"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginStart="0dp"
+				android:layout_marginTop="0dp"
+				android:background="@drawable/_bg__register_shape" />
+
+
+
+
+			<TextView android:id="@+id/app"
+				android:textStyle="bold"
+				android:layout_gravity="center_horizontal|center"
+				android:gravity="center"
+				android:textSize="29sp"
+				android:textColor="@color/app_color"
+				android:layout_marginLeft="18dp"
+				android:layout_marginTop="70dp"
+				android:layout_width="360dp"
+				android:layout_height="64.5dp"
+				android:text="@string/app_name"
+				 />
+
+			<TextView android:id="@+id/create_your_account"
+				android:layout_gravity="center_horizontal|center"
+				android:gravity="center"
+				android:textSize="16sp"
+				android:textColor="@color/app_color"
+				android:layout_marginLeft="37dp"
+				android:layout_marginTop="160dp"
+				android:layout_width="330dp"
+				android:layout_height="36dp"
+				android:text="@string/create_your_account_string"
+				 />
+
+			<EditText   android:id="@+id/rectangle_258"
+				android:background="@drawable/rectangle_258_shape"
+				android:layout_marginStart="39dp"
+				android:layout_marginTop="230dp"
+				android:layout_width="330dp"
+				android:layout_height="57dp"
+				android:text="@string/enter_your_full_name_string"
+				android:gravity="center"
+				android:textSize="14sp"
+				android:textColor="@color/app_color"
+				android:inputType="text"
+				/>
+
+			<EditText   android:id="@+id/rectangle_259"
+				android:background="@drawable/rectangle_259_shape"
+				 android:layout_marginStart="39dp"
+				android:layout_marginTop="440dp"
+				android:layout_width="330dp"
+				android:layout_height="57dp"
+				android:text="@string/confirm_password_string"
+				android:gravity="center"
+				android:textSize="14sp"
+				android:textColor="@color/app_color"
+				android:inputType="textPassword"
+				/>
+
+			<EditText   android:id="@+id/rectangle_260"
+				android:background="@drawable/rectangle_260_shape"
+				 android:layout_marginStart="39dp"
+				android:layout_marginTop="370dp"
+				android:layout_width="330dp"
+				android:layout_height="57dp"
+				android:text="@string/create_password_string"
+				android:gravity="center"
+				android:textSize="14sp"
+				android:textColor="@color/app_color"
+				android:inputType="textPassword"				/>
+
+			<EditText   android:id="@+id/rectangle_261"
+				android:background="@drawable/rectangle_261_shape"
+				 android:layout_marginStart="39dp"
+				android:layout_marginTop="300dp"
+				android:layout_width="330dp"
+				android:layout_height="57dp"
+				android:text="@string/enter_your_email_string"
+				android:gravity="center"
+				android:textSize="14sp"
+				android:textColor="@color/app_color"
+				android:inputType="textEmailAddress"
+				/>
+
+
+
+
+			<ImageView android:id="@+id/vector"
+				android:src="@drawable/vector"
+				android:contentDescription="vector"
+				 android:layout_marginStart="32dp"
+				android:layout_marginTop="43dp"
+				android:layout_width="21.88dp"
+				android:layout_height="21.32dp" />
+
+			<Button android:id="@+id/do_you_have_an_account__sign_in"
+				android:layout_gravity="center_horizontal|center"
+				android:gravity="center"
+				android:textSize="16sp"
+				android:textColor="@color/forget_password__color"
+				android:layout_marginLeft="38dp"
+				android:layout_marginTop="585dp"
+				android:layout_width="350dp"
+				android:layout_height="53dp"
+				android:text="@string/do_you_have_an_account__sign_in_string"
+				android:background="@android:color/transparent"
+				/>
+
+		<Button
+			android:id="@+id/button6"
+			android:layout_width="330dp"
+			android:layout_height="54dp"
+			android:layout_gravity="center_horizontal|center"
+			android:layout_marginStart="39dp"
+			android:layout_marginTop="520dp"
+			android:background="@drawable/rectangle_257_shape"
+			android:gravity="center"
+			android:text="@string/register_string"
+			android:textColor="@color/login_color"
+			android:textSize="18sp"
+			android:textStyle="bold" />
+
+	</RelativeLayout>
+	</LinearLayout>
