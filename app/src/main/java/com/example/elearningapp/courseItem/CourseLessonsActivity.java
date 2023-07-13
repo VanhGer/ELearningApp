@@ -3,6 +3,7 @@ package com.example.elearningapp.courseItem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class CourseLessonsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.w("vjp2", "ok");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
@@ -39,6 +41,7 @@ public class CourseLessonsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent overallActivity = new Intent(getApplicationContext(), CourseOverallActivity.class);
                 startActivity(overallActivity);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
     }

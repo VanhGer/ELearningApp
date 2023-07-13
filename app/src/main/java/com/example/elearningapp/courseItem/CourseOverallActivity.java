@@ -24,6 +24,7 @@ public class CourseOverallActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent lessonActivity = new Intent(getApplicationContext(), CourseLessonsActivity.class);
                 startActivity(lessonActivity);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
