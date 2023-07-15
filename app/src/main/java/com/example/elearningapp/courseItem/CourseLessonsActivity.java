@@ -27,11 +27,11 @@ public class CourseLessonsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.lesson_list_view);
         List<LessonItem> lessonItemList = new ArrayList<LessonItem>();
 
-        for (int i = 1; i <= 20; i++) {
+       /* for (int i = 1; i <= 20; i++) {
             lessonItemList.add(new LessonItem("bai hoc hom nay se la ve cc nhe cac e",
                     "Cristiano Ronaldo dos Santos Aveiro GOIH ComM is a Portuguese professional footballer",
                     R.drawable.course1));
-        }
+        }*/
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ListAdapter(getApplicationContext(), lessonItemList));
 
