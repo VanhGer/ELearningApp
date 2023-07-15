@@ -10,4 +10,11 @@
 
     </style>
 
+    <style name="bottomNavigationText">
+        <item name="android:fontFamily">@font/gilroybold</item>
+    </style>
+
+    <style name="bottomNavigationActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/md_blue_50</item>
+    </style>
 </resources>
