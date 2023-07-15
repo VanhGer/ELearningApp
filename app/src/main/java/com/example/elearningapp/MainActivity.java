@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
+        CreateDatabase tmp = new CreateDatabase();
+        tmp.create(MainActivity.this);
         ImageButton btn = findViewById(R.id.imageButton5);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
