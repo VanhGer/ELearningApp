@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.MainActivity;
+import com.example.elearningapp.adapter.SearchAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +29,10 @@ public class SearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private View rootView;
+
+    private GridView gridPopularSearch;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -61,6 +69,15 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        String[] searchName = {"Animation", "Graphic Design", "Film", "Photography"};
+        int[] searchImage = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d};
+
+        SearchAdapter searchAdapter = new SearchAdapter(this.getActivity(), searchName, searchImage);
+
+        gridPopularSearch = rootView.findViewById(R.id.gridPopularView);
+        gridPopularSearch.setAdapter(searchAdapter);
+
+        return rootView;
     }
 }
