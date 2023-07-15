@@ -34,5 +34,8 @@ This also happens when regular direct child components are set to layout_height=
 
 If you want the child of the ScrollView to match the height of the parent when there is not enough content, simply set android:fillViewport to true for the ScrollView.</string>
 
-
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_bookmark">Bookmark</string>
+    <string name="menu_profile">Profile</string>
 </resources>
