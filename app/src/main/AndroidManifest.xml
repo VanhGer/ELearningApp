@@ -13,13 +13,22 @@
         android:theme="@style/Theme.ELearningApp"
         tools:targetApi="31">
         <activity
+            android:name=".lessonType.testLesson"
+            android:exported="false" />
+        <activity
+            android:name=".lessonType.textLesson"
+            android:exported="false" />
+        <activity
+            android:name=".lessonType.videoLesson"
+            android:exported="false" />
+        <activity
             android:name=".courseItem.CourseOverallActivity"
             android:exported="false" />
         <activity
             android:name=".courseItem.CourseLessonsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

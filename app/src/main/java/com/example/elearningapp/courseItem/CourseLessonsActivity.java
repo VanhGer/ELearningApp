@@ -12,28 +12,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
+import com.example.elearningapp.lessonType.textLesson;
+import com.example.elearningapp.lessonType.videoLesson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseLessonsActivity extends AppCompatActivity {
+public class CourseLessonsActivity extends AppCompatActivity implements ClickHelper {
+
+    List<LessonItem> lessonItemList;
     @Override
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.w("vjp2", "ok");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
-
+        LessonDatabaseHelper helper = new LessonDatabaseHelper();
         RecyclerView recyclerView = findViewById(R.id.lesson_list_view);
-        List<LessonItem> lessonItemList = new ArrayList<LessonItem>();
+        lessonItemList = helper.getListLessonByCourseId(getApplicationContext(), 1);
 
-       /* for (int i = 1; i <= 20; i++) {
-            lessonItemList.add(new LessonItem("bai hoc hom nay se la ve cc nhe cac e",
-                    "Cristiano Ronaldo dos Santos Aveiro GOIH ComM is a Portuguese professional footballer",
-                    R.drawable.course1));
-        }*/
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ListAdapter(getApplicationContext(), lessonItemList));
+        recyclerView.setAdapter(new ListAdapter(getApplicationContext(), lessonItemList, this));
 
         TextView lessonList_btn = findViewById(R.id.lesson_tongquan);
         lessonList_btn.setOnClickListener(new View.OnClickListener() {
@@ -44,5 +44,16 @@ public class CourseLessonsActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        if (lessonItemList.get(position).getType().equals("video")) {
+            Intent intent = new Intent(CourseLessonsActivity.this, videoLesson.class);
+            startActivity(intent);
+        } else if (lessonItemList.get(position).getType().equals("text")) {
+            Intent intent = new Intent(CourseLessonsActivity.this, textLesson.class);
+            startActivity(intent);
+        }
     }
 }
