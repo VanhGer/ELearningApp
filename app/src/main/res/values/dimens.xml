@@ -3,4 +3,5 @@
     <dimen name="titleSpacing">0.1</dimen>
     <dimen name="titleTextSize">24sp</dimen>
     <dimen name="padding">20dp</dimen>
+    <dimen name="bottomNavHeight">54dp</dimen>
 </resources>
