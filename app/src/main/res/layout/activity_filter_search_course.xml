@@ -58,6 +58,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -73,52 +74,81 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/classTypeGroup"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/gilroyregular"
-                android:text="Free classes"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:padding="1dp"
+                android:background="@drawable/radio_rectangle_group_bg"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7">
 
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
-                android:text="Premium classes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_rectangle_selector"
+                    android:button="@color/md_trans"
+                    android:fontFamily="@font/gilroymedium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="All"
+                    android:textColor="@drawable/text_color_selector"
+                    android:textSize="16sp" />
 
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
-                android:text="All"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_rectangle_selector"
+                    android:button="@color/md_trans"
+                    android:fontFamily="@font/gilroymedium"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Original"
+                    android:textColor="@drawable/text_color_selector" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_rectangle_selector"
+                    android:button="@color/md_trans"
+                    android:fontFamily="@font/gilroymedium"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Staff Pick"
+                    android:textColor="@drawable/text_color_selector" />
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/gilroybold"
                 android:text="CLASS LEVEL"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+                app:layout_constraintTop_toBottomOf="@+id/classTypeGroup" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/gilroyregular"
+                android:fontFamily="@font/gilroymedium"
                 android:text="Beginner"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -126,8 +156,9 @@
                 android:id="@+id/checkBox5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
+                android:fontFamily="@font/gilroymedium"
                 android:text="Intermidiate"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
@@ -135,8 +166,9 @@
                 android:id="@+id/checkBox6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
+                android:fontFamily="@font/gilroymedium"
                 android:text="Advance"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
 
@@ -153,9 +185,11 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9">
 
@@ -164,43 +198,95 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/gilroyregular"
+                    android:fontFamily="@font/gilroymedium"
                     android:text="&lt; 15 min"
                     android:textSize="16sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/gilroyregular" />
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:fontFamily="@font/gilroymedium" />
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBox8"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
-                android:text="15-30 min"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
-            <CheckBox
-                android:id="@+id/checkBox9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
-                android:text=" 60 min"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox10" />
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/gilroymedium"
+                    android:text="15-30 min"
+                    android:textSize="16sp" />
 
-            <CheckBox
-                android:id="@+id/checkBox10"
-                android:layout_width="wrap_content"
+                <CheckBox
+                    android:id="@+id/checkBox15"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:fontFamily="@font/gilroymedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroyregular"
-                android:text="30-60 min"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/gilroymedium"
+                    android:text="30-60 min"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox16"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:fontFamily="@font/gilroymedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/gilroymedium"
+                    android:text="&gt; 60 min"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox17"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:fontFamily="@font/gilroymedium" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button4"
@@ -209,11 +295,11 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="48dp"
                 android:backgroundTint="@color/md_trans"
-                android:fontFamily="@font/interbold"
+                android:fontFamily="@font/gilroybold"
                 android:text="Reset"
                 android:textColor="@color/md_red_900"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
 
             <Button
                 android:id="@+id/button5"
@@ -221,7 +307,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="48dp"
                 android:backgroundTint="@color/md_light_blue_800"
-                android:fontFamily="@font/interbold"
+                android:fontFamily="@font/gilroybold"
                 android:text="Apply"
                 app:cornerRadius="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
