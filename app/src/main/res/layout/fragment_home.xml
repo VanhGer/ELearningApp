@@ -8,32 +8,37 @@
     android:paddingLeft="@dimen/padding"
     android:paddingTop="32dp"
     android:paddingRight="@dimen/padding"
-    android:paddingBottom="0dp">
+    android:paddingBottom="@dimen/padding">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:id="@+id/greeting1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Hello, User!"
+        android:text="@string/greeting1"
         android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/profilePic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/greeting2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Hôm nay bạn muốn học gì?"
+        android:layout_marginEnd="50dp"
+        android:text="@string/greeting2"
         android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/profilePic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/greeting1" />
 
     <ImageView
-        android:id="@+id/imageView23"
+        android:id="@+id/profilePic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/profilePic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/avatarmain" />
@@ -48,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/greeting2"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,109 +61,109 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/mostViewedCourse"
                 android:layout_width="233dp"
                 android:layout_height="49dp"
                 android:fontFamily="@font/intersemibold"
-                android:text="Khóa học được theo dõi nhiều nhất"
+                android:text="@string/mostViewedCourse"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/seeMore1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xem thêm"
+                android:text="@string/seeMore"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView19"
+                app:layout_constraintBottom_toBottomOf="@+id/mostViewedCourse"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/mostViewedCourse1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView23"
+                app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName1"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toStartOf="@+id/imageView9"
+                app:layout_constraintEnd_toStartOf="@+id/mostViewedCourse2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse"
                 app:srcCompat="@drawable/course1" />
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/mostViewedCourse2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView25"
+                app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView10"
-                app:layout_constraintTop_toTopOf="@+id/imageView10"
+                app:layout_constraintStart_toEndOf="@+id/mostViewedCourse1"
+                app:layout_constraintTop_toTopOf="@+id/mostViewedCourse1"
                 app:srcCompat="@drawable/course2" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/mostViewedCourseName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/interbold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse1" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/mostViewedCourseTeacher1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giáo viên 1"
-                app:layout_constraintStart_toStartOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseName1" />
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/mostViewedCourseName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/interbold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse2" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/mostViewedCourseTeacher2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giáo viên 2"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseName2" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/mostViewedCourseStar1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4,5 ⭐"
-                app:layout_constraintStart_toStartOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher1" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/mostViewedCourseStudent1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="(2023)"
-                app:layout_constraintStart_toEndOf="@+id/textView27"
-                app:layout_constraintTop_toTopOf="@+id/textView27" />
+                app:layout_constraintStart_toEndOf="@+id/mostViewedCourseStar1"
+                app:layout_constraintTop_toTopOf="@+id/mostViewedCourseStar1" />
 
             <TextView
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4,3 ⭐"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher2" />
 
             <TextView
                 android:id="@+id/textView31"
@@ -183,8 +188,8 @@
                 android:text="  HOT  "
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView10"
-                app:layout_constraintTop_toTopOf="@+id/imageView10" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
+                app:layout_constraintTop_toTopOf="@+id/mostViewedCourse1" />
 
             <TextView
                 android:id="@+id/textView33"
@@ -199,8 +204,8 @@
                 android:text="  MỚI  "
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
+                app:layout_constraintTop_toTopOf="@+id/mostViewedCourse2" />
 
             <TextView
                 android:id="@+id/textView34"
@@ -210,8 +215,8 @@
                 android:fontFamily="@font/intersemibold"
                 android:text="Tiếp tục xem"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                app:layout_constraintStart_toStartOf="@+id/mostViewedCourse"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseStudent1" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -225,10 +230,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/seeMore2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xem thêm"
+                android:text="@string/seeMore"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView34"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -361,10 +366,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView45" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/seeMore3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xem thêm"
+                android:text="@string/seeMore"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView21"
                 app:layout_constraintEnd_toEndOf="parent" />
