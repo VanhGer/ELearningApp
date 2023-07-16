@@ -2,5 +2,5 @@
 <resources>
     <dimen name="titleSpacing">0.1</dimen>
     <dimen name="titleTextSize">24sp</dimen>
-    <dimen name="padding">16dp</dimen>
+    <dimen name="padding">20dp</dimen>
 </resources>

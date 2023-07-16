@@ -1,16 +1,20 @@
 package com.example.elearningapp.courseItem;
 
 public class LessonItem {
-    String name, des, type, script, content;
-    int image;
+    String name, des, type, script, content, video;
+    int image, courseId, lessonId, qCategoryId;
 
-    public LessonItem(String name, String des, String type, String script, String content, int image) {
+    public LessonItem(int lessonId, int courseId, String name, String des, String type, int image, String script, String content, String video,  int qCategoryId) {
         this.name = name;
         this.des = des;
         this.type = type;
         this.script = script;
         this.content = content;
+        this.video = video;
         this.image = image;
+        this.courseId = courseId;
+        this.lessonId = lessonId;
+        this.qCategoryId = qCategoryId;
     }
 
     public String getName() {
@@ -53,11 +57,43 @@ public class LessonItem {
         this.content = content;
     }
 
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
     public int getImage() {
         return image;
     }
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public int getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(int lessonId) {
+        this.lessonId = lessonId;
+    }
+
+    public int getqCategoryId() {
+        return qCategoryId;
+    }
+
+    public void setqCategoryId(int qCategoryId) {
+        this.qCategoryId = qCategoryId;
     }
 }
