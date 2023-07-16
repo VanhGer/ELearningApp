@@ -2,37 +2,74 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textView55"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingTop="32dp"
-    android:paddingRight="16dp">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/editTextSearch"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@drawable/search_bg"
-        android:drawableRight="@drawable/search_normal"
-        android:ems="10"
-        android:fontFamily="@font/gilroyregular"
+        android:layout_height="56dp"
+        android:background="@color/md_grey_100"
+        android:drawablePadding="12dp"
+        android:fontFamily="@font/intermedium"
         android:hint="What are you looking for?"
+        android:imeOptions="actionSearch"
         android:inputType="text"
-        android:paddingLeft="16dp"
+        android:paddingLeft="56dp"
         android:paddingRight="16dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Graphic illustration" />
 
+    <Button
+        android:id="@+id/back_text_btn"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_arrow_left"
+        android:textColorHighlight="@color/md_black_1000"
+        android:textColorLink="@color/md_black_1000"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/clear_text_btn"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_remove"
+        android:textColorHighlight="@color/md_black_1000"
+        android:textColorLink="@color/md_black_1000"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView56"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="Recent searches"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
