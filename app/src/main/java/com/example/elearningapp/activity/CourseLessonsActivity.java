@@ -1,9 +1,8 @@
-package com.example.elearningapp.courseItem;
+package com.example.elearningapp.activity;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
+import com.example.elearningapp.adapter.ListAdapter;
+import com.example.elearningapp.courseItem.LessonDatabaseHelper;
+import com.example.elearningapp.courseItem.LessonItem;
 import com.example.elearningapp.lessonType.textLesson;
 import com.example.elearningapp.lessonType.videoLesson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseLessonsActivity extends AppCompatActivity implements ClickHelper {

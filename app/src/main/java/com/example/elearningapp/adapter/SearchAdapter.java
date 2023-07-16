@@ -8,8 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
-import com.example.elearningapp.fragment.SearchFragment;
+import com.example.elearningapp.courseItem.LessonItem;
+
+import java.util.List;
 
 public class SearchAdapter extends BaseAdapter {
     Context context;
@@ -58,4 +64,5 @@ public class SearchAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 }

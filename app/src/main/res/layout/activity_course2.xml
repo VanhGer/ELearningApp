@@ -53,15 +53,17 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView19"
         android:layout_width="0dp"
         android:layout_height="180dp"
         android:layout_marginTop="40dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
-        app:srcCompat="@drawable/course1" />
+        app:srcCompat="@drawable/course1"
+        app:shapeAppearanceOverlay="@style/roundedImageview"/>
 
     <ScrollView
         android:layout_width="0dp"
@@ -86,7 +88,8 @@
                 android:layout_height="73dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                app:srcCompat="@drawable/avatarmain"/>
 
             <TextView
                 android:id="@+id/authorName"
