@@ -1,6 +1,8 @@
 package com.example.elearningapp.courseItem;
 
-public class LessonItem {
+import java.io.Serializable;
+
+public class LessonItem implements Serializable {
     String name, des, type, script, content, video;
     int image, courseId, lessonId, qCategoryId;
 

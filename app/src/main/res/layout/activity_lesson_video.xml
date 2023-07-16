@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.922">
 
         <TextView
-            android:id="@+id/lesson_script"
+            android:id="@+id/lesson_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bgr_2"
