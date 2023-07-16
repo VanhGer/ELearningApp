@@ -1,9 +1,6 @@
-package com.example.elearningapp.courseItem;
+package com.example.elearningapp.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
-import com.example.elearningapp.lessonType.videoLesson;
+import com.example.elearningapp.courseItem.LessonItem;
 
 import java.util.List;
 
@@ -34,14 +31,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
     @NonNull
     @Override
-    public ListAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lesson_item, parent, false);
         return new ListViewHolder(view, clickHelper);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListAdapter.ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.nameView.setText(lessonItemList.get(position).getName());
         holder.desView.setText(lessonItemList.get(position).getDes());
         holder.numView.setText("Bai " + position + "");

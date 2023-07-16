@@ -1,5 +1,6 @@
 package com.example.elearningapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,7 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.elearningapp.CreateDatabase;
 import com.example.elearningapp.R;
-import com.example.elearningapp.databinding.ActivityMainBinding;
 import com.example.elearningapp.fragment.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

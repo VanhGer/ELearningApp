@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation"
-        />
+        android:layout_marginBottom="@dimen/bottomNavHeight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
-        android:layout_height="54dp"
+        android:layout_height="@dimen/bottomNavHeight"
         app:backgroundTint="@color/md_white_1000"
         app:itemActiveIndicatorStyle="@style/bottomNavigationActiveIndicator"
         app:itemHorizontalTranslationEnabled="false"

@@ -1,5 +1,7 @@
 package com.example.elearningapp.fragment;
 
+import android.content.Intent;
+import android.view.View;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.MainActivity;
+import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.adapter.SearchAdapter;
+import com.example.elearningapp.object.PopularCategoryItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,14 +78,64 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        String[] searchName = {"Animation", "Graphic Design", "Film", "Photography"};
-        int[] searchImage = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d};
 
-        SearchAdapter searchAdapter = new SearchAdapter(this.getActivity(), searchName, searchImage);
+        SearchAdapter searchAdapter = new SearchAdapter(this.getActivity(), getListPopularCategory());
 
         gridPopularSearch = rootView.findViewById(R.id.gridPopularView);
         gridPopularSearch.setAdapter(searchAdapter);
 
+        clickBtnSearch();
+
         return rootView;
+    }
+
+    private void clickBtnSearch() {
+        TextView searchButton = (TextView) rootView.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private List<PopularCategoryItem> getListPopularCategory() {
+        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<Integer> images = new ArrayList<Integer>();
+
+        names.add("Animation");
+        names.add("Graphic Design");
+        names.add("Film");
+        names.add("Photography");
+        names.add("Illustration");
+        names.add("Crafts");
+        names.add("Deep Learning");
+        names.add("Computer Vision");
+        names.add("Mathematics");
+        names.add("Machine Learning");
+        names.add("Originals");
+        names.add("Staff Picks");
+
+        images.add(R.drawable.a);
+        images.add(R.drawable.b);
+        images.add(R.drawable.c);
+        images.add(R.drawable.d);
+        images.add(R.drawable.b);
+        images.add(R.drawable.d);
+        images.add(R.drawable.c);
+        images.add(R.drawable.a);
+        images.add(R.drawable.c);
+        images.add(R.drawable.d);
+        images.add(R.drawable.c);
+        images.add(R.drawable.a);
+
+        List <PopularCategoryItem> popularCategoryItems = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            PopularCategoryItem popularCategoryItem = new PopularCategoryItem(names.get(i), images.get(i));
+            popularCategoryItems.add(popularCategoryItem);
+        }
+
+        return popularCategoryItems;
     }
 }

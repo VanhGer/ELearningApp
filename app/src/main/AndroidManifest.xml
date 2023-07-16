@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ELearningApp"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".lessonType.testLesson"
             android:exported="false" />
         <activity
@@ -22,10 +25,10 @@
             android:name=".lessonType.videoLesson"
             android:exported="false" />
         <activity
-            android:name=".courseItem.CourseOverallActivity"
+            android:name=".activity.CourseOverallActivity"
             android:exported="false" />
         <activity
-            android:name=".courseItem.CourseLessonsActivity"
+            android:name=".activity.CourseLessonsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"

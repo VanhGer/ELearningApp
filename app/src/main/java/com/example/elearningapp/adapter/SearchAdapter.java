@@ -10,24 +10,28 @@ import android.widget.TextView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.fragment.SearchFragment;
+import com.example.elearningapp.object.PopularCategoryItem;
+
+import java.util.List;
 
 public class SearchAdapter extends BaseAdapter {
-    Context context;
-    String[] searchName;
-    int[] searchImage;
+    private Context context;
+    private List<PopularCategoryItem> popularCategoryItemList;
 
     LayoutInflater inflater;
 
-    public SearchAdapter(Context context, String[] searchName, int[] image) {
+    public SearchAdapter(Context context, List<PopularCategoryItem> popularCategoryItemList) {
         this.context = context;
-        this.searchName = searchName;
-        this.searchImage = image;
+        this.popularCategoryItemList = popularCategoryItemList;
     }
 
 
     @Override
     public int getCount() {
-        return searchName.length;
+        if (popularCategoryItemList != null) {
+            return  popularCategoryItemList.size();
+        }
+        return 0;
     }
 
     @Override
@@ -53,8 +57,8 @@ public class SearchAdapter extends BaseAdapter {
         ImageView imageView = convertView.findViewById(R.id.grid_search_image);
         TextView textView = convertView.findViewById(R.id.grid_search_text);
 
-        imageView.setImageResource(searchImage[position]);
-        textView.setText(searchName[position]);
+        imageView.setImageResource(popularCategoryItemList.get(position).getImage());
+        textView.setText(popularCategoryItemList.get(position).getName());
 
         return convertView;
     }

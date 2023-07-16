@@ -5,20 +5,23 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bgr_2"
     android:clickable="true"
     android:paddingLeft="8dp"
     android:paddingRight="8dp">
 
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/lesson_pic"
         android:layout_width="147dp"
         android:layout_height="99dp"
         android:layout_marginTop="20dp"
-        app:circularflow_radiusInDP="20dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/radio_rectangle_group_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
+        app:srcCompat="@drawable/course2"
+        app:shapeAppearanceOverlay="@style/roundedImageview"/>
 
     <TextView
         android:id="@+id/lesson_description"
