@@ -11,9 +11,9 @@ public class CreateDatabase {
         String query = "CREATE TABLE lesson(" +
                 "lessonId INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "courseId INTERGER, " +
-                "name VARCHAR(255), " +
+                "name TEXT, " +
                 "description TEXT, " +
-                "type VARCHAR(255), " +
+                "type TEXT, " +
                 "image INTERGER, " +
                 "script TEXT, " +
                 "content TEXT, " +
