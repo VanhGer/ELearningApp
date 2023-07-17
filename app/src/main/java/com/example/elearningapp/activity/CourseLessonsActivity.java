@@ -16,9 +16,11 @@ import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.ListAdapter;
 import com.example.elearningapp.courseItem.LessonDatabaseHelper;
 import com.example.elearningapp.courseItem.LessonItem;
+import com.example.elearningapp.lessonType.testLesson;
 import com.example.elearningapp.lessonType.textLesson;
 import com.example.elearningapp.lessonType.videoLesson;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class CourseLessonsActivity extends AppCompatActivity implements ClickHelper {
@@ -51,9 +53,21 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
     public void onItemClick(int position) {
         if (lessonItemList.get(position).getType().equals("video")) {
             Intent intent = new Intent(CourseLessonsActivity.this, videoLesson.class);
+            intent.putExtra("lesson", (Serializable) lessonItemList);
+            intent.putExtra("position", position);
+            intent.putExtra("maxPosition", lessonItemList.size());
             startActivity(intent);
         } else if (lessonItemList.get(position).getType().equals("text")) {
             Intent intent = new Intent(CourseLessonsActivity.this, textLesson.class);
+            intent.putExtra("lesson", (Serializable) lessonItemList);
+            intent.putExtra("position", position);
+            intent.putExtra("maxPosition", lessonItemList.size());
+            startActivity(intent);
+        } else if (lessonItemList.get(position).getType().equals("test")) {
+            Intent intent = new Intent(CourseLessonsActivity.this, testLesson.class);
+            intent.putExtra("lesson", (Serializable) lessonItemList);
+            intent.putExtra("position", position);
+            intent.putExtra("maxPosition", lessonItemList.size());
             startActivity(intent);
         }
     }

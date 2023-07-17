@@ -9,21 +9,59 @@
     android:paddingRight="@dimen/padding"
     android:paddingBottom="@dimen/padding">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_pre_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/none"
+            android:backgroundTint="#FFFFFF"
+            android:drawableTint="@color/md_blue_grey_400"
+            android:foregroundTint="@color/md_blue_grey_400"
+            android:text="&lt; Pre "
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:iconTint="#372B2B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_next_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/none"
+            android:backgroundTint="#FFFFFF"
+            android:drawableTint="@color/md_blue_grey_400"
+            android:foregroundTint="@color/md_blue_grey_400"
+            android:text="Next &gt;"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageButton
         android:id="@+id/return_btn"
         android:layout_width="36dp"
         android:layout_height="41dp"
         android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/lesson_title2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/resource_return" />
 
     <TextView
         android:id="@+id/lesson_title2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/return_btn"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:fontFamily="sans-serif"
@@ -33,6 +71,10 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/return_btn"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="-3dp" />
 
@@ -49,20 +91,54 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lesson_title2" />
 
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="Số câu đúng là"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toEndOf="@+id/text_lesson"
+        app:layout_constraintTop_toBottomOf="@+id/lesson_title2" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/questionList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#F6F6F6"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_lesson" />
+        app:layout_constraintTop_toBottomOf="@+id/text_lesson">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/none"
+        android:drawableTint="#A3A0A0"
+        android:drawableTintMode="add"
+        android:foreground="@drawable/checkbox"
+        android:foregroundTint="#000000"
+        android:text="Submit"
+        android:textColor="#040404"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package com.example.elearningapp.courseItem;
 
-public class LessonItem {
-    String name, des, type, script, content, video;
-    int image, courseId, lessonId, qCategoryId;
+import java.io.Serializable;
 
-    public LessonItem(int lessonId, int courseId, String name, String des, String type, int image, String script, String content, String video,  int qCategoryId) {
+public class LessonItem implements Serializable {
+    String name, des, type, script, content, image, video;
+    int courseId, lessonId;
+
+    public LessonItem(int lessonId, int courseId, String name, String des, String type, String image, String script, String content, String video) {
         this.name = name;
         this.des = des;
         this.type = type;
@@ -14,7 +16,6 @@ public class LessonItem {
         this.image = image;
         this.courseId = courseId;
         this.lessonId = lessonId;
-        this.qCategoryId = qCategoryId;
     }
 
     public String getName() {
@@ -65,11 +66,11 @@ public class LessonItem {
         this.video = video;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -87,13 +88,5 @@ public class LessonItem {
 
     public void setLessonId(int lessonId) {
         this.lessonId = lessonId;
-    }
-
-    public int getqCategoryId() {
-        return qCategoryId;
-    }
-
-    public void setqCategoryId(int qCategoryId) {
-        this.qCategoryId = qCategoryId;
     }
 }
