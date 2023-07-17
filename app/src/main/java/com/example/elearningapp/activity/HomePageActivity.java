@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.courseItem.CourseOverallActivity;
+import com.example.elearningapp.activity.CourseOverallActivity;
 
 public class HomePageActivity extends AppCompatActivity {
 
