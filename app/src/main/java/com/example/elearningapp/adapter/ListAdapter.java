@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.courseItem.LessonItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,8 +42,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.nameView.setText(lessonItemList.get(position).getName());
         holder.desView.setText(lessonItemList.get(position).getDes());
-        holder.numView.setText("Bai " + position + "");
-        holder.picView.setImageResource(lessonItemList.get(position).getImage());
+        holder.numView.setText("Bai " + (position + 1) +  "");
+        Picasso.get().load(lessonItemList.get(position).getImage()).into(holder.picView);
+        //holder.picView.setImageResource(lessonItemList.get(position).getImage());
     }
 
     @Override

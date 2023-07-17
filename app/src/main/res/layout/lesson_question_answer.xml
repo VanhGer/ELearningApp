@@ -6,11 +6,23 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/checkResult"
-        android:layout_width="0dp"
+        android:id="@+id/question_num2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Câu số:"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/answer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Question Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_num2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
