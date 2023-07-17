@@ -127,13 +127,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/courseName2">
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/seeMore1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textColor="#C1C1C1"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView22"
+                    app:layout_constraintBottom_toTopOf="@+id/seeMore3"
                     app:layout_constraintEnd_toStartOf="@+id/textView21"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -145,25 +145,25 @@
                     android:text="TextView"
                     android:textColor="#C1C1C1"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView23"
+                    app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView20"
+                    app:layout_constraintStart_toEndOf="@+id/seeMore1"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/seeMore3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
                     android:textColor="#C1C1C1"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView23"
+                    app:layout_constraintEnd_toStartOf="@+id/mostViewedCourseName1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                    app:layout_constraintTop_toBottomOf="@+id/seeMore1" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/mostViewedCourseName1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
@@ -171,13 +171,13 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView22"
+                    app:layout_constraintStart_toEndOf="@+id/seeMore3"
                     app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/mostViewedCourseTeacher2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -201,7 +201,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher2"
                 app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

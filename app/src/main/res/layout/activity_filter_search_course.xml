@@ -37,7 +37,7 @@
                     app:srcCompat="@drawable/ic_arrow_left" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/seeMore3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -50,7 +50,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/mostViewedCourseName1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gilroyregular"
