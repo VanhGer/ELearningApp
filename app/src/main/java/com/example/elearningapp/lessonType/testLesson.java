@@ -57,7 +57,7 @@ public class testLesson extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new TestAdapter(getApplicationContext(), questionItemList));
-
+        title.setText(lessonItem.get(position).getName());
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
