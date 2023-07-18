@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.elearningapp.R;
@@ -27,6 +28,7 @@ import java.util.List;
 public class testLesson extends AppCompatActivity {
     TextView title, result;
     Button submit, nxt, pre;
+    ImageButton back;
 
     RecyclerView recyclerView;
 
@@ -44,6 +46,7 @@ public class testLesson extends AppCompatActivity {
         pre = findViewById(R.id.btn_pre_lesson);
         result = findViewById(R.id.result);
         recyclerView = findViewById(R.id.questionList);
+        back = findViewById(R.id.return_btn);
         setLesson();
     }
 
@@ -72,6 +75,13 @@ public class testLesson extends AppCompatActivity {
                 recyclerView.setAdapter(new AnswerAdapter(getApplicationContext(), questionItemList, ansList));
             }
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testLesson.this.onBackPressed();
+            }
+        });
         if (position > 0) {
             pre.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,6 +100,7 @@ public class testLesson extends AppCompatActivity {
                 }
             });
         }
+
 
 
     }
@@ -136,18 +147,21 @@ public class testLesson extends AppCompatActivity {
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
             startActivity(intent);
+            finish();
         } else if (lessonItemList.get(position).getType().equals("text")) {
             Intent intent = new Intent(testLesson.this, textLesson.class);
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
             startActivity(intent);
+            finish();
         } else if (lessonItemList.get(position).getType().equals("test")) {
             Intent intent = new Intent(testLesson.this, testLesson.class);
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
             startActivity(intent);
+            finish();
         }
     }
 }

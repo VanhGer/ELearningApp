@@ -44,6 +44,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
             public void onClick(View view) {
                 Intent overallActivity = new Intent(getApplicationContext(), CourseOverallActivity.class);
                 startActivity(overallActivity);
+                finish();
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
