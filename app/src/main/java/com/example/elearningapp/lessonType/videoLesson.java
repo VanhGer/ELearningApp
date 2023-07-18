@@ -3,11 +3,14 @@ package com.example.elearningapp.lessonType;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.courseItem.LessonItem;
@@ -19,8 +22,9 @@ import java.util.List;
 public class videoLesson extends AppCompatActivity {
 
     TextView title, script;
-
     Button nxt, pre;
+    VideoView video;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -33,6 +37,7 @@ public class videoLesson extends AppCompatActivity {
         nxt = findViewById(R.id.btn_next_lesson);
         pre = findViewById(R.id.btn_pre_lesson);
 
+        video = findViewById(R.id.lessonVideo);
         setLesson();
     }
 
@@ -43,6 +48,12 @@ public class videoLesson extends AppCompatActivity {
 
         title.setText(lessonItem.get(position).getName());
         script.setText(lessonItem.get(position).getScript());
+        video.setVideoURI(Uri.parse(lessonItem.get(position).getVideo()));
+        video.setMediaController(new MediaController(this));
+        video.requestFocus();
+        video.start();
+
+
         if (position > 0) {
             pre.setOnClickListener(new View.OnClickListener() {
                 @Override

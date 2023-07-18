@@ -1,6 +1,7 @@
 package com.example.elearningapp.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     Context context;
     List<QuestionItem> questionItemList;
 
-    public AnswerAdapter(Context context, List<QuestionItem> questionItemList) {
+    List<Boolean> ansList;
+
+    public AnswerAdapter(Context context, List<QuestionItem> questionItemList, List<Boolean> ansList) {
         this.context = context;
         this.questionItemList = questionItemList;
+        this.ansList = ansList;
     }
 
     @NonNull
@@ -36,8 +40,15 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     @Override
     public void onBindViewHolder(@NonNull AnswerAdapter.AnswerViewHolder holder, int position) {
-        holder.questionNum.setText("Cau hoi: " + position);
-        holder.answer.setText(questionItemList.get(position).getAnswerId());
+        holder.questionNum.setText("Câu số: " + (position + 1));
+        if (ansList.get(position)) {
+            holder.answer.setTextColor(Color.parseColor("#FF558B2F"));
+            holder.answer.setText("Chính xác! " + "Đáp án là: " + questionItemList.get(position).getAnswer());
+        }
+        else {
+            holder.answer.setTextColor(Color.parseColor("#FFC62828"));
+            holder.answer.setText("Sai! Đáp án đúng là: " + questionItemList.get(position).getAnswer());
+        }
     }
 
     @Override

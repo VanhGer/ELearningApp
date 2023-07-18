@@ -29,6 +29,7 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:iconTint="#372B2B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +46,7 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,7 +103,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="Số câu đúng là"
+        android:textAlignment="center"
+        android:textColor="#79AC40"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"

@@ -78,4 +78,18 @@ public class QuestionItem {
     public void setChoice4(String choice4) {
         this.choice4 = choice4;
     }
+
+    public String getAnswer() {
+        switch (answerId){
+            case 1:
+                return choice1;
+            case 2:
+                return choice2;
+            case 3:
+                return choice3;
+            case 4:
+                return choice4;
+        }
+        return "No data";
+    }
 }
