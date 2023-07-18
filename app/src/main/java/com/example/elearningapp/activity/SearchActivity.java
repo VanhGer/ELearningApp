@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.fragment.SearchFragment;
+import com.wefika.flowlayout.FlowLayout;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -46,6 +49,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void backBtnClick() {
+
+        if (backButton == null) {
+            return;
+        }
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +92,21 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch(searchText.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void performSearch(String text) {
+        Intent intent = new Intent(this, SearchResultActivity.class);
+        startActivity(intent);
     }
 
 
