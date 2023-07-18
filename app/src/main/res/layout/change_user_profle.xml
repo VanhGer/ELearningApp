@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+        app:layout_constraintTop_toBottomOf="@+id/top_course_item_image">
 
         <EditText
             android:id="@+id/searchButton"
@@ -132,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/top_course_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"

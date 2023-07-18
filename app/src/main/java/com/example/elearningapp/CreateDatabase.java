@@ -7,6 +7,7 @@ import com.example.elearningapp.connectData.DatabaseHelper;
 
 /// use only one time.
 public class CreateDatabase {
+
     public void createLessonTable(Context context) {
         DatabaseHelper db = new DatabaseHelper(context);
         String query = "CREATE TABLE lesson(" +

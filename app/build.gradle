@@ -31,6 +31,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    configurations {
+        implementation.exclude group: 'org.jetbrains', module: 'annotations' 
+    }
 }
 
 apply plugin: 'com.android.application'
@@ -47,5 +51,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'com.android.support:support-annotations:25.0.0'
+
+    implementation "com.wefika:flowlayout:0.4.1"
 
 }
