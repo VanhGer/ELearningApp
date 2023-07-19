@@ -151,16 +151,16 @@ public class SearchFragment extends Fragment {
 
     private List<String> getListTopSearch() {
         ArrayList<String> names = new ArrayList<String>();
-        names.add("Systematic");
-        names.add("Survey");
-        names.add("Mathematics");
-        names.add("Animation");
-        names.add("Deep Learning");
-        names.add("Computer Vision");
-        names.add("Mathematics");
-        names.add("Machine Learning");
-        names.add("Originals");
-        names.add("Staff Picks");
+        names.add("Guitar");
+        names.add("Thiết kế");
+        names.add("Toán học");
+        names.add("Hoạt cảnh");
+        names.add("Học sâu");
+        names.add("Thị giác máy tính");
+        names.add("Học máy");
+        names.add("Ngoại ngữ");
+        names.add("Chính thức");
+        names.add("Khuyên học");
 
         return names;
     }
@@ -169,18 +169,18 @@ public class SearchFragment extends Fragment {
         ArrayList<String> names = new ArrayList<String>();
         ArrayList<Integer> images = new ArrayList<Integer>();
 
-        names.add("Animation");
-        names.add("Graphic Design");
-        names.add("Film");
-        names.add("Photography");
-        names.add("Illustration");
-        names.add("Crafts");
-        names.add("Deep Learning");
-        names.add("Computer Vision");
-        names.add("Mathematics");
-        names.add("Machine Learning");
-        names.add("Originals");
-        names.add("Staff Picks");
+        names.add("Ngoại ngữ");
+        names.add("Marketing");
+        names.add("Tin học văn phòng");
+        names.add("Thiết kế");
+        names.add("Kỹ năng mềm");
+        names.add("Công nghệ thông tin");
+        names.add("Học sâu");
+        names.add("Thị giác máy tính");
+        names.add("Toán học");
+        names.add("Học máy");
+        names.add("Chính thức");
+        names.add("Khuyên học");
 
         images.add(R.drawable.a);
         images.add(R.drawable.b);

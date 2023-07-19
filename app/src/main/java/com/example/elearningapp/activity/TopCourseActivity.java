@@ -66,23 +66,23 @@ public class TopCourseActivity extends AppCompatActivity {
         ArrayList<Integer> numberStudents = new ArrayList<Integer>();
         ArrayList<Double> numberStars = new ArrayList<Double>();
 
-        names.add("Adobe illustrator for all beginner artist");
-        names.add("Digital illustration technique for procrete");
-        names.add("Learn how to draw cartoon face in easy way!");
-        names.add("Sketch book essential for everyone!");
-        names.add("Adobe illustrator for all beginner artist");
-        names.add("Digital illustration technique for procrete");
-        names.add("Learn how to draw cartoon face in easy way!");
-        names.add("Sketch book essential for everyone!");
+        names.add("Học đệm hát Guitar cùng Haketu");
+        names.add("Tự học tiếng Anh toàn diện: Nghe nói đọc viết");
+        names.add("Quy trình dưng phim HD trên Adobe Premiere CC");
+        names.add("Tự học tiếng Anh toàn diện: Nghe nói đọc viết");
+        names.add("Quy trình dưng phim HD trên Adobe Premiere CC");
+        names.add("Học đệm hát Guitar cùng Haketu");
+        names.add("Quy trình dưng phim HD trên Adobe Premiere CC");
+        names.add("Tự học tiếng Anh toàn diện: Nghe nói đọc viết");
 
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
-        owners.add("Sarrah Morry");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
+        owners.add("Bùi Tuấn Dũng");
 
 
         images.add(R.drawable.a);

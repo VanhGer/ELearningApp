@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Graphic illustration" />
+        tools:text="Guitar" />
 
     <Button
         android:id="@+id/back_text_btn"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/gilroyregular"
-            android:text="2,035 Results"
+            android:text="2,035 Kết quả"
             android:textColor="#585D69"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/gilroymedium"
-            android:text="Filter"
+            android:text="Lọc"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -123,7 +123,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/gilroybold"
-            android:text="Adobe Animation Essentials: 2D Animation Fundamentals"
+            android:text="Học đệm hát Guitar cùng Haketu"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/top_course_item_image"
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/gilroyregular"
-            android:text="Toniko Pantoja"
+            android:text="Bùi Tuấn Dũng"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/top_course_item_image"
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
@@ -180,7 +180,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/gilroybold"
-            android:text="Character Animation Basics: Combining Techniques in Ad..."
+            android:text="Guitar đệm hát 30 ngày cùng Hiền Râu"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/top_course_item_image2"
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/gilroyregular"
-            android:text="Gui Jorge Porto"
+            android:text="Bùi Tuấn Dũng"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/top_course_item_image2"
             app:layout_constraintTop_toBottomOf="@+id/textView68" />
