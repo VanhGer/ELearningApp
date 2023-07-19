@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -21,9 +22,9 @@ import com.wefika.flowlayout.FlowLayout;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private Button backButton;
+    private ImageButton backButton;
     private EditText searchText;
-    private Button clearButton;
+    private ImageButton clearButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void getViews() {
-        backButton = (Button) findViewById(R.id.back_text_btn);
+        backButton = (ImageButton) findViewById(R.id.back_text_btn);
         searchText = (EditText) findViewById(R.id.editTextSearch);
-        clearButton = (Button) findViewById(R.id.clear_text_btn);
+        clearButton = (ImageButton) findViewById(R.id.clear_text_btn);
     }
 
     private void backBtnClick() {
