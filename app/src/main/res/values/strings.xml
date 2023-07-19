@@ -16,7 +16,7 @@
     <string name="forget_password__string">Forget Password?</string>
     <string name="enter_you_email_ek1_string">Enter you email</string>
     <string name="welcome_back__string">Welcome back!</string>
-    <string name="searchTitle">Search</string>
+    <string name="searchTitle">Tìm kiếm</string>
 
     <string name="lesson_tongquan">Tổng quan</string>
     <string name="lesson_baihoc">Bài học</string>
@@ -34,10 +34,10 @@ This also happens when regular direct child components are set to layout_height=
 
 If you want the child of the ScrollView to match the height of the parent when there is not enough content, simply set android:fillViewport to true for the ScrollView.</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_bookmark">Bookmark</string>
-    <string name="menu_profile">Profile</string>
+    <string name="menu_home">Trang chủ</string>
+    <string name="menu_search">Tìm kiếm</string>
+    <string name="menu_bookmark">Lưu trữ</string>
+    <string name="menu_profile">Người dùng</string>
     <string name="greeting1">Hello, User!</string>
     <string name="greeting2">Hôm nay bạn muốn học gì?</string>
     <string name="mostViewedCourse">Khóa học được theo dõi nhiều nhất</string>
