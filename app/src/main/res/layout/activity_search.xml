@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Đồ họa máy tính" />
 
-    <Button
+    <ImageButton
         android:id="@+id/back_text_btn"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/clear_text_btn"
         android:layout_width="24dp"
         android:layout_height="24dp"
