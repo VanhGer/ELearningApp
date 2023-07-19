@@ -11,14 +11,11 @@
         android:id="@+id/constraintLayout"
         android:layout_width="411dp"
         android:layout_height="102dp"
-        android:background="#1316C3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="#5869C6"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imageButton_go_to_setting"
+            android:id="@+id/imageView11"
             android:layout_width="65dp"
             android:layout_height="52dp"
             android:layout_marginTop="32dp"
@@ -27,15 +24,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/settingvector" />
 
-        <ImageView
-            android:id="@+id/imageView17"
-            android:layout_width="46dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/backbuttom" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -117,37 +105,40 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="44dp"
         android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/imageView15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button8" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
     <ImageView
         android:id="@+id/imageView14"
-        android:layout_width="182dp"
+        android:layout_width="155dp"
         android:layout_height="144dp"
+        android:layout_marginStart="43dp"
         android:layout_marginTop="9dp"
+        android:layout_marginEnd="21dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7"
         app:srcCompat="@drawable/course1" />
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="238dp"
-        android:layout_height="139dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView16"
+        android:layout_width="155dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button8"
         app:srcCompat="@drawable/course2" />
 
     <ImageView
         android:id="@+id/imageView16"
-        android:layout_width="189dp"
-        android:layout_height="155dp"
-        android:layout_marginTop="3dp"
+        android:layout_width="155dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14"
         app:srcCompat="@drawable/course3" />
