@@ -103,7 +103,7 @@ folder or try again with a valid email."
             android:layout_height="21.32dp" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/userImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
             app:srcCompat="@drawable/forget"
