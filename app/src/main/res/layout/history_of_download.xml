@@ -10,7 +10,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="411dp"
         android:layout_height="102dp"
-        android:background="#1316C3"
+        android:background="#5869C6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -28,12 +28,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="46dp"
-            android:layout_height="43dp"
+        <ImageButton
+            android:id="@+id/imageButton_back_history_of_download"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            android:contentDescription="Nút trở về setting "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/backbuttom" />

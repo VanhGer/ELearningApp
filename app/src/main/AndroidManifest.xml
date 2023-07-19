@@ -41,6 +41,9 @@
             android:name=".activity.CourseLessonsActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
