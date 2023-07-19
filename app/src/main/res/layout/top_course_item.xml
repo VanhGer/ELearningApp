@@ -55,7 +55,7 @@
         android:textColor="@color/md_grey_700"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
-        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+        app:layout_constraintStart_toEndOf="@+id/userImage" />
 
     <TextView
         android:id="@+id/top_course_item_star"
@@ -68,10 +68,10 @@
         android:textColor="@color/md_grey_700"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
-        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+        app:layout_constraintStart_toEndOf="@+id/starImage" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/starImage"
         android:layout_width="16dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -80,7 +80,7 @@
         app:srcCompat="@drawable/star" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/userImage"
         android:layout_width="14dp"
         android:layout_height="14dp"
         android:layout_marginStart="16dp"

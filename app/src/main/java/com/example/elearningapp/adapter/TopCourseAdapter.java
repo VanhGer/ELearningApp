@@ -66,7 +66,6 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
             ownerView = itemView.findViewById(R.id.top_course_item_owner);
             numStudentView = itemView.findViewById(R.id.top_course_item_students);
             numStarView = itemView.findViewById(R.id.top_course_item_star);
-
         }
     }
 }
