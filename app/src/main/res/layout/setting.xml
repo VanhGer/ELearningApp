@@ -24,35 +24,12 @@
         android:id="@+id/button_log_out_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="167dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="17dp"
 
         android:text="Log out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="151dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:text="About app"
-        android:textSize="21dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
-
-    <Button
-        android:id="@+id/button_about_app"
-        android:layout_width="138dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="See it"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout15" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout10"
@@ -99,7 +76,6 @@
             android:id="@+id/switch_notification"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="64dp"
             android:scaleX="1.8"
             android:scaleY="1.8"
@@ -173,6 +149,38 @@
             android:layout_width="137dp"
             android:layout_height="fill_parent"
             android:text="Go"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout15"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:fontFamily="serif"
+            android:text="About app"
+            android:textSize="21dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_about_app"
+            android:layout_width="137dp"
+            android:layout_height="fill_parent"
+            android:layout_marginEnd="2dp"
+            android:gravity="center"
+            android:text="See it"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
