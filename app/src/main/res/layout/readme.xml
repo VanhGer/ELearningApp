@@ -10,12 +10,12 @@
         android:id="@+id/top_course_item_owner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
         android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:text="E-learning app"
         android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,11 +34,11 @@
         android:id="@+id/top_course_item_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
         android:layout_marginTop="17dp"
         android:text="Phạm Gia Việt Anh (leader)"
         android:textSize="14sp"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_course_item_students" />
 
@@ -46,10 +46,10 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
         android:text="Bùi Tuấn Dũng"
         android:textSize="14sp"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_course_item_star" />
 
@@ -57,10 +57,10 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
         android:text="Hoàng Minh Thái"
         android:textSize="14sp"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -68,10 +68,10 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
         android:text="Phạm Đức Thành"
         android:textSize="14sp"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -79,10 +79,10 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
         android:text="Nguyễn Đăng Hải"
         android:textSize="14sp"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -101,10 +101,10 @@
         android:id="@+id/Button_back_readme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
         android:layout_marginBottom="40dp"
         android:text="OK"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="411dp"
+        android:layout_width="fill_parent"
         android:layout_height="102dp"
         android:background="#5869C6"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,6 +48,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="Day"
+        app:layout_constraintEnd_toStartOf="@+id/button11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
@@ -54,38 +56,35 @@
         android:id="@+id/button11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="31dp"
         android:text="Week"
+        app:layout_constraintEnd_toStartOf="@+id/button12"
         app:layout_constraintStart_toEndOf="@+id/button10"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toTopOf="@+id/button10" />
 
     <Button
         android:id="@+id/button12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="31dp"
         android:text="Month"
+        app:layout_constraintEnd_toStartOf="@+id/button13"
         app:layout_constraintStart_toEndOf="@+id/button11"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toTopOf="@+id/button10" />
 
     <Button
         android:id="@+id/button13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="7dp"
         android:text="Year"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button12"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toTopOf="@+id/button10" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
+        android:layout_width="fill_parent"
         android:layout_height="475dp"
         android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button10" />
 

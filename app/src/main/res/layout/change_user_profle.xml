@@ -6,58 +6,57 @@
     android:layout_height="match_parent"
     android:background="#202AAC6F">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="389dp"
+        android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="49dp"
         android:background="#2D000000"
-        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <EditText
             android:id="@+id/editTextText4"
-            android:layout_width="339dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:background="@null"
             android:ems="10"
             android:inputType="text"
-            android:text="Email?" />
-    </LinearLayout>
+            android:text="Email?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="389dp"
+        android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="49dp"
         android:background="#2D000000"
-        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <EditText
             android:id="@+id/editTextText3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:background="@null"
             android:ems="10"
             android:inputType="text"
-            android:text="Phone number?" />
-    </LinearLayout>
+            android:text="Phone number?"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
-        android:layout_width="389dp"
+        android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="#2D000000"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,59 +64,63 @@
 
         <EditText
             android:id="@+id/searchButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
             android:background="#0D000000"
             android:ems="10"
             android:inputType="text"
-            android:text="What’s your name?" />
-    </LinearLayout>
+            android:text="What’s your name?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="389dp"
+        android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="49dp"
         android:background="#2D000000"
-        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <EditText
             android:id="@+id/editTextText2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
             android:background="@null"
             android:ems="10"
             android:inputType="text"
-            android:text="Year of birth?" />
-    </LinearLayout>
+            android:text="Year of birth?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/lesson_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
         android:layout_marginTop="36dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Bio-data"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageButton_back_change_user_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_done_update_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="49dp"
         android:scaleX="1.2"
         android:scaleY="1.2"
         android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
@@ -125,8 +128,8 @@
         android:id="@+id/top_course_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
         android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lesson_content"
         app:srcCompat="@drawable/avatarmain" />
