@@ -1,10 +1,15 @@
 package com.example.elearningapp.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
@@ -13,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.elearningapp.R;
@@ -20,10 +26,23 @@ import com.example.elearningapp.activity.MainActivity;
 import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.adapter.SearchAdapter;
 import com.example.elearningapp.object.PopularCategoryItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.wefika.flowlayout.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import kotlinx.coroutines.flow.Flow;
 
@@ -48,6 +67,13 @@ public class SearchFragment extends Fragment {
     private GridView gridPopularSearch;
 
     private FlowLayout topSearchLayout;
+
+    FirebaseFirestore db;
+
+    DocumentReference reference;
+
+    ProgressDialog TemDialog;
+
 
 
 
@@ -87,6 +113,8 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
+
+
 
         SearchAdapter searchAdapter = new SearchAdapter(this.getActivity(), getListPopularCategory());
 
@@ -143,6 +171,7 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
@@ -165,38 +194,61 @@ public class SearchFragment extends Fragment {
         return names;
     }
 
+    private ArrayList<String> getDataFireBase() {
+        ArrayList<String> typeList = new ArrayList<String>();
+
+//        TemDialog = new ProgressDialog(getActivity());
+//        TemDialog.setMessage("Please Wait...");
+//        TemDialog.setCancelable(false);
+//        TemDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        TemDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
+
+        FirebaseFirestore.getInstance()
+                .collection("categories")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot snapshot: task.getResult()) {
+                            typeList.add(snapshot.getString("name"));
+                            Log.d("FireBase", "on Success: " + typeList);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e( "Firebase", "onFireBaseFail", e);
+                    }
+                })
+        ;
+
+//        TemDialog.show();
+
+        return typeList;
+    }
+
     private List<PopularCategoryItem> getListPopularCategory() {
-        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> names = getDataFireBase();
         ArrayList<Integer> images = new ArrayList<Integer>();
 
-        names.add("Ngoại ngữ");
-        names.add("Marketing");
-        names.add("Tin học văn phòng");
-        names.add("Thiết kế");
-        names.add("Kỹ năng mềm");
-        names.add("Công nghệ thông tin");
-        names.add("Học sâu");
-        names.add("Thị giác máy tính");
-        names.add("Toán học");
-        names.add("Học máy");
-        names.add("Chính thức");
-        names.add("Khuyên học");
+        TextView searchButton = (TextView) rootView.findViewById(R.id.searchButton);
+
+        Log.d("FireBase", "on Success: " + names);
+
+
+        searchButton.setText(" " + names.size());
+
+        names.add("Hello");
+        names.add("ABC");
+
+        Log.d("FireBase", "on Success: " + names);
 
         images.add(R.drawable.a);
         images.add(R.drawable.b);
-        images.add(R.drawable.c);
-        images.add(R.drawable.d);
-        images.add(R.drawable.b);
-        images.add(R.drawable.d);
-        images.add(R.drawable.c);
-        images.add(R.drawable.a);
-        images.add(R.drawable.c);
-        images.add(R.drawable.d);
-        images.add(R.drawable.c);
-        images.add(R.drawable.a);
 
         List <PopularCategoryItem> popularCategoryItems = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < images.size(); i++) {
             PopularCategoryItem popularCategoryItem = new PopularCategoryItem(names.get(i), images.get(i));
             popularCategoryItems.add(popularCategoryItem);
         }

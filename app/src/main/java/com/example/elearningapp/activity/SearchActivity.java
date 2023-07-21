@@ -6,19 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.fragment.SearchFragment;
-import com.wefika.flowlayout.FlowLayout;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -44,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void getViews() {
-        backButton = (ImageButton) findViewById(R.id.back_text_btn);
+        backButton = (ImageButton) findViewById(R.id.backBtnTopCourse);
         searchText = (EditText) findViewById(R.id.editTextSearch);
         clearButton = (ImageButton) findViewById(R.id.clear_text_btn);
     }

@@ -25,7 +25,7 @@
         tools:text="Đồ họa máy tính" />
 
     <ImageButton
-        android:id="@+id/back_text_btn"
+        android:id="@+id/backBtnTopCourse"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
