@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.TopCourseActivity">
 
-    <ImageButton
-        android:id="@+id/backBtnTopCourse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:background="@color/md_trans"
-        app:layout_constraintBottom_toBottomOf="@+id/topCourseTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topCourseTitle"
-        app:srcCompat="@drawable/ic_arrow_left" />
+
 
     <TextView
         android:id="@+id/topCourseTitle"
@@ -31,6 +22,18 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/backBtnTopCourse"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_arrow_left"
+        android:textColorHighlight="@color/md_black_1000"
+        android:textColorLink="@color/md_black_1000"
+        app:layout_constraintBottom_toBottomOf="@+id/topCourseTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
         android:layout_width="match_parent"

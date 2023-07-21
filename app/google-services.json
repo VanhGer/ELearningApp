@@ -1,18 +1,27 @@
 {
   "project_info": {
     "project_number": "59543995251",
+    "firebase_url": "https://elearningapp-60a6d-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "elearningapp-60a6d",
     "storage_bucket": "elearningapp-60a6d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:59543995251:android:a3caf934325e11c8a17b06",
+        "mobilesdk_app_id": "1:59543995251:android:5ef3befd58684322a17b06",
         "android_client_info": {
           "package_name": "com.example.elearningapp"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "59543995251-qecimf1mmueffoc9lo95f8pl0kbt65f6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.elearningapp",
+            "certificate_hash": "1f1978ec52a9a58a0b545a834a16567ba4aa0ca0"
+          }
+        },
         {
           "client_id": "59543995251-kuh0hsh2qf63jgtv5qd9i2chs7vl2lmj.apps.googleusercontent.com",
           "client_type": 3

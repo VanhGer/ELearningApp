@@ -14,6 +14,7 @@ import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.courseItem.LessonItem;
 import com.example.elearningapp.object.CourseListItem;
+import com.example.elearningapp.object.CourseObject;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
@@ -22,9 +23,9 @@ import java.util.List;
 public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopCourseViewHolder> {
 
     Context context;
-    List<CourseListItem> courseListItemList;
+    List<CourseObject> courseListItemList;
 
-    public TopCourseAdapter(@NonNull Context context, List<CourseListItem> courseListItemList) {
+    public TopCourseAdapter(@NonNull Context context, List<CourseObject> courseListItemList) {
         this.context = context;
         this.courseListItemList = courseListItemList;
     }
@@ -40,10 +41,10 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
     @Override
     public void onBindViewHolder(@NonNull TopCourseViewHolder holder, int position) {
         holder.nameView.setText(courseListItemList.get(position).getName());
-        holder.imageView.setImageResource(courseListItemList.get(position).getImage());
+//        holder.imageView.setImageResource(courseListItemList.get(position).getImage());
         holder.ownerView.setText(courseListItemList.get(position).getOwner());
-        holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
-        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " students");
+//        holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
+//        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " students");
     }
 
     @Override
