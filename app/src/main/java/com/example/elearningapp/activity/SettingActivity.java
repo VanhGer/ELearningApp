@@ -1,5 +1,6 @@
 package com.example.elearningapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +15,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.fragment.ProfileFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+    FirebaseAuth auth;
+    FirebaseUser user;
+
     private Button button_done_update_profile;
     private Button button_download;
     private Button button_help_and_support;
     private Button button_about_app;
-    private Button button_log_out_setting;
+     Button button_log_out_setting;
     private int currentLayout;
 
     private ImageButton imageButton_back_change_user_profile;
@@ -33,6 +39,26 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
         currentLayout = R.layout.setting;
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        button_log_out_setting = findViewById(R.id.button_log_out_setting);
+        if(user == null){
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        button_log_out_setting.setOnClickListener(new View.OnClickListener() {
+            //Hải code logout nhưng không thành...
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         updateLayout(currentLayout);
 
