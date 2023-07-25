@@ -10,8 +10,12 @@ import android.view.View;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +28,9 @@ import android.widget.TextView;
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.MainActivity;
 import com.example.elearningapp.activity.SearchActivity;
+import com.example.elearningapp.adapter.CategoryAdapter;
 import com.example.elearningapp.adapter.SearchAdapter;
+import com.example.elearningapp.object.CourseObject;
 import com.example.elearningapp.object.PopularCategoryItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,9 +38,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -74,8 +84,10 @@ public class SearchFragment extends Fragment {
 
     ProgressDialog TemDialog;
 
+    private CategoryAdapter searchAdapter;
 
-
+    private List<PopularCategoryItem> popularCategoryItemList = new ArrayList<>();
+    private List<String> topSearchList = new ArrayList<>();
 
     public SearchFragment() {
         // Required empty public constructor
@@ -114,25 +126,59 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
 
+        init(rootView);
 
-
-        SearchAdapter searchAdapter = new SearchAdapter(this.getActivity(), getListPopularCategory());
-
-        gridPopularSearch = rootView.findViewById(R.id.gridPopularView);
+        searchAdapter = new CategoryAdapter(this.getActivity(), popularCategoryItemList);
         gridPopularSearch.setAdapter(searchAdapter);
 
-        topSearchLayout = rootView.findViewById(R.id.topSearchLayout);
 
         topSearchMake();
 
         clickBtnSearch();
 
+        loadDataFromFirestore();
+
         return rootView;
     }
 
-    private int scaleDptoPx(float dp){
+    private void init(View view) {
+        gridPopularSearch = rootView.findViewById(R.id.gridPopularView);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+
+
+
+//        gridPopularSearch.setLayoutManager(new GridLayoutManager(getActivity(), 2,
+//                LinearLayoutManager.VERTICAL, false));
+
+        topSearchLayout = rootView.findViewById(R.id.topSearchLayout);
+
+//        FirebaseAuth auth  = FirebaseAuth.getInstance();
+//        user = auth.getCurrentUser();
+    }
+
+
+    private int scaleDptoPx(float dp) {
         return (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+    }
+
+    private void loadDataFromFirestore() {
+        CollectionReference categoryRef = FirebaseFirestore.getInstance().collection("categories");
+        categoryRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                popularCategoryItemList.clear();
+                for (DocumentSnapshot document : value.getDocuments()) {
+                    popularCategoryItemList.add(
+                            new PopularCategoryItem(
+                                    document.getString("name"),
+                                    document.getString("image")));
+                    Log.v("Firebase", document.getString("name"));
+                }
+                searchAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
@@ -141,28 +187,31 @@ public class SearchFragment extends Fragment {
             return;
         }
 
-        topSearchLayout.removeAllViews();
-
-        List<String> topSearchList = getListTopSearch();
-        if (topSearchList != null && topSearchList.size() > 0) {
-            for (int i = 0; i < topSearchList.size(); i++) {
-                TextView textView = new TextView(this.getActivity());
-                FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(
-                        FlowLayout.LayoutParams.WRAP_CONTENT,
-                        FlowLayout.LayoutParams.WRAP_CONTENT
-                        );
-                params.setMargins(0,scaleDptoPx(5), scaleDptoPx(10), scaleDptoPx(5));
-                String topSearchItem = topSearchList.get(i);
-                textView.setLayoutParams(params);
-                textView.setText(topSearchItem);
-                textView.setPadding(scaleDptoPx(15), scaleDptoPx(5), scaleDptoPx(15), scaleDptoPx(5));
-                textView.setBackgroundResource(R.drawable.custom_topsearch_item);
-                textView.setTextColor(getResources().getColor(R.color.md_amber_600));
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                textView.setTypeface(ResourcesCompat.getFont(getContext(), R.font.gilroymedium));
-                topSearchLayout.addView(textView);
+        CollectionReference topSearchRef = FirebaseFirestore.getInstance().collection("topsearches");
+        topSearchRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                topSearchLayout.removeAllViews();
+                for (DocumentSnapshot document : value.getDocuments()) {
+                    TextView textView = new TextView(getActivity());
+                    FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(
+                            FlowLayout.LayoutParams.WRAP_CONTENT,
+                            FlowLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, scaleDptoPx(5), scaleDptoPx(10), scaleDptoPx(5));
+                    String topSearchItem = document.getString("name");
+                    textView.setLayoutParams(params);
+                    textView.setText(topSearchItem);
+                    textView.setPadding(scaleDptoPx(15), scaleDptoPx(5), scaleDptoPx(15), scaleDptoPx(5));
+                    textView.setBackgroundResource(R.drawable.custom_topsearch_item);
+                    textView.setTextColor(getResources().getColor(R.color.md_blue_300));
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                    textView.setTypeface(ResourcesCompat.getFont(getContext(), R.font.gilroymedium));
+                    topSearchLayout.addView(textView);
+                    Log.v("Firebase", document.getString("name"));
+                }
             }
-        }
+        });
 
     }
 
@@ -176,83 +225,5 @@ public class SearchFragment extends Fragment {
                 startActivity(intent);
             }
         });
-    }
-
-    private List<String> getListTopSearch() {
-        ArrayList<String> names = new ArrayList<String>();
-        names.add("Guitar");
-        names.add("Thiết kế");
-        names.add("Toán học");
-        names.add("Hoạt cảnh");
-        names.add("Học sâu");
-        names.add("Thị giác máy tính");
-        names.add("Học máy");
-        names.add("Ngoại ngữ");
-        names.add("Chính thức");
-        names.add("Khuyên học");
-
-        return names;
-    }
-
-    private ArrayList<String> getDataFireBase() {
-        ArrayList<String> typeList = new ArrayList<String>();
-
-//        TemDialog = new ProgressDialog(getActivity());
-//        TemDialog.setMessage("Please Wait...");
-//        TemDialog.setCancelable(false);
-//        TemDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        TemDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
-
-        FirebaseFirestore.getInstance()
-                .collection("categories")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (QueryDocumentSnapshot snapshot: task.getResult()) {
-                            typeList.add(snapshot.getString("name"));
-                            Log.d("FireBase", "on Success: " + typeList);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e( "Firebase", "onFireBaseFail", e);
-                    }
-                })
-        ;
-
-//        TemDialog.show();
-
-        return typeList;
-    }
-
-    private List<PopularCategoryItem> getListPopularCategory() {
-        ArrayList<String> names = getDataFireBase();
-        ArrayList<Integer> images = new ArrayList<Integer>();
-
-        TextView searchButton = (TextView) rootView.findViewById(R.id.searchButton);
-
-        Log.d("FireBase", "on Success: " + names);
-
-
-        searchButton.setText(" " + names.size());
-
-        names.add("Hello");
-        names.add("ABC");
-
-        Log.d("FireBase", "on Success: " + names);
-
-        images.add(R.drawable.a);
-        images.add(R.drawable.b);
-
-        List <PopularCategoryItem> popularCategoryItems = new ArrayList<>();
-        for (int i = 0; i < images.size(); i++) {
-            PopularCategoryItem popularCategoryItem = new PopularCategoryItem(names.get(i), images.get(i));
-            popularCategoryItems.add(popularCategoryItem);
-        }
-
-        return popularCategoryItems;
     }
 }

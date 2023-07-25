@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="titleSpacing">0.1</dimen>
-    <dimen name="titleTextSize">24sp</dimen>
+    <dimen name="titleTextSize">28sp</dimen>
     <dimen name="padding">20dp</dimen>
     <dimen name="bottomNavHeight">60dp</dimen>
 </resources>

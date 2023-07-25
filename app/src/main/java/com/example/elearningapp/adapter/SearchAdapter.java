@@ -8,13 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.elearningapp.R;
 import com.example.elearningapp.fragment.SearchFragment;
 import com.example.elearningapp.object.PopularCategoryItem;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
-public class SearchAdapter extends BaseAdapter {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
     private Context context;
     private List<PopularCategoryItem> popularCategoryItemList;
 
@@ -25,41 +29,35 @@ public class SearchAdapter extends BaseAdapter {
         this.popularCategoryItemList = popularCategoryItemList;
     }
 
-
+    @NonNull
     @Override
-    public int getCount() {
-        if (popularCategoryItemList != null) {
-            return  popularCategoryItemList.size();
-        }
-        return 0;
+    public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.popular_search_item, parent, false);
+        return new SearchAdapter.SearchViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
+//        holder.imageView.setImageResource(popularCategoryItemList.get(position).getImage());
+        holder.categoryName.setText(popularCategoryItemList.get(position).getName());
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    public int getItemCount() {
+        return popularCategoryItemList.size();
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
-        if (inflater == null) {
-            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+    public static class SearchViewHolder extends RecyclerView.ViewHolder{
+        ShapeableImageView imageView;
+        TextView categoryName;
+
+
+        public SearchViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.grid_search_image);
+            categoryName = itemView.findViewById(R.id.grid_search_text);
         }
-
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.popular_search_item, null);
-        }
-
-        ImageView imageView = convertView.findViewById(R.id.grid_search_image);
-        TextView textView = convertView.findViewById(R.id.grid_search_text);
-
-        imageView.setImageResource(popularCategoryItemList.get(position).getImage());
-        textView.setText(popularCategoryItemList.get(position).getName());
-
-        return convertView;
     }
 }

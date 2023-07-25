@@ -1,7 +1,7 @@
 package com.example.elearningapp.object;
 
 public class CourseListItem {
-    private int image;
+    private String image;
 
     private String name;
 
@@ -12,7 +12,7 @@ public class CourseListItem {
     private double numberStar;
 
 
-    public CourseListItem(int image, String name, String owner, int numberStudent, double numberStar) {
+    public CourseListItem(String image, String name, String owner, int numberStudent, double numberStar) {
         this.image = image;
         this.name = name;
         this.numberStudent = numberStudent;
@@ -20,7 +20,7 @@ public class CourseListItem {
         this.owner = owner;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -36,7 +36,7 @@ public class CourseListItem {
         return numberStar;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
