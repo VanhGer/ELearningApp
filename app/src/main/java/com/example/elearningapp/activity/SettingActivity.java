@@ -42,28 +42,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         currentLayout = R.layout.setting;
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        Log.v("Firebase", "StartAct");
 
-        button_log_out_setting = findViewById(R.id.button_log_out_setting);
 
         if(user == null){
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
             finish();
         }
-        button_log_out_setting.setOnClickListener(new View.OnClickListener() {
-            //Hải code logout nhưng không thành...
-            @Override
-            public void onClick(View view) {
-                Log.v("Firebase", "OK");
-                Log.v("Firebase", "User" + user);
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
         updateLayout(currentLayout);
 
     }
@@ -80,12 +66,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             button_download = findViewById(R.id.button_download);
             button_help_and_support = findViewById(R.id.button_help_and_support);
             button_about_app = findViewById(R.id.button_about_app);
-//            button_log_out_setting = findViewById(R.id.button_log_out_setting);
+            button_log_out_setting = findViewById(R.id.button_log_out_setting);
             button_update_profile.setOnClickListener(this);
             button_download.setOnClickListener(this);
             button_help_and_support.setOnClickListener(this);
             button_about_app.setOnClickListener(this);
-//            button_log_out_setting.setOnClickListener(this);
+            button_log_out_setting.setOnClickListener(this);
 
 
         } else if (currentLayout == R.layout.change_user_profle) {
@@ -119,6 +105,15 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             } else if (view.getId() == R.id.button_about_app) {
                 currentLayout = R.layout.readme;
                 updateLayout(currentLayout);
+//                FirebaseAuth.getInstance().signOut();
+//                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                startActivity(intent);
+//                finish();
+            } else if (view.getId() == R.id.button_log_out_setting) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         } else if (currentLayout == R.layout.history_of_download) {
             if (view.getId() == R.id.imageButton_back_history_of_download) {

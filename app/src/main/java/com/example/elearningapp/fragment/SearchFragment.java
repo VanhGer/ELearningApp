@@ -25,6 +25,7 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.MainActivity;
 import com.example.elearningapp.activity.SearchActivity;

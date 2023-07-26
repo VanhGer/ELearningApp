@@ -24,6 +24,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     LayoutInflater inflater;
 
+//    private final View.OnClickListener mOnClickListener = new MyOnClickListener();
+
     public SearchAdapter(Context context, List<PopularCategoryItem> popularCategoryItemList) {
         this.context = context;
         this.popularCategoryItemList = popularCategoryItemList;
@@ -34,8 +36,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.popular_search_item, parent, false);
+//        view.setOnClickListener(mOnClickListener);
         return new SearchAdapter.SearchViewHolder(view);
     }
+
+
+
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {

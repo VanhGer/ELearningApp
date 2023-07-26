@@ -57,7 +57,9 @@ public class SearchActivity extends AppCompatActivity {
         init();
 
         EditText editSearchText = findViewById(R.id.editTextSearch);
+
         editSearchText.requestFocus();
+
 
         searchResultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList);
@@ -70,6 +72,10 @@ public class SearchActivity extends AppCompatActivity {
         backBtnClick();
         searchTextManager();
         clearBtnClick();
+
+        String hardStringSearch = getIntent().getStringExtra("hardStringSearch");
+        editSearchText.setText(hardStringSearch);
+
     }
 
     private void init() {
@@ -124,8 +130,6 @@ public class SearchActivity extends AppCompatActivity {
                     clearButton.setVisibility(View.VISIBLE);
                     searchResultRecyclerView.setVisibility(View.VISIBLE);
                 }
-
-
 
             }
 
