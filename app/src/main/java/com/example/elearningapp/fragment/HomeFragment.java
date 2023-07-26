@@ -15,6 +15,7 @@ import com.example.elearningapp.R;
 import com.example.elearningapp.activity.CourseOverallActivity;
 import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.activity.TopCourseActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,7 +74,6 @@ public class HomeFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         TextView greeting1 = rootView.findViewById(R.id.greeting1);
-
 
         TextView seeMore1 = rootView.findViewById(R.id.seeMore1);
 
