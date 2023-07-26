@@ -3,6 +3,7 @@ package com.example.elearningapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,7 +16,12 @@ import com.example.elearningapp.R;
 import com.example.elearningapp.activity.CourseOverallActivity;
 import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.activity.TopCourseActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +78,23 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        TextView titleView = rootView.findViewById(R.id.greeting1);
+
+        ImageView imageView = rootView.findViewById(R.id.profilePic);
+
+        String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("users").document(Uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    titleView.setText("Xin chào, " + document.getString("name") + "!");
+                    Picasso.get().load(document.getString("image")).into(imageView);
+                }
+            }
+        });
 
         TextView greeting1 = rootView.findViewById(R.id.greeting1);
 

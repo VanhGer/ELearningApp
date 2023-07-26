@@ -14,10 +14,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="#00FFFFFF"
+        android:contentDescription="back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/resource_return"
-        android:contentDescription="back" />
+        app:srcCompat="@drawable/ic_arrow_left" />
 
     <TextView
         android:id="@+id/textViewRegister"
