@@ -2,22 +2,69 @@ package com.example.elearningapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.CourseLessonsActivity;
+import com.example.elearningapp.interfaces.MyCallBack;
+import com.example.elearningapp.object.CourseListItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.shape.Shapeable;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class CourseOverallActivity extends AppCompatActivity {
+
+    private String courseId = "5Ftdw3moi35uQeVK1k8M";
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    TextView authorName, courseName, students, star, courseIntro;
+    ShapeableImageView courseImg;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course2);
 
         TextView lessonList_btn = findViewById(R.id.lesson_baihoc);
+        authorName = findViewById(R.id.authorName);
+        courseName = findViewById(R.id.courseName2);
+        students = findViewById(R.id.student);
+        star = findViewById(R.id.star);
+        courseIntro = findViewById(R.id.courseIntro);
+        courseImg = findViewById(R.id.courseImg);
+
+        readData(new MyCallBack() {
+            @Override
+            public void onCourseCallback(CourseListItem courseListItem) {
+                settingLayout(courseListItem);
+            }
+        });
+
+
+
+//        Picasso.get().load(courseListItem.getImage()).into(courseImg);
+//        authorName.setText(courseListItem.getOwner());
+//        courseName.setText(courseListItem.getName());
+//        students.setText(courseListItem.getNumberStudent() + "");
+//        star.setText(courseListItem.getNumberStar() + "");
+//        courseIntro.setText(courseListItem.getDescription());
+
+
+
         lessonList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,4 +75,30 @@ public class CourseOverallActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void settingLayout(CourseListItem courseListItem) {
+        Picasso.get().load(courseListItem.getImage()).into(courseImg);
+        authorName.setText(courseListItem.getOwner());
+        courseName.setText(courseListItem.getName());
+        students.setText(courseListItem.getNumberStudent() + "");
+        star.setText(courseListItem.getNumberStar() + "");
+        courseIntro.setText(courseListItem.getDescription());
+    }
+
+    public void readData(MyCallBack myCallBack) {
+        DocumentReference docRef = db.collection("courses").document(courseId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                DocumentSnapshot document = task.getResult();
+                CourseListItem courseListItem = new CourseListItem(document.getString("image"), document.getString("name"),
+                        "Bùi Tuấn Dũng", document.getString("description"),
+                        document.getDouble("students").intValue(), document.getDouble("star"));
+                myCallBack.onCourseCallback(courseListItem);
+            }
+        });
+    }
+
+
 }

@@ -10,11 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
-import com.example.elearningapp.courseItem.LessonItem;
 import com.example.elearningapp.object.CourseListItem;
-import com.example.elearningapp.object.CourseObject;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 

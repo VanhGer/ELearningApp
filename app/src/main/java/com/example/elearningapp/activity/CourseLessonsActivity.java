@@ -15,7 +15,7 @@ import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.ListAdapter;
 import com.example.elearningapp.courseItem.LessonDatabaseHelper;
-import com.example.elearningapp.courseItem.LessonItem;
+import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.lessonType.testLesson;
 import com.example.elearningapp.lessonType.textLesson;
 import com.example.elearningapp.lessonType.videoLesson;

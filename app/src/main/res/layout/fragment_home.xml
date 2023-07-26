@@ -74,7 +74,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/seeMore1"
+                android:id="@+id/student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
@@ -229,7 +229,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseStudent1" />
 
             <TextView
-                android:id="@+id/mayLikeCourse"
+                android:id="@+id/star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -250,7 +250,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
-                android:id="@+id/continueCourse1"
+                android:id="@+id/courseImg"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
@@ -275,8 +275,8 @@
                 android:text="  ĐỀ XUẤT  "
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
-                app:layout_constraintTop_toTopOf="@+id/continueCourse1" />
+                app:layout_constraintStart_toStartOf="@+id/courseImg"
+                app:layout_constraintTop_toTopOf="@+id/courseImg" />
 
             <TextView
                 android:id="@+id/continueCourseName1"
@@ -285,8 +285,8 @@
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
-                app:layout_constraintTop_toBottomOf="@+id/continueCourse1" />
+                app:layout_constraintStart_toStartOf="@+id/courseImg"
+                app:layout_constraintTop_toBottomOf="@+id/courseImg" />
 
             <TextView
                 android:id="@+id/continueCourseTeacher1"
@@ -294,7 +294,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giảng viên 1"
-                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
+                app:layout_constraintStart_toStartOf="@+id/courseImg"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseName1" />
 
             <TextView
@@ -303,7 +303,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="4,2 ⭐"
-                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
+                app:layout_constraintStart_toStartOf="@+id/courseImg"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseTeacher1" />
 
             <TextView
@@ -324,8 +324,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/continueCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/continueCourse1"
-                app:layout_constraintTop_toTopOf="@+id/continueCourse1"
+                app:layout_constraintStart_toEndOf="@+id/courseImg"
+                app:layout_constraintTop_toTopOf="@+id/courseImg"
                 app:srcCompat="@drawable/continue2" />
 
             <TextView
@@ -389,7 +389,7 @@
                 android:fontFamily="@font/gilroyregular"
                 android:text="@string/seeMore"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mayLikeCourse"
+                app:layout_constraintBottom_toBottomOf="@+id/star"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
@@ -402,7 +402,7 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/mayLikeCourse2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse"
+                app:layout_constraintTop_toBottomOf="@+id/star"
                 app:srcCompat="@drawable/recommend1" />
 
             <TextView
@@ -472,7 +472,7 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mayLikeCourse1"
-                app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse"
+                app:layout_constraintTop_toBottomOf="@+id/star"
                 app:srcCompat="@drawable/recommend2" />
 
             <TextView

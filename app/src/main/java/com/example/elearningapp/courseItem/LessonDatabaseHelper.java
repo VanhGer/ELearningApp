@@ -3,11 +3,10 @@ package com.example.elearningapp.courseItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.elearningapp.connectData.DatabaseHelper;
+import com.example.elearningapp.item.LessonItem;
 
 import java.util.ArrayList;
 import java.util.List;

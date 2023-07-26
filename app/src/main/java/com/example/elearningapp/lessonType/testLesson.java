@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,10 +14,9 @@ import android.widget.TextView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.AnswerAdapter;
-import com.example.elearningapp.adapter.ListAdapter;
 import com.example.elearningapp.adapter.TestAdapter;
 import com.example.elearningapp.courseItem.LessonDatabaseHelper;
-import com.example.elearningapp.courseItem.LessonItem;
+import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.courseItem.QuestionItem;
 
 import java.io.Serializable;

@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.CourseOverallActivity;
-import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.activity.TopCourseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -98,7 +97,7 @@ public class HomeFragment extends Fragment {
 
         TextView greeting1 = rootView.findViewById(R.id.greeting1);
 
-        TextView seeMore1 = rootView.findViewById(R.id.seeMore1);
+        TextView seeMore1 = rootView.findViewById(R.id.student);
 
         seeMore1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,7 +150,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageView continueCourse1 = rootView.findViewById(R.id.continueCourse1);
+        ImageView continueCourse1 = rootView.findViewById(R.id.courseImg);
 
         continueCourse1.setOnClickListener(new View.OnClickListener() {
             @Override

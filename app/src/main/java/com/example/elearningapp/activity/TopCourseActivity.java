@@ -83,7 +83,9 @@ public class TopCourseActivity extends AppCompatActivity {
                             new CourseListItem(
                                     document.getString("image"),
                                     document.getString("name")
-                                    , "Bui Tuan Dung", 1234, 4.5));
+                                    , "Bui Tuan Dung", document.getString("description"),
+                                    document.getDouble("students").intValue(),
+                                    document.getDouble("star")));
                     Log.v("Firebase", document.getString("name"));
                 }
                 topCourseAdapter.notifyDataSetChanged();

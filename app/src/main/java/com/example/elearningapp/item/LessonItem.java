@@ -1,4 +1,4 @@
-package com.example.elearningapp.courseItem;
+package com.example.elearningapp.item;
 
 import java.io.Serializable;
 

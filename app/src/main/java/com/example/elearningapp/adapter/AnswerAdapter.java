@@ -5,14 +5,12 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.courseItem.LessonItem;
 import com.example.elearningapp.courseItem.QuestionItem;
 
 import java.util.List;

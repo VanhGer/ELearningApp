@@ -84,7 +84,7 @@
                 android:layout_marginTop="0dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/continueCourse1"
+                    android:id="@+id/courseImg"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:scaleType="centerCrop"
@@ -107,7 +107,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/avatar"
-                    app:layout_constraintTop_toBottomOf="@+id/continueCourse1" />
+                    app:layout_constraintTop_toBottomOf="@+id/courseImg" />
 
                 <ImageView
                     android:id="@+id/avatar"
@@ -115,7 +115,7 @@
                     android:layout_height="73dp"
                     android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/continueCourse1"
+                    app:layout_constraintTop_toBottomOf="@+id/courseImg"
                     app:srcCompat="@drawable/avatarmain"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -131,19 +131,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/courseName2">
 
                     <TextView
-                        android:id="@+id/seeMore1"
+                        android:id="@+id/student"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#C1C1C1"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@+id/seeMore3"
-                        app:layout_constraintEnd_toStartOf="@+id/mayLikeCourse"
+                        app:layout_constraintEnd_toStartOf="@+id/star"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/mayLikeCourse"
+                        android:id="@+id/star"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="TextView"
@@ -151,7 +151,7 @@
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/seeMore1"
+                        app:layout_constraintStart_toEndOf="@+id/student"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -164,7 +164,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/mostViewedCourseName1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/seeMore1" />
+                        app:layout_constraintTop_toBottomOf="@+id/student" />
 
                     <TextView
                         android:id="@+id/mostViewedCourseName1"
@@ -176,7 +176,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/seeMore3"
-                        app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse" />
+                        app:layout_constraintTop_toBottomOf="@+id/star" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

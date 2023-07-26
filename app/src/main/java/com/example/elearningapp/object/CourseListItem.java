@@ -7,15 +7,18 @@ public class CourseListItem {
 
     private String owner;
 
+    private String description;
+
     private int numberStudent;
 
     private double numberStar;
 
 
-    public CourseListItem(String image, String name, String owner, int numberStudent, double numberStar) {
+    public CourseListItem(String image, String name, String owner, String description, int numberStudent, double numberStar) {
         this.image = image;
         this.name = name;
         this.numberStudent = numberStudent;
+        this.description = description;
         this.numberStar = numberStar;
         this.owner = owner;
     }
@@ -58,5 +61,13 @@ public class CourseListItem {
 
     public void setNumberStar(double numberStar) {
         this.numberStar = numberStar;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

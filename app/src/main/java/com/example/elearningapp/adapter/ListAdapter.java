@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
-import com.example.elearningapp.courseItem.LessonItem;
+import com.example.elearningapp.item.LessonItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
