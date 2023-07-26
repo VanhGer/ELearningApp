@@ -29,7 +29,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:text="@string/greeting2"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/profilePic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/greeting1" />
@@ -158,7 +158,7 @@
                 app:layout_constraintTop_toTopOf="@+id/mostViewedCourseStar1" />
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/mostViewedCourseStar2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4,3 ⭐"
@@ -166,13 +166,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher2" />
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/mostViewedCourseStudent2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="(1987)"
-                app:layout_constraintStart_toEndOf="@+id/textView29"
-                app:layout_constraintTop_toTopOf="@+id/textView29" />
+                app:layout_constraintStart_toEndOf="@+id/mostViewedCourseStar2"
+                app:layout_constraintTop_toTopOf="@+id/mostViewedCourseStar2" />
 
             <TextView
                 android:id="@+id/textView32"

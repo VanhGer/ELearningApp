@@ -1,4 +1,4 @@
-package com.example.elearningapp;
+package com.example.elearningapp.activity;
 
 import android.content.Context;
 import android.database.Cursor;
