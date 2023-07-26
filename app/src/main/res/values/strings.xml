@@ -43,4 +43,6 @@ If you want the child of the ScrollView to match the height of the parent when t
     <string name="mostViewedCourse">Khóa học được theo dõi nhiều nhất</string>
     <string name="seeMore">xem thêm</string>
     <string name="profilePic">Ảnh đại diện</string>
+    <string name="continueCourse">Tiếp tục xem</string>
+    <string name="mayLikeCourse">Bạn cũng có thể thích</string>
 </resources>

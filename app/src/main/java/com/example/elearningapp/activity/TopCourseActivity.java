@@ -55,7 +55,6 @@ public class TopCourseActivity extends AppCompatActivity {
 
         String title = getIntent().getStringExtra("title");
 
-
         TextView titleView = findViewById(R.id.topCourseTitle);
         titleView.setText(title);
 

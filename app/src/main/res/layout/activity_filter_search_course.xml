@@ -196,7 +196,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9">
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/mayLikeCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -222,7 +222,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
                 <TextView
-                    android:id="@+id/textView40"
+                    android:id="@+id/continueCourseStar1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -248,7 +248,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
                 <TextView
-                    android:id="@+id/textView41"
+                    android:id="@+id/continueCourseStudent1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -274,7 +274,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
                 <TextView
-                    android:id="@+id/textView42"
+                    android:id="@+id/mayLikeCourseStar1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
