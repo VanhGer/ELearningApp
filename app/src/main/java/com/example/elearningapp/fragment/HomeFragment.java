@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.CourseOverallActivity;
 import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.activity.TopCourseActivity;
 
@@ -76,6 +78,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TopCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
+
+        mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
                 startActivity(intent);
             }
         });
