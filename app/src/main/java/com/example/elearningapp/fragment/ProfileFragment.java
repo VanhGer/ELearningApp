@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,7 @@ public class ProfileFragment extends Fragment {
         go_to_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.v("Firebase", "ACV");
                 Intent intent = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
             }
