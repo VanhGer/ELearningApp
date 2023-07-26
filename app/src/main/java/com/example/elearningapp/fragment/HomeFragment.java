@@ -72,6 +72,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        TextView greeting1 = rootView.findViewById(R.id.greeting1);
+
+
         TextView seeMore1 = rootView.findViewById(R.id.seeMore1);
 
         seeMore1.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +111,56 @@ public class HomeFragment extends Fragment {
         ImageView mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
 
         mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView mostViewedCourse2 = rootView.findViewById(R.id.mostViewedCourse2);
+
+        mostViewedCourse2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView continueCourse1 = rootView.findViewById(R.id.continueCourse1);
+
+        continueCourse1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView continueCourse2 = rootView.findViewById(R.id.continueCourse2);
+
+        continueCourse2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView mayLikeCourse1 = rootView.findViewById(R.id.mayLikeCourse1);
+
+        mayLikeCourse1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView mayLikeCourse2 = rootView.findViewById(R.id.mayLikeCourse2);
+
+        mayLikeCourse2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
