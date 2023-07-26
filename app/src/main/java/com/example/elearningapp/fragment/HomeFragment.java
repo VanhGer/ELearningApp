@@ -76,6 +76,29 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TopCourseActivity.class);
+                intent.putExtra("title", "Khóa học được theo dõi nhiều nhất");
+                startActivity(intent);
+            }
+        });
+
+        TextView seeMore2 = rootView.findViewById(R.id.seeMore2);
+
+        seeMore2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TopCourseActivity.class);
+                intent.putExtra("title", "Tiếp tục xem các khóa học");
+                startActivity(intent);
+            }
+        });
+
+        TextView seeMore3 = rootView.findViewById(R.id.seeMore3);
+
+        seeMore3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TopCourseActivity.class);
+                intent.putExtra("title", "Các khóa học bạn có thể thích");
                 startActivity(intent);
             }
         });

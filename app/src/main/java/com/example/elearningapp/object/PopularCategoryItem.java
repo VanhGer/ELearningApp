@@ -2,9 +2,9 @@ package com.example.elearningapp.object;
 
 public class PopularCategoryItem {
     private String name;
-    private int image;
+    private String image;
 
-    public PopularCategoryItem(String name, int image) {
+    public PopularCategoryItem(String name, String image) {
         this.name = name;
         this.image = image;
     }
@@ -13,7 +13,7 @@ public class PopularCategoryItem {
         this.name = name;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -21,7 +21,7 @@ public class PopularCategoryItem {
         return name;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 }

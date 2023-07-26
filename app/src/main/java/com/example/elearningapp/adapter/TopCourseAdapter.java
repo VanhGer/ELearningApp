@@ -23,9 +23,9 @@ import java.util.List;
 public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopCourseViewHolder> {
 
     Context context;
-    List<CourseObject> courseListItemList;
+    List<CourseListItem> courseListItemList;
 
-    public TopCourseAdapter(@NonNull Context context, List<CourseObject> courseListItemList) {
+    public TopCourseAdapter(@NonNull Context context, List<CourseListItem> courseListItemList) {
         this.context = context;
         this.courseListItemList = courseListItemList;
     }
@@ -41,10 +41,10 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
     @Override
     public void onBindViewHolder(@NonNull TopCourseViewHolder holder, int position) {
         holder.nameView.setText(courseListItemList.get(position).getName());
-//        holder.imageView.setImageResource(courseListItemList.get(position).getImage());
         holder.ownerView.setText(courseListItemList.get(position).getOwner());
-//        holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
-//        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " students");
+        Picasso.get().load(courseListItemList.get(position).getImage()).into(holder.imageView);
+        holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
+        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " students");
     }
 
     @Override
@@ -59,6 +59,10 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
         TextView numStudentView;
         TextView numStarView;
 
+        ImageView iconStar;
+
+        ImageView iconUser;
+
 
         public TopCourseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +71,8 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
             ownerView = itemView.findViewById(R.id.top_course_item_owner);
             numStudentView = itemView.findViewById(R.id.top_course_item_students);
             numStarView = itemView.findViewById(R.id.top_course_item_star);
+            iconStar = itemView.findViewById(R.id.starImage);
+            iconUser = itemView.findViewById(R.id.userImage);
         }
     }
 }

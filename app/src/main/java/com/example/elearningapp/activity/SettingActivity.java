@@ -2,6 +2,7 @@ package com.example.elearningapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -43,6 +44,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         user = auth.getCurrentUser();
 
         button_log_out_setting = findViewById(R.id.button_log_out_setting);
+
         if(user == null){
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
@@ -52,6 +54,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             //Hải code logout nhưng không thành...
             @Override
             public void onClick(View view) {
+                Log.v("Firebase", "OK");
+                Log.v("Firebase", "User" + user);
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
