@@ -2,6 +2,7 @@ package com.example.elearningapp.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,10 @@ public class SearchActivity extends AppCompatActivity {
 
     List<CourseListItem> courseListItemList = new ArrayList<>();
 
+    ConstraintLayout recentSearch;
+
+    TextView searchResultTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +77,8 @@ public class SearchActivity extends AppCompatActivity {
         searchText = (EditText) findViewById(R.id.editTextSearch);
         clearButton = (ImageButton) findViewById(R.id.clear_text_btn);
         searchResultRecyclerView = findViewById(R.id.searchListRecycler);
+        recentSearch = findViewById(R.id.recentSearch);
+        searchResultTitle = findViewById(R.id.searchResultTitle);
     }
 
     private void backBtnClick() {
@@ -107,11 +114,18 @@ public class SearchActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (searchText.getText().toString().matches("")){
                     clearButton.setVisibility(View.INVISIBLE);
+                    recentSearch.setVisibility(View.VISIBLE);
+                    searchResultRecyclerView.setVisibility(View.INVISIBLE);
+                    searchResultTitle.setText("Tìm kiếm trước đó");
+
                 } else {
+                    textSearch(searchText.getText().toString());
+                    recentSearch.setVisibility(View.INVISIBLE);
                     clearButton.setVisibility(View.VISIBLE);
+                    searchResultRecyclerView.setVisibility(View.VISIBLE);
                 }
 
-                textSearch(searchText.getText().toString());
+
 
             }
 
@@ -135,19 +149,30 @@ public class SearchActivity extends AppCompatActivity {
 
     private void textSearch(String str) {
 
-        FirebaseFirestore.getInstance().collection("courses").orderBy("name")
-                        .startAt(str).endAt(str+"~").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("courses")
+                .orderBy("name")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        courseListItemList.clear();
+                        List<CourseListItem> courseListFull = new ArrayList<>();
                         for (DocumentSnapshot document : value.getDocuments()) {
-                            courseListItemList.add(
+                            courseListFull.add(
                                     new CourseListItem(
                                             document.getString("image"),
                                             document.getString("name")
                                             , "Bui Tuan Dung", 1234, 4.5));
                             Log.v("Firebase", document.getString("name"));
                         }
+
+                        courseListItemList.clear();
+                        for (CourseListItem courseListItem: courseListFull) {
+                            if (courseListItem.getName().toLowerCase().contains(str.toLowerCase())){
+                                courseListItemList.add(courseListItem);
+                            }
+                        }
+
+                        searchResultTitle.setText("Có tất cả " + courseListItemList.size() + " kết quả được tìm thấy");
+
                         searchCourseAdapter.notifyDataSetChanged();
                     }
                 });
