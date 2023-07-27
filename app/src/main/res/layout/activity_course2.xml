@@ -85,7 +85,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/courseImg"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="180dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,58 +130,49 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/courseName2">
 
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_user" />
+
                     <TextView
                         android:id="@+id/student"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:text="TextView"
                         android:textColor="#C1C1C1"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/seeMore3"
-                        app:layout_constraintEnd_toStartOf="@+id/star"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="64dp"
+                        app:layout_constraintStart_toEndOf="@+id/student"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_star" />
 
                     <TextView
                         android:id="@+id/star"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:text="TextView"
                         android:textColor="#C1C1C1"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/student"
+                        app:layout_constraintStart_toEndOf="@+id/imageView7"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/seeMore3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="#C1C1C1"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mostViewedCourseName1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/student" />
-
-                    <TextView
-                        android:id="@+id/mostViewedCourseName1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="#C1C1C1"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/seeMore3"
-                        app:layout_constraintTop_toBottomOf="@+id/star" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/mostViewedCourseTeacher2"
+                    android:id="@+id/gioithieu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -206,7 +197,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher2"
+                    app:layout_constraintTop_toBottomOf="@+id/gioithieu"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView

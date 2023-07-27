@@ -2,6 +2,7 @@ package com.example.elearningapp.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.courseItem.QuestionItem;
 
 import java.util.List;
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
 
     Context context;
-    List<QuestionItem> questionItemList;
 
-    List<Boolean> ansList;
+    List<String> ansList;
+    List<Boolean> ansRes;
 
-    public AnswerAdapter(Context context, List<QuestionItem> questionItemList, List<Boolean> ansList) {
+    public AnswerAdapter(Context context, List<Boolean> ansRes, List<String> ansList) {
         this.context = context;
-        this.questionItemList = questionItemList;
         this.ansList = ansList;
+        this.ansRes = ansRes;
     }
 
     @NonNull
@@ -39,19 +39,20 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     @Override
     public void onBindViewHolder(@NonNull AnswerAdapter.AnswerViewHolder holder, int position) {
         holder.questionNum.setText("Câu số: " + (position + 1));
-        if (ansList.get(position)) {
+        Log.w("positionn", position + "");
+        if (ansRes.get(position)) {
             holder.answer.setTextColor(Color.parseColor("#FF558B2F"));
-            holder.answer.setText("Chính xác! " + "Đáp án là: " + questionItemList.get(position).getAnswer());
+            holder.answer.setText("Chính xác! " + "Đáp án là: " + ansList.get(position));
         }
         else {
             holder.answer.setTextColor(Color.parseColor("#FFC62828"));
-            holder.answer.setText("Sai! Đáp án đúng là: " + questionItemList.get(position).getAnswer());
+            holder.answer.setText("Sai! Đáp án đúng là: " + ansList.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        return questionItemList.size();
+        return ansList.size();
     }
 
     public static class AnswerViewHolder extends RecyclerView.ViewHolder {

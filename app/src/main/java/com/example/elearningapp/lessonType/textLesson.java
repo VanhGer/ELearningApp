@@ -18,10 +18,9 @@ import java.util.List;
 public class textLesson extends AppCompatActivity {
 
     TextView title, content;
-
     Button nxt, pre;
-
     ImageButton back;
+    String courseId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,6 +42,7 @@ public class textLesson extends AppCompatActivity {
         List<LessonItem> lessonItem = (List<LessonItem>) getIntent().getSerializableExtra("lesson");
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
+        courseId = getIntent().getStringExtra("courseId");
 
         title.setText(lessonItem.get(position).getName());
         content.setText(lessonItem.get(position).getContent());
@@ -80,6 +80,7 @@ public class textLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
             finish();
         } else if (lessonItemList.get(position).getType().equals("text")) {
@@ -87,6 +88,7 @@ public class textLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
             finish();
         } else if (lessonItemList.get(position).getType().equals("test")) {
@@ -94,6 +96,7 @@ public class textLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
             finish();
         }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,8 +24,8 @@ public class videoLesson extends AppCompatActivity {
     TextView title, script;
     Button nxt, pre;
     VideoView video;
-
     ImageButton back;
+    String courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class videoLesson extends AppCompatActivity {
         List<LessonItem> lessonItem = (List<LessonItem>) getIntent().getSerializableExtra("lesson");
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
+        courseId = getIntent().getStringExtra("courseId");
 
         title.setText(lessonItem.get(position).getName());
         script.setText(lessonItem.get(position).getScript());
@@ -87,6 +89,8 @@ public class videoLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
+
             startActivity(intent);
             finish();
         } else if (lessonItemList.get(position).getType().equals("text")) {
@@ -94,6 +98,8 @@ public class videoLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
+
             startActivity(intent);
             finish();
         } else if (lessonItemList.get(position).getType().equals("test")) {
@@ -101,6 +107,8 @@ public class videoLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
+
             startActivity(intent);
             finish();
         }

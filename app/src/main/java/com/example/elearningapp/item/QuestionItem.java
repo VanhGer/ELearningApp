@@ -1,34 +1,18 @@
-package com.example.elearningapp.courseItem;
+package com.example.elearningapp.item;
 
 public class QuestionItem {
-    int questionId, lessonId, answerId;
-    String content, choice1, choice2, choice3, choice4;
+    int answerId;
+    String questionId, lessonId, content, choice1, choice2, choice3, choice4;
 
-    public QuestionItem(int questionId, int lessonId,  String content, String choice1, String choice2, String choice3, String choice4, int answerId) {
+    public QuestionItem(String questionId, String lessonId, String content, String choice1, String choice2, String choice3, String choice4, int answerId) {
+        this.answerId = answerId;
         this.questionId = questionId;
         this.lessonId = lessonId;
-        this.answerId = answerId;
         this.content = content;
         this.choice1 = choice1;
         this.choice2 = choice2;
         this.choice3 = choice3;
         this.choice4 = choice4;
-    }
-
-    public int getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
-
-    public int getLessonId() {
-        return lessonId;
-    }
-
-    public void setLessonId(int lessonId) {
-        this.lessonId = lessonId;
     }
 
     public int getAnswerId() {
@@ -37,6 +21,22 @@ public class QuestionItem {
 
     public void setAnswerId(int answerId) {
         this.answerId = answerId;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(String lessonId) {
+        this.lessonId = lessonId;
     }
 
     public String getContent() {

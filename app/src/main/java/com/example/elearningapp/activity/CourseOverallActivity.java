@@ -2,24 +2,19 @@ package com.example.elearningapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.activity.CourseLessonsActivity;
-import com.example.elearningapp.interfaces.MyCallBack;
+import com.example.elearningapp.interfaces.CourseCallBack;
 import com.example.elearningapp.object.CourseListItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.shape.Shapeable;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,7 +42,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseIntro = findViewById(R.id.courseIntro);
         courseImg = findViewById(R.id.courseImg);
 
-        readData(new MyCallBack() {
+        readData(new CourseCallBack() {
             @Override
             public void onCourseCallback(CourseListItem courseListItem) {
                 settingLayout(courseListItem);
@@ -85,7 +80,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseIntro.setText(courseListItem.getDescription());
     }
 
-    public void readData(MyCallBack myCallBack) {
+    public void readData(CourseCallBack myCallBack) {
         DocumentReference docRef = db.collection("courses").document(courseId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

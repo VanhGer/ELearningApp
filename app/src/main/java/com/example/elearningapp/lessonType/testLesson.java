@@ -1,5 +1,6 @@
 package com.example.elearningapp.lessonType;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +16,14 @@ import android.widget.TextView;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.AnswerAdapter;
 import com.example.elearningapp.adapter.TestAdapter;
-import com.example.elearningapp.courseItem.LessonDatabaseHelper;
 import com.example.elearningapp.item.LessonItem;
-import com.example.elearningapp.courseItem.QuestionItem;
+import com.example.elearningapp.item.QuestionItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,10 +33,13 @@ public class testLesson extends AppCompatActivity {
     TextView title, result;
     Button submit, nxt, pre;
     ImageButton back;
-
     RecyclerView recyclerView;
+    TestAdapter testAdapter;
+    AnswerAdapter answerAdapter;
+    List<QuestionItem> questionItemList = new ArrayList<>();
 
-    List<QuestionItem> questionItemList;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String courseId;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,25 +61,42 @@ public class testLesson extends AppCompatActivity {
         List<LessonItem> lessonItem = (List<LessonItem>) getIntent().getSerializableExtra("lesson");
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
-
-        LessonDatabaseHelper helper = new LessonDatabaseHelper();
-        questionItemList = helper.getQuestionbyLessonId(getApplicationContext(), lessonItem.get(position).getLessonId());
+        courseId = getIntent().getStringExtra("courseId");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new TestAdapter(getApplicationContext(), questionItemList));
+        testAdapter = new TestAdapter(getApplicationContext(), questionItemList);
+        recyclerView.setAdapter(testAdapter);
         title.setText(lessonItem.get(position).getName());
+
+        CollectionReference colRef = db.collection("courses").document(courseId).
+                                    collection("lessons").document(lessonItem.get(position).getLessonId()).
+                                    collection("question");
+
+        colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    questionItemList.add(new QuestionItem(document.getId(), lessonItem.get(position).getLessonId(),
+                            document.getString("topic"), document.getString("choice1"), document.getString("choice2"),
+                            document.getString("choice3"), document.getString("choice4"), document.getDouble("answer").intValue()));
+                }
+                testAdapter.notifyDataSetChanged();
+
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Boolean> ansList = getResult();
-
+                List<Boolean> ansRes = getResult();
+                List<String> ansList = getAnswerList();
+                answerAdapter = new AnswerAdapter(getApplicationContext(), ansRes, ansList);
                 result.setVisibility(View.VISIBLE);
                 pre.setVisibility(View.VISIBLE);
                 nxt.setVisibility(View.VISIBLE);
                 submit.setVisibility(View.GONE);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(new AnswerAdapter(getApplicationContext(), questionItemList, ansList));
+                recyclerView.setAdapter(answerAdapter);
             }
         });
 
@@ -101,6 +127,14 @@ public class testLesson extends AppCompatActivity {
 
 
 
+    }
+
+    List <String> getAnswerList() {
+        List<String> ansList = new ArrayList<>();
+        for (int i = 0; i <  questionItemList.size(); i++) {
+            ansList.add(questionItemList.get(i).getAnswer());
+        }
+        return ansList;
     }
 
     List<Boolean> getResult() {
@@ -144,6 +178,7 @@ public class testLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
             finish();
         } else if (lessonItemList.get(position).getType().equals("text")) {
@@ -151,6 +186,7 @@ public class testLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
             finish();
         } else if (lessonItemList.get(position).getType().equals("test")) {
@@ -158,6 +194,7 @@ public class testLesson extends AppCompatActivity {
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", maxPosition);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
             finish();
         }

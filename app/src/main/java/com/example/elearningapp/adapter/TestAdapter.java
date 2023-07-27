@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.courseItem.QuestionItem;
+import com.example.elearningapp.item.QuestionItem;
 
 import java.util.HashMap;
 import java.util.List;

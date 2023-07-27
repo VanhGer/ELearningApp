@@ -2,6 +2,6 @@ package com.example.elearningapp.interfaces;
 
 import com.example.elearningapp.object.CourseListItem;
 
-public interface MyCallBack {
+public interface CourseCallBack {
     void onCourseCallback(CourseListItem courseListItem);
 }

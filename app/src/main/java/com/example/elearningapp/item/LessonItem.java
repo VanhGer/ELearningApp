@@ -3,10 +3,9 @@ package com.example.elearningapp.item;
 import java.io.Serializable;
 
 public class LessonItem implements Serializable {
-    String name, des, type, script, content, image, video;
-    int courseId, lessonId;
+    String name, des, type, script, content, image, video, lessonId;
 
-    public LessonItem(int lessonId, int courseId, String name, String des, String type, String image, String script, String content, String video) {
+    public LessonItem(String lessonId, String name, String des, String type, String image, String script, String content, String video) {
         this.name = name;
         this.des = des;
         this.type = type;
@@ -14,7 +13,6 @@ public class LessonItem implements Serializable {
         this.content = content;
         this.video = video;
         this.image = image;
-        this.courseId = courseId;
         this.lessonId = lessonId;
     }
 
@@ -74,19 +72,11 @@ public class LessonItem implements Serializable {
         this.image = image;
     }
 
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
-
-    public int getLessonId() {
+    public String getLessonId() {
         return lessonId;
     }
 
-    public void setLessonId(int lessonId) {
+    public void setLessonId(String lessonId) {
         this.lessonId = lessonId;
     }
 }

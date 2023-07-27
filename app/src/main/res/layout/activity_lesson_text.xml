@@ -15,7 +15,7 @@
         android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/resource_return" />
+        app:srcCompat="@drawable/ic_arrow_left" />
 
     <TextView
         android:id="@+id/lesson_title2"

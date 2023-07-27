@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,31 +15,51 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.ListAdapter;
-import com.example.elearningapp.courseItem.LessonDatabaseHelper;
 import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.lessonType.testLesson;
 import com.example.elearningapp.lessonType.textLesson;
 import com.example.elearningapp.lessonType.videoLesson;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseLessonsActivity extends AppCompatActivity implements ClickHelper {
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String courseId = "5Ftdw3moi35uQeVK1k8M";
+    List<LessonItem> lessonItemList = new ArrayList<>();
 
-    List<LessonItem> lessonItemList;
+    ListAdapter listAdapter;
+    RecyclerView recyclerView;
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
-        LessonDatabaseHelper helper = new LessonDatabaseHelper();
-        RecyclerView recyclerView = findViewById(R.id.lesson_list_view);
-        lessonItemList = helper.getListLessonByCourseId(getApplicationContext(), 1);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ListAdapter(getApplicationContext(), lessonItemList, this));
-
+        recyclerView = findViewById(R.id.lesson_list_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        listAdapter = new ListAdapter(getApplicationContext(), lessonItemList, this);
+        recyclerView.setAdapter(listAdapter);
         TextView lessonList_btn = findViewById(R.id.lesson_tongquan);
+
+        CollectionReference colRef = db.collection("courses").document(courseId).collection("lessons");
+        colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    lessonItemList.add(new LessonItem(document.getId(), document.getString("name"), document.getString("description"),
+                            document.getString("type"), document.getString("image"), document.getString("script"),
+                            document.getString("content"), document.getString("video")));
+                }
+                listAdapter.notifyDataSetChanged();
+            }
+        });
         lessonList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +69,10 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+
     }
+
+
 
     @Override
     public void onItemClick(int position) {
@@ -57,18 +81,21 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", lessonItemList.size());
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
         } else if (lessonItemList.get(position).getType().equals("text")) {
             Intent intent = new Intent(CourseLessonsActivity.this, textLesson.class);
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", lessonItemList.size());
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
         } else if (lessonItemList.get(position).getType().equals("test")) {
             Intent intent = new Intent(CourseLessonsActivity.this, testLesson.class);
             intent.putExtra("lesson", (Serializable) lessonItemList);
             intent.putExtra("position", position);
             intent.putExtra("maxPosition", lessonItemList.size());
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
         }
     }
