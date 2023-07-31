@@ -27,7 +27,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private Button button_download;
     private Button button_help_and_support;
     private Button button_about_app;
-     Button button_log_out_setting;
+    private Button button_log_out_setting;
     private int currentLayout;
 
     private ImageButton imageButton_back_change_user_profile;
@@ -83,8 +83,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             imageButton_back_history_of_download =findViewById(R.id.imageButton_back_history_of_download);
             imageButton_back_history_of_download.setOnClickListener(this);
         } else if (currentLayout == R.layout.help_and_support) {
-            imageButton_back_help_and_support =findViewById(R.id.imageButton_back_help_and_support);
-            imageButton_back_help_and_support.setOnClickListener(this);
+//            imageButton_back_help_and_support =findViewById(R.id.imageButton_back_help_and_support);
+//            imageButton_back_help_and_support.setOnClickListener(this);
         } else if (currentLayout == R.layout.readme) {
             Button_back_readme =findViewById(R.id.Button_back_readme);
             Button_back_readme.setOnClickListener(this);
@@ -94,8 +94,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         if (currentLayout == R.layout.setting) {
             if (view.getId() == R.id.button_update_profile) {
-                currentLayout = R.layout.change_user_profle;
-                updateLayout(currentLayout);
+                Intent intent = new Intent(getApplicationContext(), ChangeUserProfile.class);
+                startActivity(intent);
+                finish();
             } else if (view.getId() == R.id.button_download) {
                 currentLayout = R.layout.history_of_download;
                 updateLayout(currentLayout);
@@ -136,9 +137,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 updateLayout(currentLayout);
             }
         } else if (currentLayout == R.layout.help_and_support) {
-            if (view.getId() == R.id.imageButton_back_help_and_support) {
-                currentLayout = R.layout.setting;
-                updateLayout(currentLayout);
+//            if (view.getId() == R.id.imageButton_back_help_and_support) {
+//                currentLayout = R.layout.setting;
+//                updateLayout(currentLayout);
             }
         }
         // Xử lý các sự kiện onClick khác tùy thuộc vào currentLayout
@@ -146,4 +147,4 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-}
+

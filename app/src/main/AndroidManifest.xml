@@ -69,6 +69,19 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.ChangeUserProfile"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AboutAppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DownloadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.HelpAndSupportActivity"
+            android:exported="false" />
+
 
     </application>
 

@@ -119,6 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                     Map<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("name", user);
+                                    userInfo.put("email", email);
                                     FirebaseFirestore.getInstance().collection("users")
                                             .document(mAuth.getUid()).
                                             set(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
