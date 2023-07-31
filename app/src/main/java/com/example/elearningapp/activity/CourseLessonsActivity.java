@@ -42,7 +42,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
-        recyclerView = findViewById(R.id.lesson_list_view);
+        recyclerView = findViewById(R.id.course_list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         listAdapter = new ListAdapter(getApplicationContext(), lessonItemList, this);
         recyclerView.setAdapter(listAdapter);

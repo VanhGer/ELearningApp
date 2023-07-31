@@ -1,30 +1,19 @@
 package com.example.elearningapp.activity;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
-import com.example.elearningapp.object.CourseObject;
-import com.example.elearningapp.object.PopularCategoryItem;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -55,7 +44,7 @@ public class TopCourseActivity extends AppCompatActivity {
 
         String title = getIntent().getStringExtra("title");
 
-        TextView titleView = findViewById(R.id.topCourseTitle);
+        TextView titleView = findViewById(R.id.yourCourse);
         titleView.setText(title);
 
         topCourseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -69,7 +58,7 @@ public class TopCourseActivity extends AppCompatActivity {
 
     private void init() {
         backBtn = findViewById(R.id.backBtnTopCourse);
-        topCourseRecyclerView = findViewById(R.id.topCourseRecycler);
+        topCourseRecyclerView = findViewById(R.id.yourCourseRecycler);
     }
 
     private void loadDataFromFirestore() {
@@ -86,7 +75,6 @@ public class TopCourseActivity extends AppCompatActivity {
                                     , "Bui Tuan Dung", document.getString("description"),
                                     document.getDouble("students").intValue(),
                                     document.getDouble("star")));
-                    Log.v("Firebase", document.getString("name"));
                 }
                 topCourseAdapter.notifyDataSetChanged();
             }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
-    android:padding="0dp">
+    android:paddingBottom="4dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/top_course_item_image"
@@ -46,7 +46,7 @@
     <TextView
         android:id="@+id/top_course_item_students"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:fontFamily="@font/gilroyregular"
@@ -59,8 +59,8 @@
 
     <TextView
         android:id="@+id/top_course_item_star"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:fontFamily="@font/gilroyregular"
@@ -72,20 +72,20 @@
 
     <ImageView
         android:id="@+id/starImage"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
         app:layout_constraintStart_toEndOf="@+id/top_course_item_students"
-        app:srcCompat="@drawable/star" />
+        app:srcCompat="@drawable/ic_star" />
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
         app:layout_constraintStart_toEndOf="@+id/top_course_item_image"
-        app:srcCompat="@drawable/user" />
+        app:srcCompat="@drawable/ic_user" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
