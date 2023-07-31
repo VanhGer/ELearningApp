@@ -3,18 +3,25 @@ package com.example.elearningapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.elearningapp.R;
-import com.example.elearningapp.activity.SearchActivity;
+import com.example.elearningapp.activity.AboutAppActivity;
+import com.example.elearningapp.activity.ChangeUserProfile;
+import com.example.elearningapp.activity.DownloadActivity;
+import com.example.elearningapp.activity.HelpAndSupportActivity;
+import com.example.elearningapp.activity.LoginActivity;
+import com.example.elearningapp.activity.ProfileActivity;
+import com.example.elearningapp.activity.RegisterActivity;
 import com.example.elearningapp.activity.SettingActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +40,8 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -69,19 +78,97 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        rootView = inflater.inflate(R.layout.fragment_more, container, false);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if(user == null){
+            Intent intent = new Intent(getActivity(),LoginActivity.class);
+            startActivity(intent);
+        }
         clicksetting();
         return rootView ;
     }
     private void clicksetting() {
-        ImageView go_to_setting =  rootView.findViewById(R.id.imageView11);
+
+
+        //setting
+        ConstraintLayout go_to_setting =  rootView.findViewById(R.id.constraintLayout13);
         go_to_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.v("Firebase", "ACV");
                 Intent intent = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
+
             }
         });
+
+
+
+        //download
+        ConstraintLayout go_to_download =  rootView.findViewById(R.id.constraintLayout17);
+        go_to_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Firebase", "ACV");
+                Intent intent = new Intent(getActivity(), DownloadActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //profile
+        ConstraintLayout go_to_profile =  rootView.findViewById(R.id.constraintLayout18);
+        go_to_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Firebase", "ACV");
+                Intent intent = new Intent(getActivity(), ChangeUserProfile.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // Liên hệ
+        ConstraintLayout go_to_help_and_support =  rootView.findViewById(R.id.constraintLayout14);
+        go_to_help_and_support.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Firebase", "ACV");
+                Intent intent = new Intent(getActivity(), HelpAndSupportActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //về chúng tôi
+        ConstraintLayout go_to_about_app =  rootView.findViewById(R.id.constraintLayout19);
+        go_to_about_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Firebase", "ACV");
+                Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // đăng xuất
+        ConstraintLayout logout =  rootView.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+
+
+
+
+
     }
 }
