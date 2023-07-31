@@ -1,6 +1,8 @@
 package com.example.elearningapp.object;
 
 public class CourseListItem {
+
+    private String id;
     private String image;
 
     private String name;
@@ -14,13 +16,22 @@ public class CourseListItem {
     private double numberStar;
 
 
-    public CourseListItem(String image, String name, String owner, String description, int numberStudent, double numberStar) {
+    public CourseListItem(String id, String image, String name, String owner, String description, int numberStudent, double numberStar) {
+        this.id = id;
         this.image = image;
         this.name = name;
         this.numberStudent = numberStudent;
         this.description = description;
         this.numberStar = numberStar;
         this.owner = owner;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getImage() {

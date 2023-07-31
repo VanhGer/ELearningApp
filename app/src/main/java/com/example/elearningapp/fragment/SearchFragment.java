@@ -2,60 +2,37 @@ package com.example.elearningapp.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.elearningapp.ClickHelper;
 import com.example.elearningapp.R;
-import com.example.elearningapp.activity.MainActivity;
 import com.example.elearningapp.activity.SearchActivity;
 import com.example.elearningapp.adapter.CategoryAdapter;
-import com.example.elearningapp.adapter.SearchAdapter;
-import com.example.elearningapp.object.CourseObject;
 import com.example.elearningapp.object.PopularCategoryItem;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.wefika.flowlayout.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import kotlinx.coroutines.flow.Flow;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
 
 public class CourseOverallActivity extends AppCompatActivity {
 
-    private String courseId = "5Ftdw3moi35uQeVK1k8M";
+    private String courseId = "";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -35,6 +35,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course2);
 
         TextView lessonList_btn = findViewById(R.id.lesson_baihoc);
+        courseId = getIntent().getStringExtra("courseId");
         authorName = findViewById(R.id.authorName);
         courseName = findViewById(R.id.courseName2);
         students = findViewById(R.id.student);
@@ -64,6 +65,7 @@ public class CourseOverallActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent lessonActivity = new Intent(getApplicationContext(), CourseLessonsActivity.class);
+                lessonActivity.putExtra("courseId", courseId);
                 startActivity(lessonActivity);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -87,7 +89,7 @@ public class CourseOverallActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                 DocumentSnapshot document = task.getResult();
-                CourseListItem courseListItem = new CourseListItem(document.getString("image"), document.getString("name"),
+                CourseListItem courseListItem = new CourseListItem(document.getId(), document.getString("image"), document.getString("name"),
                         "Bùi Tuấn Dũng", document.getString("description"),
                         document.getDouble("students").intValue(), document.getDouble("star"));
                 myCallBack.onCourseCallback(courseListItem);

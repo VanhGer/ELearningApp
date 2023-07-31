@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.elearningapp.interfaces.CourseClickHelper;
+import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.object.CourseListItem;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -19,12 +21,16 @@ import java.util.List;
 
 public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopCourseViewHolder> {
 
+
+    private final CourseClickHelper clickHelper;
     Context context;
     List<CourseListItem> courseListItemList;
 
-    public TopCourseAdapter(@NonNull Context context, List<CourseListItem> courseListItemList) {
+    public TopCourseAdapter(@NonNull Context context, List<CourseListItem> courseListItemList,
+                            CourseClickHelper clickHelper) {
         this.context = context;
         this.courseListItemList = courseListItemList;
+        this.clickHelper = clickHelper;
     }
 
     @NonNull
@@ -32,7 +38,7 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
     public TopCourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.top_course_item, parent, false);
-        return new TopCourseAdapter.TopCourseViewHolder(view);
+        return new TopCourseAdapter.TopCourseViewHolder(view, clickHelper);
     }
 
     @Override
@@ -42,6 +48,7 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
         Picasso.get().load(courseListItemList.get(position).getImage()).into(holder.imageView);
         holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
         holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " students");
+        holder.id = courseListItemList.get(position).getId();
     }
 
     @Override
@@ -60,8 +67,10 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
 
         ImageView iconUser;
 
+        String id;
 
-        public TopCourseViewHolder(@NonNull View itemView) {
+
+        public TopCourseViewHolder(@NonNull View itemView, CourseClickHelper clickHelper) {
             super(itemView);
             nameView = itemView.findViewById(R.id.top_course_item_name);
             imageView = itemView.findViewById(R.id.top_course_item_image);
@@ -70,6 +79,19 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
             numStarView = itemView.findViewById(R.id.top_course_item_star);
             iconStar = itemView.findViewById(R.id.starImage);
             iconUser = itemView.findViewById(R.id.userImage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickHelper != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            clickHelper.onItemClick(id);
+                        }
+                    }
+                }
+            });
+
         }
     }
 }

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.elearningapp.ClickHelper;
+import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.ListAdapter;
 import com.example.elearningapp.item.LessonItem;
@@ -30,9 +30,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseLessonsActivity extends AppCompatActivity implements ClickHelper {
+public class CourseLessonsActivity extends AppCompatActivity implements LessonClickHelper {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String courseId = "5Ftdw3moi35uQeVK1k8M";
+    private String courseId;
     List<LessonItem> lessonItemList = new ArrayList<>();
 
     ListAdapter listAdapter;
@@ -42,6 +42,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+        courseId = getIntent().getStringExtra("courseId");
         recyclerView = findViewById(R.id.course_list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         listAdapter = new ListAdapter(getApplicationContext(), lessonItemList, this);
@@ -64,6 +65,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements ClickHel
             @Override
             public void onClick(View view) {
                 Intent overallActivity = new Intent(getApplicationContext(), CourseOverallActivity.class);
+                overallActivity.putExtra("courseId", courseId);
                 startActivity(overallActivity);
                 finish();
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.elearningapp.ClickHelper;
+import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.item.LessonItem;
 import com.squareup.picasso.Picasso;
@@ -19,13 +19,13 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
-    private final ClickHelper clickHelper;
+    private final LessonClickHelper clickHelper;
 
     @NonNull
     Context context;
     List<LessonItem> lessonItemList;
 
-    public ListAdapter(@NonNull Context context, List<LessonItem> lessonItemList, ClickHelper clickHelper) {
+    public ListAdapter(@NonNull Context context, List<LessonItem> lessonItemList, LessonClickHelper clickHelper) {
         this.context = context;
         this.lessonItemList = lessonItemList;
         this.clickHelper = clickHelper;
@@ -56,7 +56,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         TextView nameView, desView, numView;
         ImageView picView;
 
-        public ListViewHolder(@NonNull View itemView, ClickHelper clickHelper) {
+        public ListViewHolder(@NonNull View itemView, LessonClickHelper clickHelper) {
             super(itemView);
             nameView = itemView.findViewById(R.id.lesson_title);
             desView = itemView.findViewById(R.id.lesson_description);

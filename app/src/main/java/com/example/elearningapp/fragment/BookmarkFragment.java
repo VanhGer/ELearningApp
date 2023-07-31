@@ -1,5 +1,6 @@
 package com.example.elearningapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.elearningapp.activity.CourseOverallActivity;
+import com.example.elearningapp.interfaces.CourseClickHelper;
+import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
@@ -36,7 +39,7 @@ import java.util.List;
  * Use the {@link BookmarkFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BookmarkFragment extends Fragment {
+public class BookmarkFragment extends Fragment implements CourseClickHelper {
 
 
 
@@ -98,7 +101,7 @@ public class BookmarkFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_bookmark, container, false);
         init(rootView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        topCourseAdapter = new TopCourseAdapter(this.getContext(), courseListItemList);
+        topCourseAdapter = new TopCourseAdapter(this.getContext(), courseListItemList, this);
         recyclerView.setAdapter(topCourseAdapter);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -131,6 +134,7 @@ public class BookmarkFragment extends Fragment {
                             DocumentSnapshot document = task.getResult();
                             courseListItemList.add(
                                     new CourseListItem(
+                                            document.getId(),
                                             document.getString("image"),
                                             document.getString("name")
                                             , userName, document.getString("description"),
@@ -143,5 +147,11 @@ public class BookmarkFragment extends Fragment {
 
             }
         });
+    }
+    @Override
+    public void onItemClick(String id) {
+        Intent overallActivity = new Intent(this.getContext(), CourseOverallActivity.class);
+        overallActivity.putExtra("courseId", id);
+        startActivity(overallActivity);
     }
 }

@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.elearningapp.interfaces.CourseClickHelper;
+import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
@@ -23,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopCourseActivity extends AppCompatActivity {
+public class TopCourseActivity extends AppCompatActivity implements CourseClickHelper {
 
     ImageButton backBtn;
     RecyclerView topCourseRecyclerView;
@@ -48,7 +51,7 @@ public class TopCourseActivity extends AppCompatActivity {
         titleView.setText(title);
 
         topCourseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        topCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList);
+        topCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList, this);
         topCourseRecyclerView.setAdapter(topCourseAdapter);
 
         loadDataFromFirestore();
@@ -70,6 +73,7 @@ public class TopCourseActivity extends AppCompatActivity {
                 for (DocumentSnapshot document : value.getDocuments()) {
                     courseListItemList.add(
                             new CourseListItem(
+                                    document.getId(),
                                     document.getString("image"),
                                     document.getString("name")
                                     , "Bui Tuan Dung", document.getString("description"),
@@ -91,6 +95,13 @@ public class TopCourseActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onItemClick(String id) {
+        Intent overallActivity = new Intent(getApplicationContext(), CourseOverallActivity.class);
+        overallActivity.putExtra("courseId", id);
+        startActivity(overallActivity);
     }
 }
 

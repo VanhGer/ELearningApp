@@ -16,13 +16,13 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.elearningapp.interfaces.CourseClickHelper;
+import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements CourseClickHelper {
 
     private ImageButton backButton;
     private EditText searchText;
@@ -62,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         searchResultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        searchCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList);
+        searchCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList, this);
         searchResultRecyclerView.setAdapter(searchCourseAdapter);
 
 
@@ -162,6 +162,7 @@ public class SearchActivity extends AppCompatActivity {
                         for (DocumentSnapshot document : value.getDocuments()) {
                             courseListFull.add(
                                     new CourseListItem(
+                                            document.getId(),
                                             document.getString("image"),
                                             document.getString("name")
                                             , "Bui Tuan Dung", document.getString("description"),
@@ -190,4 +191,10 @@ public class SearchActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onItemClick(String id) {
+        Intent overallActivity = new Intent(getApplicationContext(), CourseOverallActivity.class);
+        overallActivity.putExtra("courseId", id);
+        startActivity(overallActivity);
+    }
 }
