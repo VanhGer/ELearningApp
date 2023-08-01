@@ -11,7 +11,7 @@
         android:layout_height="56dp"
         android:background="@color/md_grey_100"
         android:drawablePadding="12dp"
-        android:fontFamily="@font/intermedium"
+        android:fontFamily="@font/gilroymedium"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:paddingLeft="56dp"

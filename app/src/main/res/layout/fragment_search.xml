@@ -34,7 +34,7 @@
             android:background="@drawable/search_bg"
             android:drawableRight="@drawable/ic_search"
             android:ems="10"
-            android:fontFamily="@font/interregular"
+            android:fontFamily="@font/gilroyregular"
             android:gravity="center_vertical"
             android:hint="Bạn muốn học gì hôm nay?"
             android:inputType="text"

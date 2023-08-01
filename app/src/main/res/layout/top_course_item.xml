@@ -50,7 +50,7 @@
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:fontFamily="@font/gilroyregular"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="bottom|center_horizontal"
         android:text="4k students"
         android:textColor="@color/md_grey_700"
         android:textSize="12sp"
@@ -59,11 +59,12 @@
 
     <TextView
         android:id="@+id/top_course_item_star"
-        android:layout_width="19dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:fontFamily="@font/gilroyregular"
+        android:gravity="bottom"
         android:text="4.7"
         android:textColor="@color/md_grey_700"
         android:textSize="12sp"
@@ -77,15 +78,15 @@
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
         app:layout_constraintStart_toEndOf="@+id/top_course_item_students"
-        app:srcCompat="@drawable/ic_star" />
+        app:srcCompat="@drawable/star" />
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
         app:layout_constraintStart_toEndOf="@+id/top_course_item_image"
-        app:srcCompat="@drawable/ic_user" />
+        app:srcCompat="@drawable/user" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
