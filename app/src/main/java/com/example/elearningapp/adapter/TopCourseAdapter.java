@@ -51,7 +51,7 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
         holder.ownerView.setText(courseListItemList.get(position).getOwner());
         Picasso.get().load(courseListItemList.get(position).getImage()).into(holder.imageView);
         holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
-        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " students");
+        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " người học");
         holder.id = courseListItemList.get(position).getId();
     }
 
@@ -90,8 +90,10 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
                     if (clickHelper != null) {
                         int pos = getAdapterPosition();
                         if (pos != RecyclerView.NO_POSITION) {
-                            Log.v("Search", context.toString());
-                            ((SearchActivity) context).updateSearchCount();
+                            if (context instanceof SearchActivity) {
+                                Log.v("Search", context.toString());
+                                ((SearchActivity) context).updateSearchCount();
+                            }
                             clickHelper.onItemClick(id);
                         }
                     }

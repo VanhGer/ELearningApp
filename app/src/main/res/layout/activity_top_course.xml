@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@drawable/title_top_course_bg"
-        android:fontFamily="@font/interbold"
+        android:fontFamily="@font/gilroybold"
         android:gravity="center_vertical"
         android:paddingLeft="60dp"
         android:text="Khóa học được theo dõi nhiều nhất"

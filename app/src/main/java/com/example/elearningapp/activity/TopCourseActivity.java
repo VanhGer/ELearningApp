@@ -51,7 +51,7 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
         titleView.setText(title);
 
         topCourseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        topCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList, this);
+        topCourseAdapter = new TopCourseAdapter(this, courseListItemList, this);
         topCourseRecyclerView.setAdapter(topCourseAdapter);
 
         loadDataFromFirestore();
