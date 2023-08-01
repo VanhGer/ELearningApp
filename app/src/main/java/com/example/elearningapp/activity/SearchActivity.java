@@ -1,5 +1,6 @@
 package com.example.elearningapp.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -23,14 +24,21 @@ import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity implements CourseClickHelper {
 
@@ -62,7 +70,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
 
 
         searchResultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        searchCourseAdapter = new TopCourseAdapter(getApplicationContext(), courseListItemList, this);
+        searchCourseAdapter = new TopCourseAdapter(this, courseListItemList, this);
         searchResultRecyclerView.setAdapter(searchCourseAdapter);
 
 
@@ -197,4 +205,36 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
         overallActivity.putExtra("courseId", id);
         startActivity(overallActivity);
     }
+
+    public void updateSearchCount() {
+        String doc = searchText.getText().toString();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Query docRef = db.collection("topsearches").whereEqualTo("name", doc);
+        ListenerRegistration registration = docRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+            boolean doneUpdate = false;
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.getMetadata().hasPendingWrites()) {
+                    return;
+                }
+                if (!value.isEmpty()) {
+                    for (DocumentSnapshot document : value.getDocuments()) {
+                        int oldCnt = document.getDouble("count").intValue();
+                        Log.v("Search", "+1");
+                        db.collection("topsearches").document(document.getId()).update("count", oldCnt + 1);
+                        doneUpdate = true;
+                    }
+                } else {
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("name", doc);
+                    data.put("count", 1);
+                    db.collection("topsearches").add(data);
+                }
+            }
+        });
+
+        Log.v("Search", searchText.getText().toString());
+    }
+
 }

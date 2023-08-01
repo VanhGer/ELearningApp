@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.wefika.flowlayout.FlowLayout;
 
@@ -125,7 +127,6 @@ public class SearchFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
 
 
-
 //        gridPopularSearch.setLayoutManager(new GridLayoutManager(getActivity(), 2,
 //                LinearLayoutManager.VERTICAL, false));
 
@@ -165,7 +166,7 @@ public class SearchFragment extends Fragment {
             return;
         }
 
-        CollectionReference topSearchRef = FirebaseFirestore.getInstance().collection("topsearches");
+        Query topSearchRef = FirebaseFirestore.getInstance().collection("topsearches").orderBy("count", Query.Direction.DESCENDING).limit(10);
         topSearchRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -198,7 +199,6 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
