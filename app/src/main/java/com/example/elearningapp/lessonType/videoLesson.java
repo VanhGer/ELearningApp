@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -27,9 +26,12 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.CommentDialog;
 import com.example.elearningapp.item.LessonItem;
+import com.example.elearningapp.object.CommentObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class videoLesson extends AppCompatActivity {
@@ -204,7 +206,13 @@ public class videoLesson extends AppCompatActivity {
     }
 
     private void showDialog() {
-        final Dialog dialog = new Dialog(this);
+        List<CommentObject> commentObjects = new ArrayList<>();
+        commentObjects.add(new CommentObject("Haha"));
+        commentObjects.add(new CommentObject("Ban that biet dua"));
+        commentObjects.add(new CommentObject("In this step, we are going to Get the employeelist by calling the Constants getEmployeeData() method and pass the employeelist to the DialogList class and display the employee list. Comments are added inside the code for a better understanding of the Code."));
+        commentObjects.add(new CommentObject("Here we are going to Apply OnClickListener to our RecylerView Adapter by Implementing OnClickListener Interface. Navigate to app"));
+        commentObjects.add(new CommentObject("Nếu bạn ở trong tình huống mà mọi người chưa từng thực hiện kiểm tra chịu tải trước đó và cần tìm hiểu một công cụ mới, thì một công cụ điều khiển bằng GUI như JMeter đơn giản là lựa chọn dễ dàng nhất. Tuy nhiên, màn hình kế hoạch kiểm tra (Test Plan) chào đón bạn khi bạn khởi động JMeter lần đầu tiên không cung cấp bất kỳ hướng dẫn nào về cách tạo trình lấy mẫu HTTP. UI là chủ quan ở một mức độ nhất định. Tuy nhiên, chúng tôi cho rằng việc khám phá giao diện người dùng dễ dàng hơn đối với những người không phải là nhà phát triển hơn là một chút sử dụng mã lệnh như k6."));
+        final CommentDialog dialog = new CommentDialog(this, commentObjects);
 //        dialog.findViewById(R.id.commentLayout).setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
@@ -212,7 +220,7 @@ public class videoLesson extends AppCompatActivity {
 //            }
 //        });
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_comment);
+        dialog.setContentView(R.layout.dialog_comment);
         swipeListener = new SwipeListener(dialog.findViewById(R.id.commentLayout), dialog);
 
         dialog.show();
