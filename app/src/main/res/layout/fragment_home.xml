@@ -83,7 +83,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/mostViewedCourse"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mostViewedCourse1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -96,7 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse"
                 app:srcCompat="@drawable/course1" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mostViewedCourse2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -110,39 +110,43 @@
 
             <TextView
                 android:id="@+id/mostViewedCourseName1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/mostViewedCourse1"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse1" />
 
             <TextView
                 android:id="@+id/mostViewedCourseTeacher1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giáo viên 1"
+                app:layout_constraintEnd_toEndOf="@+id/mostViewedCourse1"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseName1" />
 
             <TextView
                 android:id="@+id/mostViewedCourseName2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/mostViewedCourse2"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse2" />
 
             <TextView
-                android:id="@+id/gioithieu"
-                android:layout_width="wrap_content"
+                android:id="@+id/mostViewedCourseTeacher2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giáo viên 2"
+                app:layout_constraintEnd_toEndOf="@+id/mostViewedCourse2"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseName2" />
 
@@ -172,7 +176,7 @@
                 android:fontFamily="@font/gilroyregular"
                 android:text="4,3 ⭐"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
-                app:layout_constraintTop_toBottomOf="@+id/gioithieu" />
+                app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher2" />
 
             <TextView
                 android:id="@+id/mostViewedCourseStudent2"
@@ -229,7 +233,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseStudent1" />
 
             <TextView
-                android:id="@+id/star"
+                android:id="@+id/mayLikeCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -249,8 +253,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/continueCourse"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <ImageView
-                android:id="@+id/courseImg"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/continueCourse1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
@@ -275,26 +279,28 @@
                 android:text="  ĐỀ XUẤT  "
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/courseImg"
-                app:layout_constraintTop_toTopOf="@+id/courseImg" />
+                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
+                app:layout_constraintTop_toTopOf="@+id/continueCourse1" />
 
             <TextView
                 android:id="@+id/continueCourseName1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/courseImg"
-                app:layout_constraintTop_toBottomOf="@+id/courseImg" />
+                app:layout_constraintEnd_toEndOf="@+id/continueCourse1"
+                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
+                app:layout_constraintTop_toBottomOf="@+id/continueCourse1" />
 
             <TextView
                 android:id="@+id/continueCourseTeacher1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giảng viên 1"
-                app:layout_constraintStart_toStartOf="@+id/courseImg"
+                app:layout_constraintEnd_toEndOf="@+id/continueCourse1"
+                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseName1" />
 
             <TextView
@@ -303,7 +309,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="4,2 ⭐"
-                app:layout_constraintStart_toStartOf="@+id/courseImg"
+                app:layout_constraintStart_toStartOf="@+id/continueCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseTeacher1" />
 
             <TextView
@@ -316,7 +322,7 @@
                 app:layout_constraintStart_toEndOf="@+id/continueCourseStar1"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseTeacher1" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/continueCourse2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -324,8 +330,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/continueCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/courseImg"
-                app:layout_constraintTop_toTopOf="@+id/courseImg"
+                app:layout_constraintStart_toEndOf="@+id/continueCourse1"
+                app:layout_constraintTop_toTopOf="@+id/continueCourse1"
                 app:srcCompat="@drawable/continue2" />
 
             <TextView
@@ -346,20 +352,22 @@
 
             <TextView
                 android:id="@+id/continueCourseName2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/continueCourse2"
                 app:layout_constraintStart_toStartOf="@+id/continueCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourse2" />
 
             <TextView
                 android:id="@+id/continueCourseTeacher2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giảng viên 2"
+                app:layout_constraintEnd_toEndOf="@+id/continueCourse2"
                 app:layout_constraintStart_toStartOf="@+id/continueCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseName2" />
 
@@ -389,10 +397,10 @@
                 android:fontFamily="@font/gilroyregular"
                 android:text="@string/seeMore"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/star"
+                app:layout_constraintBottom_toBottomOf="@+id/mayLikeCourse"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mayLikeCourse1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -402,25 +410,27 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/mayLikeCourse2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/star"
+                app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse"
                 app:srcCompat="@drawable/recommend1" />
 
             <TextView
                 android:id="@+id/mayLikeCourseName1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/mayLikeCourse1"
                 app:layout_constraintStart_toStartOf="@+id/mayLikeCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse1" />
 
             <TextView
                 android:id="@+id/mayLikeCourseTeacher1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giảng viên 1"
+                app:layout_constraintEnd_toEndOf="@+id/mayLikeCourse1"
                 app:layout_constraintStart_toStartOf="@+id/mayLikeCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourseName1" />
 
@@ -462,7 +472,7 @@
                 app:layout_constraintStart_toStartOf="@+id/mayLikeCourse1"
                 app:layout_constraintTop_toTopOf="@+id/mayLikeCourse1" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mayLikeCourse2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -472,25 +482,27 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mayLikeCourse1"
-                app:layout_constraintTop_toBottomOf="@+id/star"
+                app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse"
                 app:srcCompat="@drawable/recommend2" />
 
             <TextView
                 android:id="@+id/mayLikeCourseName2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/mayLikeCourse2"
                 app:layout_constraintStart_toStartOf="@+id/mayLikeCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse2" />
 
             <TextView
                 android:id="@+id/mayLikeCourseTeacher2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giảng viên 2"
+                app:layout_constraintEnd_toEndOf="@+id/mayLikeCourse2"
                 app:layout_constraintStart_toStartOf="@+id/mayLikeCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourseName2" />
 

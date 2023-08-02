@@ -39,9 +39,9 @@ public class CourseOverallActivity extends AppCompatActivity {
         authorName = findViewById(R.id.authorName);
         courseName = findViewById(R.id.courseName2);
         students = findViewById(R.id.student);
-        star = findViewById(R.id.star);
+        star = findViewById(R.id.mayLikeCourse);
         courseIntro = findViewById(R.id.courseIntro);
-        courseImg = findViewById(R.id.courseImg);
+        courseImg = findViewById(R.id.continueCourse1);
 
         readData(new CourseCallBack() {
             @Override
