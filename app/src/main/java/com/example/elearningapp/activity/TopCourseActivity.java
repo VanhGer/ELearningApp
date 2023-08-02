@@ -75,8 +75,9 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
                             new CourseListItem(
                                     document.getId(),
                                     document.getString("image"),
-                                    document.getString("name")
-                                    , "Bui Tuan Dung", document.getString("description"),
+                                    document.getString("name"),
+                                    document.getString("owner"),
+                                    document.getString("description"),
                                     document.getDouble("students").intValue(),
                                     document.getDouble("star")));
                 }

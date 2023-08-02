@@ -13,10 +13,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.elearningapp.interfaces.CourseClickHelper;
@@ -26,14 +28,23 @@ import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.ServerTimestamp;
+import com.google.firebase.firestore.model.Document;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,15 +57,21 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
     private EditText searchText;
     private ImageButton clearButton;
 
+    FirebaseUser currentUser;
+
     TopCourseAdapter searchCourseAdapter;
 
     RecyclerView searchResultRecyclerView;
 
     List<CourseListItem> courseListItemList = new ArrayList<>();
 
-    ConstraintLayout recentSearch;
+    LinearLayout recentSearch;
 
     TextView searchResultTitle;
+
+    TextView resetSearch;
+
+    LayoutInflater factory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +81,14 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
 
         init();
 
-        EditText editSearchText = findViewById(R.id.editTextSearch);
+        searchText.requestFocus();
+        searchText.onEditorAction(EditorInfo.IME_ACTION_SEARCH);
 
-        editSearchText.requestFocus();
-
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         searchResultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchCourseAdapter = new TopCourseAdapter(this, courseListItemList, this);
         searchResultRecyclerView.setAdapter(searchCourseAdapter);
-
 
 
         clearButton.setVisibility(View.INVISIBLE);
@@ -80,19 +96,22 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
         backBtnClick();
         searchTextManager();
         clearBtnClick();
+        resetSearchClick();
 
         String hardStringSearch = getIntent().getStringExtra("hardStringSearch");
-        editSearchText.setText(hardStringSearch);
+        searchText.setText(hardStringSearch);
 
     }
 
     private void init() {
+        factory = LayoutInflater.from(this);
         backButton = (ImageButton) findViewById(R.id.backBtnTopCourse);
         searchText = (EditText) findViewById(R.id.editTextSearch);
         clearButton = (ImageButton) findViewById(R.id.clear_text_btn);
         searchResultRecyclerView = findViewById(R.id.searchListRecycler);
         recentSearch = findViewById(R.id.recentSearch);
         searchResultTitle = findViewById(R.id.searchResultTitle);
+        resetSearch = findViewById(R.id.resetSearch);
     }
 
     private void backBtnClick() {
@@ -104,6 +123,31 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+    }
+
+    private void resetSearchClick() {
+
+        if (resetSearch == null) {
+            return;
+        }
+        resetSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseFirestore.getInstance().collection("users").
+                        document(currentUser.getUid()).collection("searches").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (DocumentSnapshot documentSnapshot: task.getResult()) {
+                                        FirebaseFirestore.getInstance().collection("users").
+                                                document(currentUser.getUid()).collection("searches").document(documentSnapshot.getId()).delete();
+                                    }
+                                    recentSearch.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
             }
         });
     }
@@ -128,7 +172,9 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (searchText.getText().toString().matches("")){
                     clearButton.setVisibility(View.INVISIBLE);
+                    recentSearchGet();
                     recentSearch.setVisibility(View.VISIBLE);
+                    resetSearch.setVisibility(View.VISIBLE);
                     searchResultRecyclerView.setVisibility(View.INVISIBLE);
                     searchResultTitle.setText("Tìm kiếm trước đó");
 
@@ -136,6 +182,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
                     textSearch(searchText.getText().toString());
                     recentSearch.setVisibility(View.INVISIBLE);
                     clearButton.setVisibility(View.VISIBLE);
+                    resetSearch.setVisibility(View.INVISIBLE);
                     searchResultRecyclerView.setVisibility(View.VISIBLE);
                 }
 
@@ -157,6 +204,24 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
                 return false;
             }
         });
+    }
+
+    private void recentSearchGet() {
+         recentSearch.removeAllViews();
+         FirebaseFirestore.getInstance().collection("users").
+                document(currentUser.getUid()).collection("searches").orderBy("timestamp", Query.Direction.DESCENDING).limit(10).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for (DocumentSnapshot documentSnapshot: value.getDocuments()) {
+                            View newView = factory.inflate(R.layout.recent_search_item, null);
+                            TextView text = newView.findViewById(R.id.recentSearchText);
+                            text.setText(documentSnapshot.getString("name").toString());
+                            recentSearch.addView(newView);
+                        }
+                    }
+                });
+
+
     }
 
     private void textSearch(String str) {
@@ -195,8 +260,17 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
     }
 
     private void performSearch(String text) {
-        Intent intent = new Intent(this, SearchResultActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, SearchResultActivity.class);
+//        startActivity(intent);
+        searchText.clearFocus();
+        searchText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        updateSearchCount();
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", text);
+        data.put("timestamp", FieldValue.serverTimestamp());
+        FirebaseFirestore.getInstance().collection("users").
+                document(currentUser.getUid()).collection("searches").add(data);
+
     }
 
     @Override
