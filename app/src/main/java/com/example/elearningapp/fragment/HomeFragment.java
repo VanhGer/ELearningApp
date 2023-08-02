@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -95,8 +98,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        TextView greeting1 = rootView.findViewById(R.id.greeting1);
-
         TextView seeMore1 = rootView.findViewById(R.id.student);
 
         seeMore1.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +131,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         ImageView mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
 
         mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +152,42 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        TextView mostViewedCourseName1 = rootView.findViewById(R.id.mostViewedCourseName1);
+        TextView mostViewedCourseName2 = rootView.findViewById(R.id.mostViewedCourseName2);
+        TextView mostViewedCourseTeacher1 = rootView.findViewById(R.id.mostViewedCourseTeacher1);
+        TextView mostViewedCourseTeacher2 = rootView.findViewById(R.id.mostViewedCourseTeacher2);
+        TextView mostViewedCourseStar1 = rootView.findViewById(R.id.mostViewedCourseStar1);
+        TextView mostViewedCourseStar2 = rootView.findViewById(R.id.mostViewedCourseStar2);
+        TextView mostViewedCourseStudent1 = rootView.findViewById(R.id.mostViewedCourseStudent1);
+        TextView mostViewedCourseStudent2 = rootView.findViewById(R.id.mostViewedCourseStudent2);
+        db.collection("courses").orderBy("students", Query.Direction.DESCENDING).limit(2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int cur = 1;
+                    for (DocumentSnapshot document: task.getResult()) {
+                        if (cur == 1) {
+                            mostViewedCourseName1.setText(document.getString("name"));
+                            //mostViewedCourseTeacher1.setText(document.getString("owner"));
+                            mostViewedCourseStar1.setText(document.getDouble("star") + "⭐");
+                            mostViewedCourseStudent1.setText("(" + document.getLong("students") + ")");
+                            Picasso.get().load(document.getString("image")).into(mostViewedCourse1);
+                        }
+                        else {
+                            mostViewedCourseName2.setText(document.getString("name"));
+                            //mostViewedCourseTeacher2.setText(document.getString("owner"));
+                            mostViewedCourseStar2.setText(document.getDouble("star") + "⭐");
+                            mostViewedCourseStudent2.setText("(" + document.getLong("students") + ")");
+                            Picasso.get().load(document.getString("image")).into(mostViewedCourse2);
+                        }
+                        cur++;
+                    }
+                }
+            }
+        });
 
-        ImageView continueCourse1 = rootView.findViewById(R.id.courseImg);
+
+        ImageView continueCourse1 = rootView.findViewById(R.id.continueCourse1);
 
         continueCourse1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +224,39 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
                 startActivity(intent);
+            }
+        });
+        TextView mayLikeCourseName1 = rootView.findViewById(R.id.mayLikeCourseName1);
+        TextView mayLikeCourseName2 = rootView.findViewById(R.id.mayLikeCourseName2);
+        TextView mayLikeCourseTeacher1 = rootView.findViewById(R.id.mayLikeCourseTeacher1);
+        TextView mayLikeCourseTeacher2 = rootView.findViewById(R.id.mayLikeCourseTeacher2);
+        TextView mayLikeCourseStar1 = rootView.findViewById(R.id.mayLikeCourseStar1);
+        TextView mayLikeCourseStar2 = rootView.findViewById(R.id.mayLikeCourseStar2);
+        TextView mayLikeCourseStudent1 = rootView.findViewById(R.id.mayLikeCourseStudent1);
+        TextView mayLikeCourseStudent2 = rootView.findViewById(R.id.mayLikeCourseStudent2);
+        db.collection("courses").orderBy("star", Query.Direction.DESCENDING).limit(2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int cur = 1;
+                    for (DocumentSnapshot document: task.getResult()) {
+                        if (cur == 1) {
+                            mayLikeCourseName1.setText(document.getString("name"));
+                            //mayLikeCourseTeacher1.setText(document.getString("owner"));
+                            mayLikeCourseStar1.setText(document.getDouble("star") + "⭐");
+                            mayLikeCourseStudent1.setText("(" + document.getLong("students") + ")");
+                            Picasso.get().load(document.getString("image")).into(mayLikeCourse1);
+                        }
+                        else {
+                            mayLikeCourseName2.setText(document.getString("name"));
+                            //mayLikeCourseTeacher2.setText(document.getString("owner"));
+                            mayLikeCourseStar2.setText(document.getDouble("star") + "⭐");
+                            mayLikeCourseStudent2.setText("(" + document.getLong("students") + ")");
+                            Picasso.get().load(document.getString("image")).into(mayLikeCourse2);
+                        }
+                        cur++;
+                    }
+                }
             }
         });
 

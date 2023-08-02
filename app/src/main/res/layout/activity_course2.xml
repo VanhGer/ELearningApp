@@ -84,7 +84,7 @@
                 android:layout_marginTop="0dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/courseImg"
+                    android:id="@+id/continueCourse1"
                     android:layout_width="wrap_content"
                     android:layout_height="180dp"
                     android:scaleType="centerCrop"
@@ -107,7 +107,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/avatar"
-                    app:layout_constraintTop_toBottomOf="@+id/courseImg" />
+                    app:layout_constraintTop_toBottomOf="@+id/continueCourse1" />
 
                 <ImageView
                     android:id="@+id/avatar"
@@ -115,7 +115,7 @@
                     android:layout_height="73dp"
                     android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/courseImg"
+                    app:layout_constraintTop_toBottomOf="@+id/continueCourse1"
                     app:srcCompat="@drawable/avatarmain"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -159,7 +159,7 @@
                         app:srcCompat="@drawable/ic_star" />
 
                     <TextView
-                        android:id="@+id/star"
+                        android:id="@+id/mayLikeCourse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
@@ -172,7 +172,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/gioithieu"
+                    android:id="@+id/mostViewedCourseTeacher2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -197,7 +197,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/gioithieu"
+                    app:layout_constraintTop_toBottomOf="@+id/mostViewedCourseTeacher2"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
