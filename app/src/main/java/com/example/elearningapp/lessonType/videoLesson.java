@@ -3,7 +3,6 @@ package com.example.elearningapp.lessonType;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ValueAnimator;
 import android.app.Dialog;
@@ -22,7 +21,9 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -32,12 +33,14 @@ import com.example.elearningapp.activity.CommentDialog;
 import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.object.CommentObject;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -117,11 +120,11 @@ public class videoLesson extends AppCompatActivity {
                                     if (Math.abs(yDiff) > threshold && Math.abs(velocityY) > velocity_threshold) {
                                         if (yDiff > 0) {
                                             // Down
-                                            if (view.getHeight() == 1200) {
+                                            if (view.getHeight() == 1500) {
                                                 dialog.hide();
                                             } else {
 //                                                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
-                                                ValueAnimator anim = ValueAnimator.ofInt(view.getHeight(), 1200);
+                                                ValueAnimator anim = ValueAnimator.ofInt(view.getHeight(), 1500);
                                                 anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                                                     @Override
                                                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -216,12 +219,14 @@ public class videoLesson extends AppCompatActivity {
 
     private void showDialog(String lessonId) {
         List<CommentObject> commentObjects = new ArrayList<>();
-//        Log.v("Comment", courseId);
-//        Log.v("Comment", lessonId);
-
         CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
 
-        final CommentDialog dialog = new CommentDialog(this, commentObjects, commentAdapter);
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        CommentDialog dialog = new CommentDialog(this,
+                commentObjects, commentAdapter, courseId, lessonId, currentUserId);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_comment);
 
         FirebaseFirestore.getInstance().collection("comments")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -242,7 +247,8 @@ public class videoLesson extends AppCompatActivity {
                                     documentSnapshot.getId(),
                                     1,
                                     documentSnapshot.getString("userId"),
-                                    likeList
+                                    likeList,
+                                    documentSnapshot.getLong("timestamp")
                                     ));
                             Log.v("Comment", likeList.toString());
                             commentAdapter.notifyDataSetChanged();
@@ -250,18 +256,25 @@ public class videoLesson extends AppCompatActivity {
                     }
                 });
 
-//        dialog.findViewById(R.id.commentLayout).setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return false;
-//            }
-//        });
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_comment);
-        swipeListener = new SwipeListener(dialog.findViewById(R.id.commentLayout), dialog);
+
+        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        Picasso.get().load(value.getString("image")).into((ImageView) dialog.findViewById(R.id.replyuserpic));
+                    }
+                });
+
+        EditText replyEditText = dialog.findViewById(R.id.replyCommentField);
+
+
+//        Log.v("Comment", replyEditText.toString());
+
+//        swipeListener = new SwipeListener(dialog.findViewById(R.id.commentDialogTitle), dialog);
+//        dialog.findViewById(R.id.commentDialogTitle).setOnTouchListener(swipeListener);
 
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1200);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);

@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/gilroyregular"
         android:text="Comment 1"
         android:textSize="14sp"
@@ -21,13 +21,13 @@
         app:layout_constraintTop_toBottomOf="@+id/v2username" />
 
     <TextView
-        android:id="@+id/commentReply"
+        android:id="@+id/ReplyV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/gilroymedium"
-        android:text="Reply"
+        android:text="Trả lời"
         app:layout_constraintStart_toEndOf="@+id/v2time"
         app:layout_constraintTop_toBottomOf="@+id/v2content" />
 
@@ -63,6 +63,15 @@
         app:layout_constraintStart_toEndOf="@+id/v2userpic"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/userReplyName"
+        app:layout_constraintStart_toStartOf="@+id/v2username"
+        app:layout_constraintTop_toBottomOf="@+id/v2username"
+        app:srcCompat="@drawable/ic_corner_down_right" />
+
     <ImageButton
         android:id="@+id/likev2Button"
         android:layout_width="16dp"
@@ -71,7 +80,7 @@
         android:background="@drawable/ic_heart"
         android:textColorHighlight="@color/md_black_1000"
         android:textColorLink="@color/md_black_1000"
-        app:layout_constraintBottom_toBottomOf="@+id/commentReply"
+        app:layout_constraintBottom_toBottomOf="@+id/ReplyV2"
         app:layout_constraintEnd_toStartOf="@+id/likeCnt" />
 
     <TextView
@@ -83,5 +92,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/likev2Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/likev2Button" />
+
+    <TextView
+        android:id="@+id/userReplyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroybold"
+        android:text="Pham Duc Thanh"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/v2username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
