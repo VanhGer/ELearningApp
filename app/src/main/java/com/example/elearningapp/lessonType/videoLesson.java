@@ -1,12 +1,25 @@
 package com.example.elearningapp.lessonType;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ValueAnimator;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MediaController;
@@ -14,9 +27,19 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.CommentDialog;
+import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.item.LessonItem;
+import com.example.elearningapp.object.CommentObject;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class videoLesson extends AppCompatActivity {
@@ -26,6 +49,10 @@ public class videoLesson extends AppCompatActivity {
     VideoView video;
     ImageButton back;
     String courseId;
+
+    Button showComment;
+
+    SwipeListener swipeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +68,102 @@ public class videoLesson extends AppCompatActivity {
 
         video = findViewById(R.id.lessonVideo);
         back = findViewById(R.id.return_btn);
+
+        showComment = findViewById(R.id.showComment);
+
         setLesson();
+    }
+
+    private class SwipeListener implements View.OnTouchListener {
+
+        GestureDetector gestureDetector;
+
+        Animation slide_down = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slide_center_bottom);
+
+        Animation slide_up = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slide_out_bottom);
+
+        SwipeListener(View view, Dialog dialog) {
+            int threshold = 100;
+            int velocity_threshold = 100;
+
+            GestureDetector.SimpleOnGestureListener listener =
+                    new GestureDetector.SimpleOnGestureListener() {
+                        @Override
+                        public boolean onDown(MotionEvent e) {
+                            return true;
+                        }
+
+                        @Override
+                        public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+                            float xDiff = e2.getX() - e1.getX();
+                            float yDiff = e2.getY() - e1.getY();
+
+                            try {
+                                if (Math.abs(xDiff) > Math.abs(yDiff)) {
+                                    if (Math.abs(xDiff) > threshold && Math.abs(velocityX) > velocity_threshold) {
+                                        if (xDiff > 0) {
+                                            // Right
+                                            Log.v("Swipe", "Right");
+                                        } else {
+                                            // Left
+                                            Log.v("Swipe", "Left");
+                                        }
+                                    }
+                                    return true;
+                                } else {
+                                    if (Math.abs(yDiff) > threshold && Math.abs(velocityY) > velocity_threshold) {
+                                        if (yDiff > 0) {
+                                            // Down
+                                            if (view.getHeight() == 1200) {
+                                                dialog.hide();
+                                            } else {
+//                                                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
+                                                ValueAnimator anim = ValueAnimator.ofInt(view.getHeight(), 1200);
+                                                anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                                    @Override
+                                                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                                        int val = (Integer) valueAnimator.getAnimatedValue();
+                                                        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, val);
+                                                    }
+                                                });
+                                                anim.setDuration(400);
+                                                anim.start();
+                                            }
+                                            Log.v("Swipe", "Down" + view.getHeight());
+                                        } else {
+                                            // Up
+//                                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                                            ValueAnimator anim = ValueAnimator.ofInt(view.getHeight(), 2200);
+                                            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                                @Override
+                                                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                                    int val = (Integer) valueAnimator.getAnimatedValue();
+                                                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, val);
+                                                }
+                                            });
+                                            anim.setDuration(400);
+                                            anim.start();
+                                            Log.v("Swipe", "Up" );
+                                        }
+                                    }
+                                    return true;
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return false;
+                        }
+                    };
+            gestureDetector = new GestureDetector(listener);
+            view.setOnTouchListener(this);
+        }
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
+        }
     }
 
     void setLesson() {
@@ -56,6 +178,13 @@ public class videoLesson extends AppCompatActivity {
         video.setMediaController(new MediaController(this));
         video.requestFocus();
         video.start();
+
+        showComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(lessonItem.get(position).getLessonId());
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +212,53 @@ public class videoLesson extends AppCompatActivity {
             });
         }
     }
+
+    private void showDialog(String lessonId) {
+        List<CommentObject> commentObjects = new ArrayList<>();
+//        Log.v("Comment", courseId);
+//        Log.v("Comment", lessonId);
+
+        CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
+
+        FirebaseFirestore.getInstance().collection("comments")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .whereEqualTo("courseId", courseId)
+                .whereEqualTo("lessonId", lessonId)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for (DocumentSnapshot documentSnapshot: value.getDocuments()) {
+                            commentObjects.add(new CommentObject(
+                                    documentSnapshot.getString("content"),
+                                    documentSnapshot.getId(),
+                                    1,
+                                    "image",
+                                    (List<String>) documentSnapshot.get("likes")
+                                    ));
+                            commentAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+        final CommentDialog dialog = new CommentDialog(this, commentObjects, commentAdapter);
+
+//        dialog.findViewById(R.id.commentLayout).setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return false;
+//            }
+//        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_comment);
+        swipeListener = new SwipeListener(dialog.findViewById(R.id.commentLayout), dialog);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1200);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
     void buttonOnClick(int position, int maxPosition, List<LessonItem> lessonItemList) {
         if (lessonItemList.get(position).getType().equals("video")) {
             Intent intent = new Intent(videoLesson.this, videoLesson.class);

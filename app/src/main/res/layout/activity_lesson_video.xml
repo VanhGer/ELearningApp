@@ -50,51 +50,63 @@
         app:layout_constraintTop_toBottomOf="@+id/lesson_title2"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/text_lesson"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tongquan"
-            android:backgroundTint="#D6A6A6"
-            android:text="Nội dung"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-        <ScrollView
-            android:id="@+id/scrollView1"
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bgr_2"
-            android:backgroundTint="#F6F6F6"
-            android:paddingLeft="4dp"
-            android:paddingTop="4dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="4dp"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_lesson"
-            app:layout_constraintVertical_bias="0.637">
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-            <TextView
-                android:id="@+id/lesson_content"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bgr_2"
-                android:backgroundTint="#F6F6F6"
-                android:scrollbarAlwaysDrawHorizontalTrack="false"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:text="text lessonslknskdnksdnfksdfhlskadfjkasdjfklsadjflasdjfklasdjfalsdjfalsdfjsadlfjasdlfjasdlfjasdlfjasdlfjsadlfjasdflasdfjsldfjasdlf lalsjfalsdfj sldf"
-                android:textSize="16sp" />
-        </ScrollView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_lesson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tongquan"
+                    android:backgroundTint="#D6A6A6"
+                    android:text="Nội dung"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ScrollView
+                    android:id="@+id/scrollView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/bgr_2"
+                    android:backgroundTint="#F6F6F6"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingBottom="4dp"
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/lesson_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bgr_2"
+                        android:backgroundTint="#F6F6F6"
+                        android:scrollbarAlwaysDrawHorizontalTrack="false"
+                        android:scrollbarAlwaysDrawVerticalTrack="true"
+                        android:text="text lessonslknskdnksdnfksdfhlskadfjkasdjfklsadjflasdjfklasdjfalsdjfalsdfjsadlfjasdlfjasdlfjasdlfjasdlfjsadlfjasdflasdfjsldfjasdlf lalsjfalsdfj sldf"
+                        android:textSize="16sp" />
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/showComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="showComment" />
+            </LinearLayout>
+
+        </FrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"

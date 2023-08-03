@@ -5,6 +5,7 @@ public class CourseObject {
 
     private String owner;
 
+
     public CourseObject(){
 
     }
