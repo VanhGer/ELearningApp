@@ -39,14 +39,26 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @NonNull
     Context context;
     List<CommentObject> courseObjectList = new ArrayList<>();
+    String userReplyIdGet = "";
+    String commentIdReply = "";
 
 
     public CommentAdapter(@NonNull Context context, List<CommentObject> courseObjectList) {
         this.context = context;
         this.courseObjectList = courseObjectList;
+        this.userReplyIdGet = userReplyIdGet;
 
 //        this.clickHelper = clickHelper;
     }
+
+    public String getUserReplyIdGet(){
+        return userReplyIdGet;
+    }
+
+    public String getCommentIdReply() {
+        return commentIdReply;
+    }
+
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,6 +71,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         holder.contentView.setText(courseObjectList.get(position).getContent());
+        holder.v1time.setText(changetoDate(courseObjectList.get(position).getTimestamp()));
 
         FirebaseFirestore.getInstance()
                 .collection("users")
@@ -97,7 +110,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 if (holder.likev1Button.getTag().equals(R.drawable.ic_heart_filled)) {
                     Log.v("Comment1", currentUserId);
                     likeListV1.remove(currentUserId);
-                    holder.likeCntv1.setText(likeListV1.size() + "");
+                    holder.likeCntv1.setText(likeListV1.size() - 1 + "");
                     holder.likev1Button.setImageResource(R.drawable.ic_heart);
                     holder.likev1Button.setTag(R.drawable.ic_heart);
                     FirebaseFirestore.getInstance().collection("comments")
@@ -106,7 +119,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 } else {
                     Log.v("Comment2", currentUserId);
                     likeListV1.add(currentUserId);
-                    holder.likeCntv1.setText(likeListV1.size() + "");
+                    holder.likeCntv1.setText(likeListV1.size() - 1 + "");
                     holder.likev1Button.setImageResource(R.drawable.ic_heart_filled);
                     holder.likev1Button.setTag(R.drawable.ic_heart_filled);
                     FirebaseFirestore.getInstance().collection("comments")
@@ -116,16 +129,23 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             }
         });
 
-        holder.likeCntv1.setText(likeListV1.size() + "");
+        holder.likeCntv1.setText(likeListV1.size() - 1 + "");
+
+        holder.ReplyV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userReplyIdGet = courseObjectList.get(holder.getAdapterPosition()).getUserId();
+                commentIdReply = courseObjectList.get(holder.getAdapterPosition()).getId();
+            }
+        });
 
 
         holder.replyView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String replyText = holder.replyView.getText().toString();
-                if (replyText.contains("Reply")) {
-                    Log.v("Comment1", replyText);
-                    holder.replyView.setText("Hide");
+                if (replyText.contains("Xem câu trả lời")) {
+                    holder.replyView.setText("Ẩn câu trả lời");
                     holder.commentReplyLayout.removeAllViews();
                     LayoutInflater factory = LayoutInflater.from(context);
                     List<CommentObject> commentv2Objects = new ArrayList<>();
@@ -137,7 +157,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                     if (value.getMetadata().hasPendingWrites()) {
                                         return;
                                     }
-//                                    holder.commentReplyLayout.removeAllViews();
+                                    holder.commentReplyLayout.removeAllViews();
                                     for (DocumentSnapshot documentSnapshot: value.getDocuments()){
                                         FirebaseFirestore.getInstance()
                                                 .collection("users")
@@ -151,6 +171,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                         TextView time = newView.findViewById(R.id.v2time);
                                                         TextView cntLike = newView.findViewById(R.id.likeCnt);
                                                         ImageButton likeButton = newView.findViewById(R.id.likev2Button);
+                                                        TextView userReplyName = newView.findViewById(R.id.userReplyName);
+                                                        TextView ReplyV2 = newView.findViewById(R.id.ReplyV2);
+
+                                                        ReplyV2.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                userReplyIdGet = documentSnapshot.getString("userId");
+                                                                commentIdReply = courseObjectList.get(holder.getAdapterPosition()).getId();
+                                                            }
+                                                        });
 
                                                         List<String> likeList = (List<String>)documentSnapshot.get("like");
 
@@ -176,7 +206,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                 ImageButton likeButton = newView.findViewById(R.id.likev2Button);
                                                                 if (likeButton.getTag().equals(R.drawable.ic_heart_filled)) {
                                                                     likeList.remove(currentUserId);
-                                                                    cntLike.setText(likeList.size() + "");
+                                                                    cntLike.setText(likeList.size() - 1 + "");
                                                                     likeButton.setImageResource(R.drawable.ic_heart);
                                                                     likeButton.setTag(R.drawable.ic_heart);
                                                                     FirebaseFirestore.getInstance().collection("comments")
@@ -189,7 +219,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                     }
                                                                 } else {
                                                                     likeList.add(currentUserId);
-                                                                    cntLike.setText(likeList.size() + "");
+                                                                    cntLike.setText(likeList.size() - 1 + "");
                                                                     likeButton.setImageResource(R.drawable.ic_heart_filled);
                                                                     likeButton.setTag(R.drawable.ic_heart_filled);
                                                                     FirebaseFirestore.getInstance().collection("comments")
@@ -205,7 +235,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                             }
                                                         });
 
-                                                        cntLike.setText(likeList.size() + "");
+                                                        cntLike.setText(likeList.size() - 1 + "");
 
 
 
@@ -214,6 +244,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                         Picasso.get().load(value.getString("image")).into(userpic);
                                                         String date = changetoDate(documentSnapshot.getLong("timestamp"));
                                                         time.setText(date);
+
+                                                        FirebaseFirestore.getInstance()
+                                                                .collection("users")
+                                                                .document(documentSnapshot.getString("userReplyId"))
+                                                                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                                        userReplyName.setText(value.getString("name"));
+                                                                    }
+                                                                });
 
 //                                                        Log.v("Comment", documentSnapshot.getLong("timestamp").toString());
 
@@ -227,7 +267,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     holder.commentReplyLayout.setVisibility(View.VISIBLE);
                 } else {
 //                        Log.v("Comment2", replyView.getText().toString());
-                    holder.replyView.setText("Reply");
+                    holder.replyView.setText("Xem câu trả lời");
 //                        ((ViewGroup) commentReplyLayout.getParent()).removeView(commentReplyLayout);
                     holder.commentReplyLayout.setVisibility(View.GONE);
                 }
@@ -280,16 +320,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         ImageButton likev1Button;
 
+        TextView ReplyV1;
+
         public CommentViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             contentView = itemView.findViewById(R.id.v1content);
             commentReplyLayout = itemView.findViewById(R.id.commentv2layout);
-            replyView = itemView.findViewById(R.id.commentReply);
+            replyView = itemView.findViewById(R.id.commentShowReply);
             v1userpic = itemView.findViewById(R.id.v1userpic);
             v1username = itemView.findViewById(R.id.v1username);
             v1time = itemView.findViewById(R.id.v1time);
             likeCntv1 = itemView.findViewById(R.id.likeCntv1);
             likev1Button = itemView.findViewById(R.id.likev1Button);
+            ReplyV1 = itemView.findViewById(R.id.ReplyV1);
         }
     }
 

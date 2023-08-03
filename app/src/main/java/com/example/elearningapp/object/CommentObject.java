@@ -13,12 +13,15 @@ public class CommentObject {
 
     List<String> likeList;
 
-    public CommentObject(String content, String id, int type, String userId, List<String> likeList) {
+    Long timestamp;
+
+    public CommentObject(String content, String id, int type, String userId, List<String> likeList, Long timestamp) {
         this.content = content;
         this.id = id;
         this.type = type;
         this.userId = userId;
         this.likeList = likeList;
+        this.timestamp = timestamp;
     }
 
     public String getContent() {
@@ -59,5 +62,13 @@ public class CommentObject {
 
     public void setLikeList(List<String> likeList) {
         this.likeList = likeList;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

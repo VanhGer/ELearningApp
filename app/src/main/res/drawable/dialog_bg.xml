@@ -5,8 +5,8 @@
         android:color="@color/md_white_1000"/>
 
     <corners
-        android:topLeftRadius="30dp"
-        android:topRightRadius="30dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp"
         />
     <padding
         android:left="10dp"
