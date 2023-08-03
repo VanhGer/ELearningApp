@@ -1,39 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="20dp">
 
     <TextView
-        android:id="@+id/commentv1Content"
-        android:layout_width="wrap_content"
+        android:id="@+id/v1content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroyregular"
         android:text="Comment 1"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/v1userpic"
+        app:layout_constraintTop_toBottomOf="@+id/v1username" />
 
     <LinearLayout
         android:id="@+id/commentv2layout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v1userpic"
         app:layout_constraintTop_toBottomOf="@+id/commentReply" />
 
     <TextView
         android:id="@+id/commentReply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroymedium"
         android:text="Reply"
+        app:layout_constraintStart_toEndOf="@+id/v1time"
+        app:layout_constraintTop_toBottomOf="@+id/v1content" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/v1userpic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentv1Content" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/commentRoundedImage"
+        app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
+
+    <TextView
+        android:id="@+id/v1time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroymedium"
+        android:text="2022-11-03"
+        android:textColor="@color/md_grey_400"
+        app:layout_constraintStart_toEndOf="@+id/v1userpic"
+        app:layout_constraintTop_toBottomOf="@+id/v1content" />
+
+    <TextView
+        android:id="@+id/v1username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="Bui Tuan Dung"
+        app:layout_constraintStart_toEndOf="@+id/v1userpic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/likev1Button"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/ic_heart"
+        android:textColorHighlight="@color/md_black_1000"
+        android:textColorLink="@color/md_black_1000"
+        app:layout_constraintBottom_toTopOf="@+id/commentv2layout"
+        app:layout_constraintEnd_toStartOf="@+id/likeCntv1"
+        app:layout_constraintTop_toBottomOf="@+id/v1content" />
+
+    <TextView
+        android:id="@+id/likeCntv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroyregular"
+        android:text="41"
+        app:layout_constraintBottom_toBottomOf="@+id/likev1Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/likev1Button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

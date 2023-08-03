@@ -3,6 +3,7 @@ package com.example.elearningapp.lessonType;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ValueAnimator;
 import android.app.Dialog;
@@ -220,6 +221,8 @@ public class videoLesson extends AppCompatActivity {
 
         CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
 
+        final CommentDialog dialog = new CommentDialog(this, commentObjects, commentAdapter);
+
         FirebaseFirestore.getInstance().collection("comments")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .whereEqualTo("courseId", courseId)
@@ -227,20 +230,25 @@ public class videoLesson extends AppCompatActivity {
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                        RecyclerView listComment = dialog.findViewById(R.id.listComment);
+//                        listComment.removeAllViews();
+                        if (value.getMetadata().hasPendingWrites()) {
+                            return;
+                        }
                         for (DocumentSnapshot documentSnapshot: value.getDocuments()) {
+                            List <String> likeList = (List<String>) documentSnapshot.get("like");
                             commentObjects.add(new CommentObject(
                                     documentSnapshot.getString("content"),
                                     documentSnapshot.getId(),
                                     1,
-                                    "image",
-                                    (List<String>) documentSnapshot.get("likes")
+                                    documentSnapshot.getString("userId"),
+                                    likeList
                                     ));
+                            Log.v("Comment", likeList.toString());
                             commentAdapter.notifyDataSetChanged();
                         }
                     }
                 });
-
-        final CommentDialog dialog = new CommentDialog(this, commentObjects, commentAdapter);
 
 //        dialog.findViewById(R.id.commentLayout).setOnTouchListener(new View.OnTouchListener() {
 //            @Override
