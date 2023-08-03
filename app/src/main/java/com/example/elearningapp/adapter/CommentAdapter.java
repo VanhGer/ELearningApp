@@ -9,10 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.object.CommentObject;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +49,41 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
         holder.contentView.setText(courseObjectList.get(position).getContent());
+
+        holder.replyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String replyText = holder.replyView.getText().toString();
+                if (replyText.contains("Reply")) {
+                    Log.v("Comment1", replyText);
+                    holder.replyView.setText("Hide");
+                    holder.commentReplyLayout.removeAllViews();
+                    LayoutInflater factory = LayoutInflater.from(context);
+                    List<CommentObject> commentv2Objects = new ArrayList<>();
+                    FirebaseFirestore.getInstance().collection("comments")
+                            .document(courseObjectList.get(holder.getAdapterPosition()).getId()).collection("replies").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                    for (DocumentSnapshot documentSnapshot: value.getDocuments()){
+                                        View newView = factory.inflate(R.layout.comment_v2_item, null);
+                                        TextView text = newView.findViewById(R.id.v2content);
+                                        text.setText(documentSnapshot.getString("content"));
+                                        holder.commentReplyLayout.addView(newView);
+
+                                        Log.v("Comment", documentSnapshot.getId());
+                                    }
+                                }
+                            });
+                    holder.commentReplyLayout.setVisibility(View.VISIBLE);
+                } else {
+//                        Log.v("Comment2", replyView.getText().toString());
+                    holder.replyView.setText("Reply");
+//                        ((ViewGroup) commentReplyLayout.getParent()).removeView(commentReplyLayout);
+                    holder.commentReplyLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -61,38 +102,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             contentView = itemView.findViewById(R.id.commentv1Content);
             commentReplyLayout = itemView.findViewById(R.id.commentv2layout);
             replyView = itemView.findViewById(R.id.commentReply);
-
-            replyView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String replyText = replyView.getText().toString();
-                    if (replyText.contains("Reply")) {
-                        Log.v("Comment1", replyText);
-                        replyView.setText("Hide");
-                        commentReplyLayout.removeAllViews();
-                        List<CommentObject> commentv2Objects = new ArrayList<>();
-                        commentv2Objects.add(new CommentObject("Reply 1"));
-                        commentv2Objects.add(new CommentObject("Reply 2"));
-                        commentv2Objects.add(new CommentObject("Reply 3"));
-                        commentv2Objects.add(new CommentObject("Reply 4"));
-                        LayoutInflater factory = LayoutInflater.from(context);
-                        for (CommentObject commentObject : commentv2Objects) {
-                            View newView = factory.inflate(R.layout.comment_v2_item, null);
-                            TextView text = newView.findViewById(R.id.v2content);
-                            text.setText(commentObject.getContent());
-
-                            commentReplyLayout.addView(newView);
-                        }
-                        commentReplyLayout.setVisibility(View.VISIBLE);
-                    } else {
-//                        Log.v("Comment2", replyView.getText().toString());
-                        replyView.setText("Reply");
-//                        ((ViewGroup) commentReplyLayout.getParent()).removeView(commentReplyLayout);
-                        commentReplyLayout.setVisibility(View.GONE);
-                    }
-                }
-            });
-
         }
     }
 

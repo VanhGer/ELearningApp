@@ -22,9 +22,10 @@ public class CommentDialog extends Dialog {
 
     CommentAdapter commentAdapter;
 
-    public CommentDialog(Context context, List<CommentObject> commentObjects) {
+    public CommentDialog(Context context, List<CommentObject> commentObjects, CommentAdapter commentAdapter) {
         super(context);
         this.commentObjects = commentObjects;
+        this.commentAdapter = commentAdapter;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class CommentDialog extends Dialog {
         RecyclerView recyclerView = view.findViewById(R.id.listComment);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        commentAdapter = new CommentAdapter(getContext(), commentObjects);
+//        commentAdapter = new CommentAdapter(getContext(), commentObjects);
 
         recyclerView.setAdapter(commentAdapter);
     }

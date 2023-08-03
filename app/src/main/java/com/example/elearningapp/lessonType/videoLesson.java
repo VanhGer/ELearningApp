@@ -1,6 +1,7 @@
 package com.example.elearningapp.lessonType;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ValueAnimator;
@@ -27,8 +28,15 @@ import android.widget.VideoView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.CommentDialog;
+import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.object.CommentObject;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -174,7 +182,7 @@ public class videoLesson extends AppCompatActivity {
         showComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                showDialog(lessonItem.get(position).getLessonId());
             }
         });
 
@@ -205,14 +213,35 @@ public class videoLesson extends AppCompatActivity {
         }
     }
 
-    private void showDialog() {
+    private void showDialog(String lessonId) {
         List<CommentObject> commentObjects = new ArrayList<>();
-        commentObjects.add(new CommentObject("Haha"));
-        commentObjects.add(new CommentObject("Ban that biet dua"));
-        commentObjects.add(new CommentObject("In this step, we are going to Get the employeelist by calling the Constants getEmployeeData() method and pass the employeelist to the DialogList class and display the employee list. Comments are added inside the code for a better understanding of the Code."));
-        commentObjects.add(new CommentObject("Here we are going to Apply OnClickListener to our RecylerView Adapter by Implementing OnClickListener Interface. Navigate to app"));
-        commentObjects.add(new CommentObject("Nếu bạn ở trong tình huống mà mọi người chưa từng thực hiện kiểm tra chịu tải trước đó và cần tìm hiểu một công cụ mới, thì một công cụ điều khiển bằng GUI như JMeter đơn giản là lựa chọn dễ dàng nhất. Tuy nhiên, màn hình kế hoạch kiểm tra (Test Plan) chào đón bạn khi bạn khởi động JMeter lần đầu tiên không cung cấp bất kỳ hướng dẫn nào về cách tạo trình lấy mẫu HTTP. UI là chủ quan ở một mức độ nhất định. Tuy nhiên, chúng tôi cho rằng việc khám phá giao diện người dùng dễ dàng hơn đối với những người không phải là nhà phát triển hơn là một chút sử dụng mã lệnh như k6."));
-        final CommentDialog dialog = new CommentDialog(this, commentObjects);
+//        Log.v("Comment", courseId);
+//        Log.v("Comment", lessonId);
+
+        CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
+
+        FirebaseFirestore.getInstance().collection("comments")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .whereEqualTo("courseId", courseId)
+                .whereEqualTo("lessonId", lessonId)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for (DocumentSnapshot documentSnapshot: value.getDocuments()) {
+                            commentObjects.add(new CommentObject(
+                                    documentSnapshot.getString("content"),
+                                    documentSnapshot.getId(),
+                                    1,
+                                    "image",
+                                    (List<String>) documentSnapshot.get("likes")
+                                    ));
+                            commentAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+        final CommentDialog dialog = new CommentDialog(this, commentObjects, commentAdapter);
+
 //        dialog.findViewById(R.id.commentLayout).setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
