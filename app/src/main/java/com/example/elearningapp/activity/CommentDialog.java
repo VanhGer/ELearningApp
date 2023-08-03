@@ -35,6 +35,10 @@ public class CommentDialog extends Dialog {
     String lessonId;
     String userId;
 
+    EditText replyCommentField;
+
+    ImageButton replySendButton;
+
     public CommentDialog(Context context, List<CommentObject> commentObjects,
                          CommentAdapter commentAdapter,
                          String courseId,
@@ -48,6 +52,11 @@ public class CommentDialog extends Dialog {
         this.userId = userId;
     }
 
+    public EditText getCommentEditText() {
+        return replyCommentField;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +65,9 @@ public class CommentDialog extends Dialog {
         setContentView(view);
 
 
-        ImageButton replySendButton = view.findViewById(R.id.replySendButton);
+        replySendButton = view.findViewById(R.id.replySendButton);
 
-        EditText replyCommentField = view.findViewById(R.id.replyCommentField);
+        replyCommentField = view.findViewById(R.id.replyCommentField);
 
         replySendButton.setOnClickListener(new View.OnClickListener() {
             @Override

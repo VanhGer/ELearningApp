@@ -58,6 +58,8 @@ public class videoLesson extends AppCompatActivity {
 
     SwipeListener swipeListener;
 
+    CommentDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -217,16 +219,23 @@ public class videoLesson extends AppCompatActivity {
         }
     }
 
+    public EditText getCommentEditText() {
+        return dialog.getCommentEditText();
+    }
+
     private void showDialog(String lessonId) {
         List<CommentObject> commentObjects = new ArrayList<>();
         CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        CommentDialog dialog = new CommentDialog(this,
+        dialog = new CommentDialog(this,
                 commentObjects, commentAdapter, courseId, lessonId, currentUserId);
+
+        commentAdapter.setDialog(dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_comment);
+
 
         FirebaseFirestore.getInstance().collection("comments")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -250,7 +259,6 @@ public class videoLesson extends AppCompatActivity {
                                     likeList,
                                     documentSnapshot.getLong("timestamp")
                                     ));
-                            Log.v("Comment", likeList.toString());
                             commentAdapter.notifyDataSetChanged();
                         }
                     }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/gilroyregular"
+        android:fontFamily="@font/gilroymedium"
         android:text="Comment 1"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +38,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/gilroymedium"
         android:text="Xem câu trả lời"
+        android:textColor="@color/md_grey_600"
         app:layout_constraintStart_toStartOf="@+id/v1time"
         app:layout_constraintTop_toBottomOf="@+id/v1time" />
 
@@ -70,6 +71,7 @@
         android:layout_marginStart="20dp"
         android:fontFamily="@font/gilroybold"
         android:text="Bui Tuan Dung"
+        android:textColor="@color/md_grey_700"
         app:layout_constraintStart_toEndOf="@+id/v1userpic"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,6 +105,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/gilroymedium"
         android:text="Trả lời"
+        android:textColor="@color/md_grey_600"
         app:layout_constraintStart_toEndOf="@+id/v1time"
         app:layout_constraintTop_toBottomOf="@+id/v1content" />
 

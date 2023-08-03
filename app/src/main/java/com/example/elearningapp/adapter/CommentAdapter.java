@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,12 +13,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.CommentDialog;
 import com.example.elearningapp.object.CommentObject;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,13 +49,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     String userReplyIdGet = "";
     String commentIdReply = "";
 
+    CommentDialog commentDialog;
+
 
     public CommentAdapter(@NonNull Context context, List<CommentObject> courseObjectList) {
         this.context = context;
         this.courseObjectList = courseObjectList;
-        this.userReplyIdGet = userReplyIdGet;
-
-//        this.clickHelper = clickHelper;
     }
 
     public String getUserReplyIdGet(){
@@ -59,11 +65,35 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         return commentIdReply;
     }
 
+    public void setDialog(CommentDialog dialog) {
+        this.commentDialog = dialog;
+    }
+
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.comment_v1_item, parent, false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("Comment", "Clicked");
+
+                userReplyIdGet = "";
+                commentIdReply = "";
+                if (commentDialog != null) {
+                    commentDialog.getCommentEditText().requestFocus();
+                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                    commentDialog.getCommentEditText().setHint(
+                            "Thêm bình luận..."
+                    );
+                }
+            }
+        });
+
         return new CommentViewHolder(view, context);
     }
 
@@ -87,7 +117,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         boolean currentLikeV1 = false;
         for (String userid: likeListV1) {
-            Log.v("Comment", userid );
             if (userid.equals(currentUserId)) {
                 currentLikeV1 = true;
                 break;
@@ -103,6 +132,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             holder.likev1Button.setImageResource(R.drawable.ic_heart);
             holder.likev1Button.setTag(R.drawable.ic_heart);
         }
+
 
         holder.likev1Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,15 +166,40 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             public void onClick(View v) {
                 userReplyIdGet = courseObjectList.get(holder.getAdapterPosition()).getUserId();
                 commentIdReply = courseObjectList.get(holder.getAdapterPosition()).getId();
+                if (commentDialog != null) {
+                    commentDialog.getCommentEditText().requestFocus();
+                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+
+                    commentDialog.getCommentEditText().setHint(
+                            "Trả lời bình luận của " + holder.v1username.getText().toString()
+                    );
+                }
             }
         });
+
+        FirebaseFirestore.getInstance()
+                .collection("comments")
+                .document(courseObjectList.get(holder.getAdapterPosition()).getId())
+                        .collection("replies").count().get(AggregateSource.SERVER)
+                        .addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                                AggregateQuerySnapshot snapshot = task.getResult();
+                                if (snapshot.getCount() == 0) {
+                                    holder.replyView.setVisibility(View.GONE);
+                                } else {
+                                    holder.replyView.setText("Xem " + snapshot.getCount() + " câu trả lời");
+                                }
+                            }
+                        });
 
 
         holder.replyView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String replyText = holder.replyView.getText().toString();
-                if (replyText.contains("Xem câu trả lời")) {
+                if (replyText.contains("Xem")) {
                     holder.replyView.setText("Ẩn câu trả lời");
                     holder.commentReplyLayout.removeAllViews();
                     LayoutInflater factory = LayoutInflater.from(context);
@@ -179,6 +234,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                             public void onClick(View v) {
                                                                 userReplyIdGet = documentSnapshot.getString("userId");
                                                                 commentIdReply = courseObjectList.get(holder.getAdapterPosition()).getId();
+
+                                                                if (commentDialog != null) {
+                                                                    commentDialog.getCommentEditText().requestFocus();
+                                                                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                                                                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+
+                                                                    commentDialog.getCommentEditText().setHint(
+                                                                            "Trả lời bình luận của " + username.getText().toString()
+                                                                    );
+                                                                }
                                                             }
                                                         });
 
@@ -214,9 +279,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                             .collection("replies")
                                                                             .document(documentSnapshot.getId())
                                                                             .update("like", likeList);
-                                                                    for (String user: likeList) {
-                                                                        Log.v("Comment", user);
-                                                                    }
                                                                 } else {
                                                                     likeList.add(currentUserId);
                                                                     cntLike.setText(likeList.size() - 1 + "");
@@ -227,9 +289,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                             .collection("replies")
                                                                             .document(documentSnapshot.getId())
                                                                             .update("like", likeList);
-                                                                    for (String user: likeList) {
-                                                                        Log.v("Comment", user);
-                                                                    }
 
                                                                 }
                                                             }
@@ -254,8 +313,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                         userReplyName.setText(value.getString("name"));
                                                                     }
                                                                 });
-
-//                                                        Log.v("Comment", documentSnapshot.getLong("timestamp").toString());
 
                                                         holder.commentReplyLayout.addView(newView);
                                                     }
@@ -333,6 +390,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             likeCntv1 = itemView.findViewById(R.id.likeCntv1);
             likev1Button = itemView.findViewById(R.id.likev1Button);
             ReplyV1 = itemView.findViewById(R.id.ReplyV1);
+
         }
     }
 
