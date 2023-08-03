@@ -9,15 +9,15 @@ public class CommentObject {
 
     int type;
 
-    String image;
+    String userId;
 
     List<String> likeList;
 
-    public CommentObject(String content, String id, int type, String image, List<String> likeList) {
+    public CommentObject(String content, String id, int type, String userId, List<String> likeList) {
         this.content = content;
         this.id = id;
         this.type = type;
-        this.image = image;
+        this.userId = userId;
         this.likeList = likeList;
     }
 
@@ -45,12 +45,12 @@ public class CommentObject {
         this.type = type;
     }
 
-    public String getImage() {
-        return image;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUserId(String image) {
+        this.userId = image;
     }
 
     public List<String> getLikeList() {

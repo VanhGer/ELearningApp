@@ -4,14 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:paddingBottom="20dp">
 
     <TextView
         android:id="@+id/v2content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroyregular"
+        android:text="Comment 1"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/v2userpic"
+        app:layout_constraintTop_toBottomOf="@+id/v2username" />
+
+    <TextView
+        android:id="@+id/commentReply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroymedium"
+        android:text="Reply"
+        app:layout_constraintStart_toEndOf="@+id/v2time"
+        app:layout_constraintTop_toBottomOf="@+id/v2content" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/v2userpic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/commentRoundedImage"
+        app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
+
+    <TextView
+        android:id="@+id/v2time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroymedium"
+        android:text="2022-11-03"
+        android:textColor="@color/md_grey_400"
+        app:layout_constraintStart_toEndOf="@+id/v2userpic"
+        app:layout_constraintTop_toBottomOf="@+id/v2content" />
+
+    <TextView
+        android:id="@+id/v2username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="Bui Tuan Dung"
+        app:layout_constraintStart_toEndOf="@+id/v2userpic"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/likev2Button"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/ic_heart"
+        android:textColorHighlight="@color/md_black_1000"
+        android:textColorLink="@color/md_black_1000"
+        app:layout_constraintBottom_toBottomOf="@+id/commentReply"
+        app:layout_constraintEnd_toStartOf="@+id/likeCnt" />
+
+    <TextView
+        android:id="@+id/likeCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroyregular"
+        android:text="41"
+        app:layout_constraintBottom_toBottomOf="@+id/likev2Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/likev2Button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
