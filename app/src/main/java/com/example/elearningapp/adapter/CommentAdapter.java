@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,12 +13,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.CommentDialog;
+import com.example.elearningapp.activity.LoadingDialog;
 import com.example.elearningapp.object.CommentObject;
+import com.example.elearningapp.object.CourseObject;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,13 +52,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     String userReplyIdGet = "";
     String commentIdReply = "";
 
+    CommentDialog commentDialog;
+
+    private LoadingDialog loadingDialog;
+
 
     public CommentAdapter(@NonNull Context context, List<CommentObject> courseObjectList) {
         this.context = context;
         this.courseObjectList = courseObjectList;
-        this.userReplyIdGet = userReplyIdGet;
-
-//        this.clickHelper = clickHelper;
     }
 
     public String getUserReplyIdGet(){
@@ -59,23 +70,54 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         return commentIdReply;
     }
 
+    public void setDialog(CommentDialog dialog) {
+        this.commentDialog = dialog;
+    }
+
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.comment_v1_item, parent, false);
+
+//        loadingDialog = new LoadingDialog(commentDialog.getContext());
+//        Log.v("CommentX", view.getContext().toString());
+//        Log.v("CommentX1", commentDialog.getContext().toString());
+//        Log.v("CommentX2", commentDialog.getRecyclerView().getContext().toString());
+//
+//        loadingDialog.show();
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("Comment", "Clicked");
+
+                userReplyIdGet = "";
+                commentIdReply = "";
+                if (commentDialog != null) {
+                    commentDialog.getCommentEditText().requestFocus();
+                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                    commentDialog.getCommentEditText().setHint(
+                            "Thêm bình luận..."
+                    );
+                }
+            }
+        });
+
         return new CommentViewHolder(view, context);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        CommentObject commentObject = courseObjectList.get(position);
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        holder.contentView.setText(courseObjectList.get(position).getContent());
-        holder.v1time.setText(changetoDate(courseObjectList.get(position).getTimestamp()));
+        holder.contentView.setText(commentObject.getContent());
+        holder.v1time.setText(changetoDate(commentObject.getTimestamp()));
 
         FirebaseFirestore.getInstance()
                 .collection("users")
-                .document(courseObjectList.get(position).getUserId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                .document(commentObject.getUserId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         holder.v1username.setText(value.getString("name"));
@@ -83,11 +125,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     }
                 });
 
-        List<String> likeListV1 = courseObjectList.get(position).getLikeList();
+        List<String> likeListV1 = commentObject.getLikeList();
 
         boolean currentLikeV1 = false;
         for (String userid: likeListV1) {
-            Log.v("Comment", userid );
             if (userid.equals(currentUserId)) {
                 currentLikeV1 = true;
                 break;
@@ -104,6 +145,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             holder.likev1Button.setTag(R.drawable.ic_heart);
         }
 
+
         holder.likev1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +156,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     holder.likev1Button.setImageResource(R.drawable.ic_heart);
                     holder.likev1Button.setTag(R.drawable.ic_heart);
                     FirebaseFirestore.getInstance().collection("comments")
-                            .document(courseObjectList.get(holder.getAdapterPosition()).getId())
+                            .document(commentObject.getId())
                             .update("like", likeListV1);
                 } else {
                     Log.v("Comment2", currentUserId);
@@ -123,8 +165,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     holder.likev1Button.setImageResource(R.drawable.ic_heart_filled);
                     holder.likev1Button.setTag(R.drawable.ic_heart_filled);
                     FirebaseFirestore.getInstance().collection("comments")
-                            .document(courseObjectList.get(holder.getAdapterPosition()).getId())
+                            .document(commentObject.getId())
                             .update("like", likeListV1);
+                    FirebaseFirestore.getInstance().collection("comments")
+                            .document(commentObject.getId())
+                            .update("likeCnt", likeListV1.size() - 1);
                 }
             }
         });
@@ -134,31 +179,59 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.ReplyV1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userReplyIdGet = courseObjectList.get(holder.getAdapterPosition()).getUserId();
-                commentIdReply = courseObjectList.get(holder.getAdapterPosition()).getId();
+                userReplyIdGet = commentObject.getUserId();
+                commentIdReply = commentObject.getId();
+                if (commentDialog != null) {
+                    commentDialog.getCommentEditText().requestFocus();
+                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+
+                    holder.replyView.performClick();
+                    commentDialog.getCommentEditText().setHint(
+                            "Trả lời bình luận của " + holder.v1username.getText().toString()
+                    );
+                }
             }
         });
+
+        Task getReplyFiresbaseQuery = FirebaseFirestore.getInstance()
+                .collection("comments")
+                .document(commentObject.getId())
+                        .collection("replies").count().get(AggregateSource.SERVER)
+                        .addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                                AggregateQuerySnapshot snapshot = task.getResult();
+                                if (snapshot.getCount() == 0) {
+                                    holder.replyView.setVisibility(View.GONE);
+                                } else {
+                                    holder.replyView.setText("Xem " + snapshot.getCount() + " câu trả lời");
+                                }
+                            }
+                        });
 
 
         holder.replyView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String replyText = holder.replyView.getText().toString();
-                if (replyText.contains("Xem câu trả lời")) {
-                    holder.replyView.setText("Ẩn câu trả lời");
+                if (replyText.contains("Xem")) {
+                    holder.replyView.setVisibility(View.GONE);
                     holder.commentReplyLayout.removeAllViews();
                     LayoutInflater factory = LayoutInflater.from(context);
                     List<CommentObject> commentv2Objects = new ArrayList<>();
                     FirebaseFirestore.getInstance().collection("comments")
-                            .document(courseObjectList.get(holder.getAdapterPosition()).getId()).collection("replies")
+                            .document(commentObject.getId())
+                            .collection("replies")
+                            .orderBy("timestamp")
                             .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                 @Override
                                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                    if (value.getMetadata().hasPendingWrites()) {
-                                        return;
-                                    }
-                                    holder.commentReplyLayout.removeAllViews();
-                                    for (DocumentSnapshot documentSnapshot: value.getDocuments()){
+                                    for (DocumentChange doc: value.getDocumentChanges()){
+                                        if (doc.getType() != DocumentChange.Type.ADDED) {
+                                            continue;
+                                        }
+                                        DocumentSnapshot documentSnapshot = doc.getDocument();
                                         FirebaseFirestore.getInstance()
                                                 .collection("users")
                                                 .document(documentSnapshot.getString("userId")).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -178,7 +251,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                             @Override
                                                             public void onClick(View v) {
                                                                 userReplyIdGet = documentSnapshot.getString("userId");
-                                                                commentIdReply = courseObjectList.get(holder.getAdapterPosition()).getId();
+                                                                commentIdReply = commentObject.getId();
+
+                                                                if (commentDialog != null) {
+                                                                    commentDialog.getCommentEditText().requestFocus();
+                                                                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                                                                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+
+                                                                    commentDialog.getCommentEditText().setHint(
+                                                                            "Trả lời bình luận của " + username.getText().toString()
+                                                                    );
+                                                                }
                                                             }
                                                         });
 
@@ -210,26 +293,26 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                     likeButton.setImageResource(R.drawable.ic_heart);
                                                                     likeButton.setTag(R.drawable.ic_heart);
                                                                     FirebaseFirestore.getInstance().collection("comments")
-                                                                            .document(courseObjectList.get(holder.getAdapterPosition()).getId())
+                                                                            .document(commentObject.getId())
                                                                             .collection("replies")
                                                                             .document(documentSnapshot.getId())
                                                                             .update("like", likeList);
-                                                                    for (String user: likeList) {
-                                                                        Log.v("Comment", user);
-                                                                    }
+                                                                    FirebaseFirestore.getInstance().collection("comments")
+                                                                            .document(commentObject.getId())
+                                                                            .update("likeCnt", likeList.size() - 1);
                                                                 } else {
                                                                     likeList.add(currentUserId);
                                                                     cntLike.setText(likeList.size() - 1 + "");
                                                                     likeButton.setImageResource(R.drawable.ic_heart_filled);
                                                                     likeButton.setTag(R.drawable.ic_heart_filled);
                                                                     FirebaseFirestore.getInstance().collection("comments")
-                                                                            .document(courseObjectList.get(holder.getAdapterPosition()).getId())
+                                                                            .document(commentObject.getId())
                                                                             .collection("replies")
                                                                             .document(documentSnapshot.getId())
                                                                             .update("like", likeList);
-                                                                    for (String user: likeList) {
-                                                                        Log.v("Comment", user);
-                                                                    }
+                                                                    FirebaseFirestore.getInstance().collection("comments")
+                                                                            .document(commentObject.getId())
+                                                                            .update("likeCnt", likeList.size() - 1);
 
                                                                 }
                                                             }
@@ -255,8 +338,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                     }
                                                                 });
 
-//                                                        Log.v("Comment", documentSnapshot.getLong("timestamp").toString());
-
                                                         holder.commentReplyLayout.addView(newView);
                                                     }
                                                 });
@@ -266,9 +347,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                             });
                     holder.commentReplyLayout.setVisibility(View.VISIBLE);
                 } else {
-//                        Log.v("Comment2", replyView.getText().toString());
                     holder.replyView.setText("Xem câu trả lời");
-//                        ((ViewGroup) commentReplyLayout.getParent()).removeView(commentReplyLayout);
                     holder.commentReplyLayout.setVisibility(View.GONE);
                 }
             }
@@ -333,6 +412,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             likeCntv1 = itemView.findViewById(R.id.likeCntv1);
             likev1Button = itemView.findViewById(R.id.likev1Button);
             ReplyV1 = itemView.findViewById(R.id.ReplyV1);
+
         }
     }
 

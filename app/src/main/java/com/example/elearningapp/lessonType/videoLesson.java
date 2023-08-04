@@ -3,6 +3,7 @@ package com.example.elearningapp.lessonType;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.animation.ValueAnimator;
 import android.app.Dialog;
@@ -34,11 +35,13 @@ import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.object.CommentObject;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
@@ -57,6 +60,8 @@ public class videoLesson extends AppCompatActivity {
     Button showComment;
 
     SwipeListener swipeListener;
+
+    CommentDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,53 +222,27 @@ public class videoLesson extends AppCompatActivity {
         }
     }
 
+    public EditText getCommentEditText() {
+        return dialog.getCommentEditText();
+    }
+
+    public void updateRecycler() {
+
+    }
+
     private void showDialog(String lessonId) {
         List<CommentObject> commentObjects = new ArrayList<>();
         CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        CommentDialog dialog = new CommentDialog(this,
+        dialog = new CommentDialog(this,
                 commentObjects, commentAdapter, courseId, lessonId, currentUserId);
+
+        commentAdapter.setDialog(dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_comment);
 
-        FirebaseFirestore.getInstance().collection("comments")
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .whereEqualTo("courseId", courseId)
-                .whereEqualTo("lessonId", lessonId)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                        RecyclerView listComment = dialog.findViewById(R.id.listComment);
-//                        listComment.removeAllViews();
-                        if (value.getMetadata().hasPendingWrites()) {
-                            return;
-                        }
-                        for (DocumentSnapshot documentSnapshot: value.getDocuments()) {
-                            List <String> likeList = (List<String>) documentSnapshot.get("like");
-                            commentObjects.add(new CommentObject(
-                                    documentSnapshot.getString("content"),
-                                    documentSnapshot.getId(),
-                                    1,
-                                    documentSnapshot.getString("userId"),
-                                    likeList,
-                                    documentSnapshot.getLong("timestamp")
-                                    ));
-                            Log.v("Comment", likeList.toString());
-                            commentAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-
-
-        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        Picasso.get().load(value.getString("image")).into((ImageView) dialog.findViewById(R.id.replyuserpic));
-                    }
-                });
 
         EditText replyEditText = dialog.findViewById(R.id.replyCommentField);
 

@@ -3,17 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/commentLayout"
+    style="@style/Widget.AppCompat.Button.Borderless.Colored"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_bg">
+    android:background="@drawable/dialog_bg"
+    android:padding="0dp">
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/search_bg"
+        android:backgroundTint="@color/md_grey_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/md_grey_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterComment" />
 
     <TextView
         android:id="@+id/commentDialogTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/gilroyextrabold"
         android:paddingLeft="10dp"
-        android:paddingTop="20dp"
+        android:paddingTop="0dp"
         android:text="Bình luận"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,11 +49,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentDialogTitle">
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -62,12 +87,12 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/search_bg"
             android:ems="10"
-            android:fontFamily="@font/gilroyregular"
+            android:fontFamily="@font/gilroymedium"
             android:hint="Thêm bình luận..."
             android:inputType="textMultiLine"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingRight="10dp"
+            android:paddingRight="20dp"
             android:paddingBottom="10dp"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,5 +115,66 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_brand_telegram" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RadioGroup
+        android:id="@+id/filterComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentDialogTitle">
+
+        <RadioButton
+            android:id="@+id/newFilterComment"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/radio_rectangle_selector"
+            android:button="@color/md_trans"
+            android:fontFamily="@font/gilroybold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Mới nhất"
+            android:textColor="@drawable/text_color_selector"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/popularFilterComment"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@drawable/radio_rectangle_selector"
+            android:button="@color/md_trans"
+            android:fontFamily="@font/gilroybold"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Phổ biến nhất"
+            android:textColor="@drawable/text_color_selector"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/md_grey_50"
+        android:fontFamily="@font/gilroyregular"
+        android:padding="10dp"
+        android:text="Hãy nhớ tôn trọng người dùng khác khi đăng bình luận và tuân thủ Nguyên tắc cộng đồng của chúng tôi"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
