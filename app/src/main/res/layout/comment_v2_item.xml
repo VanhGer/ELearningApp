@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/gilroymedium"
         android:text="Comment 1"
         android:textSize="14sp"
@@ -69,10 +69,10 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/userReplyName"
-        app:layout_constraintStart_toStartOf="@+id/v2username"
-        app:layout_constraintTop_toBottomOf="@+id/v2username"
-        app:srcCompat="@drawable/ic_corner_down_right" />
+        app:layout_constraintBottom_toBottomOf="@+id/v2username"
+        app:layout_constraintStart_toEndOf="@+id/v2username"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_caret_right_filled" />
 
     <ImageButton
         android:id="@+id/likev2Button"
@@ -103,6 +103,6 @@
         android:text="Pham Duc Thanh"
         android:textColor="@color/md_grey_700"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/v2username" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
