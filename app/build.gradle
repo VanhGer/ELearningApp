@@ -7,6 +7,11 @@ android {
     namespace 'com.example.elearningapp'
     compileSdk 33
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+
+
     defaultConfig {
         applicationId "com.example.elearningapp"
         minSdk 24
@@ -46,7 +51,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:32.2.0')
     implementation 'com.google.firebase:firebase-analytics'
-
+    implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -67,5 +72,6 @@ dependencies {
     implementation 'com.wefika:flowlayout:0.4.1'
 
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 
 }

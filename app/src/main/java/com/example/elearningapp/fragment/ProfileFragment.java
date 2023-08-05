@@ -2,14 +2,13 @@ package com.example.elearningapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.AboutAppActivity;
@@ -17,8 +16,6 @@ import com.example.elearningapp.activity.ChangeUserProfile;
 import com.example.elearningapp.activity.DownloadActivity;
 import com.example.elearningapp.activity.HelpAndSupportActivity;
 import com.example.elearningapp.activity.LoginActivity;
-import com.example.elearningapp.activity.ProfileActivity;
-import com.example.elearningapp.activity.RegisterActivity;
 import com.example.elearningapp.activity.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
