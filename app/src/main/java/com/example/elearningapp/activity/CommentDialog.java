@@ -3,6 +3,7 @@ package com.example.elearningapp.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -60,16 +62,16 @@ public class CommentDialog extends Dialog {
     RadioButton popularFilterComment;
     ImageView replyuserpic;
 
+    ProgressBar progressBar;
+    RecyclerView listComment;
+
     View thisView;
 
-    public CommentDialog(Context context, List<CommentObject> commentObjects,
-                         CommentAdapter commentAdapter,
+    public CommentDialog(Context context,
                          String courseId,
                          String lessonId,
                          String userId) {
         super(context);
-        this.commentObjects = commentObjects;
-        this.commentAdapter = commentAdapter;
         this.courseId = courseId;
         this.lessonId = lessonId;
         this.userId = userId;
@@ -80,7 +82,9 @@ public class CommentDialog extends Dialog {
     }
 
     private void setNewComment() {
-        commentObjects.clear();
+        setUpRecyclerView(thisView);
+        listComment.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         FirebaseFirestore.getInstance().collection("comments")
                 .orderBy("timestamp")
                 .whereEqualTo("courseId", courseId)
@@ -100,15 +104,28 @@ public class CommentDialog extends Dialog {
                                         likeList,
                                         documentSnapshot.getLong("timestamp")
                                 ));
+                                commentAdapter.notifyDataSetChanged();
                             }
                         }
-                        commentAdapter.notifyDataSetChanged();
+
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                listComment.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+                        };
+                        handler.postDelayed(runnable, 500);
                     }
                 });
     }
 
     public void setPopularComment() {
-        commentObjects.clear();
+        setUpRecyclerView(thisView);
+        listComment.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+
         FirebaseFirestore.getInstance().collection("comments")
                 .orderBy("likeCnt")
                 .whereEqualTo("courseId", courseId)
@@ -128,9 +145,19 @@ public class CommentDialog extends Dialog {
                                         likeList,
                                         documentSnapshot.getLong("timestamp")
                                 ));
+                                commentAdapter.notifyDataSetChanged();
                             }
                         }
-                        commentAdapter.notifyDataSetChanged();
+
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                listComment.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+                        };
+                        handler.postDelayed(runnable, 500);
                     }
                 });
     }
@@ -152,6 +179,8 @@ public class CommentDialog extends Dialog {
         newFilterComment = view.findViewById(R.id.newFilterComment);
         popularFilterComment = view.findViewById(R.id.popularFilterComment);
         replyuserpic = view.findViewById(R.id.replyuserpic);
+        progressBar = view.findViewById(R.id.loadingComment);
+        listComment = view.findViewById(R.id.listComment);
 
         newFilterComment.setChecked(true);
         setNewComment();
@@ -232,12 +261,10 @@ public class CommentDialog extends Dialog {
             }
         });
 
-
-        setUpRecyclerView(view);
-
     }
 
     private void showToast() {
+        Log.v("Comment", "ook");
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.toast_layout, null);
         Toast toast = new Toast(getContext());
@@ -256,13 +283,16 @@ public class CommentDialog extends Dialog {
     }
 
     private void setUpRecyclerView(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.listComment);
+        commentObjects = new ArrayList<>();
+        commentAdapter = new CommentAdapter(getContext(), commentObjects);
+
+        commentAdapter.setDialog(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
+        listComment.setLayoutManager(layoutManager);
 //        commentAdapter = new CommentAdapter(getContext(), commentObjects);
 
-        recyclerView.setAdapter(commentAdapter);
+        listComment.setAdapter(commentAdapter);
     }
 }
