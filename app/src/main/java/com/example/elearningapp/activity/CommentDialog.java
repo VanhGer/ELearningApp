@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -66,6 +67,8 @@ public class CommentDialog extends Dialog {
     RecyclerView listComment;
 
     View thisView;
+
+    Toast toast;
 
     public CommentDialog(Context context,
                          String courseId,
@@ -216,6 +219,11 @@ public class CommentDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if (replyCommentField.getText().length() < 5) {
+                    showToast("Bình luận phải có ít nhất 5 từ", R.color.md_yellow_900, R.color.md_yellow_50);
+                    return;
+                }
+                if (replyCommentField.getText().toString().contains("ngu")) {
+                    showToast("Không được đăng bình luận khiếm nhã người khác", R.color.md_red_900, R.color.md_red_50);
                     return;
                 }
                 if (commentAdapter.getUserReplyIdGet().equals("")) {
@@ -232,7 +240,8 @@ public class CommentDialog extends Dialog {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     replyCommentField.setText("");
-                                    showToast();
+                                    Log.v("Comment", "Reply1");
+                                    showToast("Đã thêm bình luận", R.color.md_blue_900, R.color.md_blue_50);
                                 }
                             });
 
@@ -252,7 +261,8 @@ public class CommentDialog extends Dialog {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     replyCommentField.setText("");
-                                    showToast();
+                                    Log.v("Comment", "Reply2");
+                                    showToast("Đã thêm bình luận", R.color.md_blue_900, R.color.md_blue_200);
                                 }
                             });
 
@@ -263,17 +273,25 @@ public class CommentDialog extends Dialog {
 
     }
 
-    private void showToast() {
-        Log.v("Comment", "ook");
+    private void showToast(String message, int color, int backgroundColor) {
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.toast_layout, null);
-        Toast toast = new Toast(getContext());
+        TextView textView = layout.findViewById(R.id.toastMessage);
+        textView.setText(message);
+        textView.setTextColor(getContext().getResources().getColor(color));
+        textView.setBackgroundTintList(getContext().getResources().getColorStateList(backgroundColor));
+        if (toast!= null) {
+            toast.cancel();
+        }
+        toast = new Toast(getContext());
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
 
+
         toast.show();
     }
+
 
     public RecyclerView getRecyclerView() {
         if (thisView != null) {

@@ -2,6 +2,7 @@ package com.example.elearningapp.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -226,6 +227,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 String replyText = holder.replyView.getText().toString();
                 if (replyText.contains("Xem")) {
                     holder.replyView.setVisibility(View.GONE);
+                    holder.commentV2Loading.setVisibility(View.VISIBLE);
+                    holder.commentReplyLayout.setVisibility(View.GONE);
                     holder.commentReplyLayout.removeAllViews();
                     LayoutInflater factory = LayoutInflater.from(context);
                     List<CommentObject> commentv2Objects = new ArrayList<>();
@@ -352,9 +355,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                 });
 
                                     }
+                                    Handler handler = new Handler();
+                                    Runnable runnable = new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            holder.commentV2Loading.setVisibility(View.GONE);
+                                            holder.commentReplyLayout.setVisibility(View.VISIBLE);
+                                        }
+                                    };
+                                    handler.postDelayed(runnable, 500);
                                 }
                             });
-                    holder.commentReplyLayout.setVisibility(View.VISIBLE);
                 } else {
                     holder.replyView.setText("Xem câu trả lời");
                     holder.commentReplyLayout.setVisibility(View.GONE);
@@ -410,6 +421,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         TextView ReplyV1;
 
+        ProgressBar commentV2Loading;
+
         public CommentViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             contentView = itemView.findViewById(R.id.v1content);
@@ -421,6 +434,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             likeCntv1 = itemView.findViewById(R.id.likeCntv1);
             likev1Button = itemView.findViewById(R.id.likev1Button);
             ReplyV1 = itemView.findViewById(R.id.ReplyV1);
+            commentV2Loading = itemView.findViewById(R.id.commentV2Loading);
 
         }
     }

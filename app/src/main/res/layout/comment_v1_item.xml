@@ -110,5 +110,16 @@
         app:layout_constraintStart_toEndOf="@+id/v1time"
         app:layout_constraintTop_toBottomOf="@+id/v1content" />
 
+    <ProgressBar
+        android:id="@+id/commentV2Loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/commentShowReply"
+        app:layout_constraintTop_toBottomOf="@+id/commentShowReply" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
