@@ -1,5 +1,6 @@
 package com.example.elearningapp.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +55,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     String commentIdReply = "";
 
     CommentDialog commentDialog;
+    ProgressBar commentLoading;
 
     private LoadingDialog loadingDialog;
 
@@ -86,6 +89,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 //        Log.v("CommentX2", commentDialog.getRecyclerView().getContext().toString());
 //
 //        loadingDialog.show();
+        commentLoading = commentDialog.findViewById(R.id.loadingComment);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +114,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        Log.v("Comment", "Create");
         CommentObject commentObject = courseObjectList.get(position);
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         holder.contentView.setText(commentObject.getContent());
@@ -158,6 +163,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     FirebaseFirestore.getInstance().collection("comments")
                             .document(commentObject.getId())
                             .update("like", likeListV1);
+                    FirebaseFirestore.getInstance().collection("comments")
+                            .document(commentObject.getId())
+                            .update("likeCnt", likeListV1.size() - 1);
                 } else {
                     Log.v("Comment2", currentUserId);
                     likeListV1.add(currentUserId);
@@ -194,7 +202,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             }
         });
 
-        Task getReplyFiresbaseQuery = FirebaseFirestore.getInstance()
+        FirebaseFirestore.getInstance()
                 .collection("comments")
                 .document(commentObject.getId())
                         .collection("replies").count().get(AggregateSource.SERVER)
@@ -203,6 +211,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                             public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
                                 AggregateQuerySnapshot snapshot = task.getResult();
                                 if (snapshot.getCount() == 0) {
+                                    Log.v("Comment", "GONE Here 1");
                                     holder.replyView.setVisibility(View.GONE);
                                 } else {
                                     holder.replyView.setText("Xem " + snapshot.getCount() + " câu trả lời");

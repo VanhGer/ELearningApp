@@ -231,15 +231,11 @@ public class videoLesson extends AppCompatActivity {
     }
 
     private void showDialog(String lessonId) {
-        List<CommentObject> commentObjects = new ArrayList<>();
-        CommentAdapter commentAdapter = new CommentAdapter(this, commentObjects);
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        dialog = new CommentDialog(this,
-                commentObjects, commentAdapter, courseId, lessonId, currentUserId);
+        dialog = new CommentDialog(this, courseId, lessonId, currentUserId);
 
-        commentAdapter.setDialog(dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_comment);
 
