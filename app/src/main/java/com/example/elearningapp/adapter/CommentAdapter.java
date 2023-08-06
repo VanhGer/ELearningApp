@@ -2,6 +2,7 @@ package com.example.elearningapp.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,8 +94,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("Comment", "Clicked");
-
                 userReplyIdGet = "";
                 commentIdReply = "";
                 if (commentDialog != null) {
@@ -113,20 +112,48 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        Log.v("Comment", "Create");
-        CommentObject commentObject = courseObjectList.get(position);
+        TextView contentView = holder.contentView;
+        LinearLayout commentReplyLayout = holder.commentReplyLayout;
+
+        TextView replyView = holder.replyView;
+
+        ImageView v1userpic = holder.v1userpic;
+
+        TextView v1username = holder.v1username;
+
+        TextView v1time = holder.v1time;
+
+        TextView likeCntv1 = holder.likeCntv1;
+
+        ImageButton likev1Button = holder.likev1Button;
+
+        TextView ReplyV1 = holder.ReplyV1;
+
+        ProgressBar commentV2Loading;
+        Log.v("CommentX", holder.commentReplyLayout.toString() + " " + holder.getAdapterPosition() + " " + holder.getLayoutPosition() + " " + holder.getLayoutPosition());
+        CommentObject commentObject = courseObjectList.get(holder.getAdapterPosition());
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        holder.contentView.setText(commentObject.getContent());
-        holder.v1time.setText(changetoDate(commentObject.getTimestamp()));
+        contentView.setText(commentObject.getContent());
+        v1time.setText(changetoDate(commentObject.getTimestamp()));
 
         FirebaseFirestore.getInstance()
                 .collection("users")
                 .document(commentObject.getUserId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        holder.v1username.setText(value.getString("name"));
-                        Picasso.get().load(value.getString("image")).into(holder.v1userpic);
+                        v1username.setText(value.getString("name"));
+                        Picasso.get().load(value.getString("image")).into(v1userpic);
                     }
                 });
 
@@ -143,23 +170,23 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
 
         if (currentLikeV1) {
-            holder.likev1Button.setImageResource(R.drawable.ic_heart_filled);
-            holder.likev1Button.setTag(R.drawable.ic_heart_filled);
+            likev1Button.setImageResource(R.drawable.ic_heart_filled);
+            likev1Button.setTag(R.drawable.ic_heart_filled);
         } else {
-            holder.likev1Button.setImageResource(R.drawable.ic_heart);
-            holder.likev1Button.setTag(R.drawable.ic_heart);
+            likev1Button.setImageResource(R.drawable.ic_heart);
+            likev1Button.setTag(R.drawable.ic_heart);
         }
 
 
-        holder.likev1Button.setOnClickListener(new View.OnClickListener() {
+        likev1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.likev1Button.getTag().equals(R.drawable.ic_heart_filled)) {
+                if (likev1Button.getTag().equals(R.drawable.ic_heart_filled)) {
                     Log.v("Comment1", currentUserId);
                     likeListV1.remove(currentUserId);
-                    holder.likeCntv1.setText(likeListV1.size() - 1 + "");
-                    holder.likev1Button.setImageResource(R.drawable.ic_heart);
-                    holder.likev1Button.setTag(R.drawable.ic_heart);
+                    likeCntv1.setText(likeListV1.size() - 1 + "");
+                    likev1Button.setImageResource(R.drawable.ic_heart);
+                    likev1Button.setTag(R.drawable.ic_heart);
                     FirebaseFirestore.getInstance().collection("comments")
                             .document(commentObject.getId())
                             .update("like", likeListV1);
@@ -169,9 +196,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 } else {
                     Log.v("Comment2", currentUserId);
                     likeListV1.add(currentUserId);
-                    holder.likeCntv1.setText(likeListV1.size() - 1 + "");
-                    holder.likev1Button.setImageResource(R.drawable.ic_heart_filled);
-                    holder.likev1Button.setTag(R.drawable.ic_heart_filled);
+                    likeCntv1.setText(likeListV1.size() - 1 + "");
+                    likev1Button.setImageResource(R.drawable.ic_heart_filled);
+                    likev1Button.setTag(R.drawable.ic_heart_filled);
                     FirebaseFirestore.getInstance().collection("comments")
                             .document(commentObject.getId())
                             .update("like", likeListV1);
@@ -182,9 +209,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             }
         });
 
-        holder.likeCntv1.setText(likeListV1.size() - 1 + "");
+        likeCntv1.setText(likeListV1.size() - 1 + "");
 
-        holder.ReplyV1.setOnClickListener(new View.OnClickListener() {
+        ReplyV1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userReplyIdGet = commentObject.getUserId();
@@ -194,7 +221,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
 
-                    holder.replyView.performClick();
+                    replyView.performClick();
                     commentDialog.getCommentEditText().setHint(
                             "Trả lời bình luận của " + holder.v1username.getText().toString()
                     );
@@ -210,11 +237,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                             @Override
                             public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
                                 AggregateQuerySnapshot snapshot = task.getResult();
+//                                Log.v("CommentXY", holder.getAdapterPosition() + " " + position);
+                                if (!commentReplyLayout.toString().equals(holder.commentReplyLayout.toString())) {
+                                    Log.v("CommentXY", "Not equals");
+                                }
                                 if (snapshot.getCount() == 0) {
-                                    Log.v("Comment", "GONE Here 1");
-                                    holder.replyView.setVisibility(View.GONE);
+                                    replyView.setVisibility(View.GONE);
                                 } else {
-                                    holder.replyView.setText("Xem " + snapshot.getCount() + " câu trả lời");
+                                    replyView.setText("Xem " + snapshot.getCount() + " câu trả lời");
                                 }
                             }
                         });
@@ -226,6 +256,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 String replyText = holder.replyView.getText().toString();
                 if (replyText.contains("Xem")) {
                     holder.replyView.setVisibility(View.GONE);
+                    holder.commentV2Loading.setVisibility(View.VISIBLE);
+                    holder.commentReplyLayout.setVisibility(View.GONE);
                     holder.commentReplyLayout.removeAllViews();
                     LayoutInflater factory = LayoutInflater.from(context);
                     List<CommentObject> commentv2Objects = new ArrayList<>();
@@ -352,9 +384,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                 });
 
                                     }
+                                    Handler handler = new Handler();
+                                    Runnable runnable = new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            holder.commentV2Loading.setVisibility(View.GONE);
+                                            holder.commentReplyLayout.setVisibility(View.VISIBLE);
+                                        }
+                                    };
+                                    handler.postDelayed(runnable, 500);
                                 }
                             });
-                    holder.commentReplyLayout.setVisibility(View.VISIBLE);
                 } else {
                     holder.replyView.setText("Xem câu trả lời");
                     holder.commentReplyLayout.setVisibility(View.GONE);
@@ -410,6 +450,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         TextView ReplyV1;
 
+        ProgressBar commentV2Loading;
+
         public CommentViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             contentView = itemView.findViewById(R.id.v1content);
@@ -421,6 +463,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             likeCntv1 = itemView.findViewById(R.id.likeCntv1);
             likev1Button = itemView.findViewById(R.id.likev1Button);
             ReplyV1 = itemView.findViewById(R.id.ReplyV1);
+            commentV2Loading = itemView.findViewById(R.id.commentV2Loading);
 
         }
     }

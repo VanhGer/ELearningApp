@@ -1,16 +1,36 @@
 package com.example.elearningapp.lessonType;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.CommentDialog;
 import com.example.elearningapp.item.LessonItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +41,15 @@ public class textLesson extends AppCompatActivity {
     Button nxt, pre;
     ImageButton back;
     String courseId;
+
+    ShapeableImageView userPic;
+
+    TextView commentCount;
+
+    Button showComment;
+
+    CommentDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,6 +64,12 @@ public class textLesson extends AppCompatActivity {
 
         back = findViewById(R.id.return_btn);
 
+        showComment = findViewById(R.id.showComment);
+
+        userPic = findViewById(R.id.userPic);
+
+        commentCount = findViewById(R.id.commentCount);
+
         setLesson();
     }
 
@@ -43,6 +78,38 @@ public class textLesson extends AppCompatActivity {
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
         courseId = getIntent().getStringExtra("courseId");
+
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("users")
+                .document(currentUserId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        Picasso.get().load(value.getString("image")).into(userPic);
+                    }
+                });
+
+        FirebaseFirestore.getInstance().collection("comments")
+                .whereEqualTo("courseId", courseId)
+                .whereEqualTo("lessonId", lessonItem.get(position).getLessonId())
+                .count()
+                .get(AggregateSource.SERVER).addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                        AggregateQuerySnapshot snapshot = task.getResult();
+                        if (snapshot.getCount() != 0) {
+                            commentCount.setText(snapshot.getCount() + "");
+                            commentCount.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
+        showComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(lessonItem.get(position).getLessonId());
+            }
+        });
 
         title.setText(lessonItem.get(position).getName());
         content.setText(lessonItem.get(position).getContent());
@@ -72,6 +139,25 @@ public class textLesson extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void showDialog(String lessonId) {
+
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        dialog = new CommentDialog(this, courseId, lessonId, currentUserId);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_comment);
+
+
+        EditText replyEditText = dialog.findViewById(R.id.replyCommentField);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     void buttonOnClick(int position, int maxPosition, List<LessonItem> lessonItemList) {

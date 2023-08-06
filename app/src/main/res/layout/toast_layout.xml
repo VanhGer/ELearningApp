@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="100dp">
 
     <TextView
         android:id="@+id/toastMessage"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/search_bg"
-        android:backgroundTint="#80BBDEFB"
+        android:background="@drawable/small_rounded_bg"
+        android:backgroundTint="@color/md_blue_grey_100"
         android:fontFamily="@font/gilroybold"
         android:gravity="center"
         android:padding="10dp"

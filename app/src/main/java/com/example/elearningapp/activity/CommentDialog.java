@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,6 +68,11 @@ public class CommentDialog extends Dialog {
 
     View thisView;
 
+    Toast toast;
+
+    TextView noCommentText;
+    ImageButton backComment;
+
     public CommentDialog(Context context,
                          String courseId,
                          String lessonId,
@@ -94,6 +100,7 @@ public class CommentDialog extends Dialog {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         for (DocumentChange doc: value.getDocumentChanges()) {
                             if (doc.getType() == DocumentChange.Type.ADDED) {
+                                noCommentText.setVisibility(View.GONE);
                                 QueryDocumentSnapshot documentSnapshot = doc.getDocument();
                                 List <String> likeList = (List<String>) documentSnapshot.get("like");
                                 commentObjects.add(new CommentObject(
@@ -135,6 +142,7 @@ public class CommentDialog extends Dialog {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         for (DocumentChange doc: value.getDocumentChanges()) {
                             if (doc.getType() == DocumentChange.Type.ADDED) {
+                                noCommentText.setVisibility(View.GONE);
                                 QueryDocumentSnapshot documentSnapshot = doc.getDocument();
                                 List <String> likeList = (List<String>) documentSnapshot.get("like");
                                 commentObjects.add(new CommentObject(
@@ -170,17 +178,14 @@ public class CommentDialog extends Dialog {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_comment, null);
         setContentView(view);
 
-        this.thisView = view;
+        init(view);
 
-
-        replySendButton = view.findViewById(R.id.replySendButton);
-        replyCommentField = view.findViewById(R.id.replyCommentField);
-        filterComment = view.findViewById(R.id.filterComment);
-        newFilterComment = view.findViewById(R.id.newFilterComment);
-        popularFilterComment = view.findViewById(R.id.popularFilterComment);
-        replyuserpic = view.findViewById(R.id.replyuserpic);
-        progressBar = view.findViewById(R.id.loadingComment);
-        listComment = view.findViewById(R.id.listComment);
+        backComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         newFilterComment.setChecked(true);
         setNewComment();
@@ -216,8 +221,14 @@ public class CommentDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if (replyCommentField.getText().length() < 5) {
+                    showToast("Bình luận phải có ít nhất 5 từ", R.color.md_yellow_900, R.color.md_yellow_50);
                     return;
                 }
+                if (replyCommentField.getText().toString().contains("ngu")) {
+                    showToast("Không được đăng bình luận khiếm nhã người khác", R.color.md_red_900, R.color.md_red_50);
+                    return;
+                }
+                replySendButton.setClickable(false);
                 if (commentAdapter.getUserReplyIdGet().equals("")) {
                     Map<String, Object> data = new HashMap<>();
                     data.put("content", replyCommentField.getText().toString());
@@ -232,7 +243,9 @@ public class CommentDialog extends Dialog {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     replyCommentField.setText("");
-                                    showToast();
+                                    Log.v("Comment", "Reply1");
+                                    showToast("Đã thêm bình luận", R.color.md_blue_900, R.color.md_blue_50);
+                                    replySendButton.setClickable(true);
                                 }
                             });
 
@@ -252,7 +265,9 @@ public class CommentDialog extends Dialog {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     replyCommentField.setText("");
-                                    showToast();
+                                    Log.v("Comment", "Reply2");
+                                    showToast("Đã thêm bình luận", R.color.md_blue_900, R.color.md_blue_200);
+                                    replySendButton.setClickable(true);
                                 }
                             });
 
@@ -263,17 +278,39 @@ public class CommentDialog extends Dialog {
 
     }
 
-    private void showToast() {
-        Log.v("Comment", "ook");
+    private void init(View view) {
+        this.thisView = view;
+        replySendButton = view.findViewById(R.id.replySendButton);
+        replyCommentField = view.findViewById(R.id.replyCommentField);
+        filterComment = view.findViewById(R.id.filterComment);
+        newFilterComment = view.findViewById(R.id.newFilterComment);
+        popularFilterComment = view.findViewById(R.id.popularFilterComment);
+        replyuserpic = view.findViewById(R.id.replyuserpic);
+        progressBar = view.findViewById(R.id.loadingComment);
+        listComment = view.findViewById(R.id.listComment);
+        backComment = view.findViewById(R.id.backComment);
+        noCommentText = view.findViewById(R.id.noCommentText);
+    }
+
+    private void showToast(String message, int color, int backgroundColor) {
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.toast_layout, null);
-        Toast toast = new Toast(getContext());
+        TextView textView = layout.findViewById(R.id.toastMessage);
+        textView.setText(message);
+        textView.setTextColor(getContext().getResources().getColor(color));
+        textView.setBackgroundTintList(getContext().getResources().getColorStateList(backgroundColor));
+        if (toast!= null) {
+            toast.cancel();
+        }
+        toast = new Toast(getContext());
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
 
+
         toast.show();
     }
+
 
     public RecyclerView getRecyclerView() {
         if (thisView != null) {
