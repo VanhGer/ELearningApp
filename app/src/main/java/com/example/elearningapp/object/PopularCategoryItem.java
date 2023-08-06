@@ -4,7 +4,10 @@ public class PopularCategoryItem {
     private String name;
     private String image;
 
-    public PopularCategoryItem(String name, String image) {
+    private String id;
+
+    public PopularCategoryItem(String id, String name, String image) {
+        this.id = id;
         this.name = name;
         this.image = image;
     }
@@ -23,5 +26,13 @@ public class PopularCategoryItem {
 
     public String getImage() {
         return image;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

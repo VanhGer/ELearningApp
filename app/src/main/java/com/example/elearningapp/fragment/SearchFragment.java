@@ -108,7 +108,7 @@ public class SearchFragment extends Fragment {
 
         init(rootView);
 
-        searchAdapter = new CategoryAdapter(this.getActivity(), popularCategoryItemList);
+        searchAdapter = new CategoryAdapter(this.getActivity(), popularCategoryItemList, this.getActivity());
         gridPopularSearch.setAdapter(searchAdapter);
 
 
@@ -151,6 +151,7 @@ public class SearchFragment extends Fragment {
                 for (DocumentSnapshot document : value.getDocuments()) {
                     popularCategoryItemList.add(
                             new PopularCategoryItem(
+                                    document.getId(),
                                     document.getString("name"),
                                     document.getString("image")));
                     Log.v("Firebase", document.getString("name"));
