@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
+    android:paddingStart="20dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="20dp"
     android:paddingBottom="4dp">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -61,7 +64,6 @@
         android:id="@+id/top_course_item_star"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:fontFamily="@font/gilroyregular"
         android:gravity="bottom"
@@ -69,15 +71,15 @@
         android:textColor="@color/md_grey_700"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
-        app:layout_constraintStart_toEndOf="@+id/starImage" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/starImage"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/top_course_item_image"
-        app:layout_constraintStart_toEndOf="@+id/top_course_item_students"
+        app:layout_constraintEnd_toStartOf="@+id/top_course_item_star"
         app:srcCompat="@drawable/star" />
 
     <ImageView
