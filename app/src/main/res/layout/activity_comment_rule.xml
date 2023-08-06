@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CommentRule">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/gilroyextrabold"
+                android:text="Nguyên tắc cộng đồng của CourseCloud"
+                android:textSize="48sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout15" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/gilroyregular"
+                android:text="Khi sử dụng CourseCloud, bạn đồng thời gia nhập một cộng đồng quy tụ những người đến từ khắp nơi trên thế giới. \nCác nguyên tắc dưới đây giúp duy trì một cộng đồng CourseCloud thú vị và thoải mái cho mọi người. \n \nNếu thấy nội dung mà bạn cho là vi phạm các nguyên tắc này, hãy báo cáo nội dung đó.  \n \nCác chính sách này áp dụng cho mọi loại nội dung trên nền tảng của chúng tôi, bao gồm cả nội dung ở chế độ riêng tư và không công khai, bình luận, đường liên kết, bài đăng trên thẻ Cộng đồng và hình thu nhỏ. Danh sách này không phải là danh sách đầy đủ."
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/backRule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/ic_arrow_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_arrow_left" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/gilroybold"
+                android:text="Nội dung rác và các thủ đoạn lừa đảo"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+            <TextView
+                android:id="@+id/textView81"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/gilroyregular"
+                android:text="Cộng đồng YouTube là một cộng đồng được xây dựng dựa trên lòng tin. Những nội dung nhằm mục đích lừa đảo, gây hiểu lầm, câu kéo hoặc lừa gạt những người dùng khác không được phép xuất hiện trên YouTube.  "
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView80" />
+
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/gilroybold"
+                android:text="Nội dung nhạy cảm  "
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView81" />
+
+            <TextView
+                android:id="@+id/textView83"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/gilroyregular"
+                android:text="Chúng tôi hy vọng sẽ bảo vệ được người xem, người sáng tạo và đặc biệt là trẻ vị thành niên. Đó là lý do chúng tôi có các quy tắc về việc đảm bảo an toàn cho trẻ em, nội dung khiêu dâm và ảnh khoả thân cũng như hành vi tự huỷ hoại bản thân. Hãy tìm hiểu xem nội dung nào được phép xuất hiện trên YouTube và việc bạn cần làm nếu bắt gặp nội dung không tuân thủ những chính sách này.  "
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView82" />
+
+            <TextView
+                android:id="@+id/textView84"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/gilroymedium"
+                android:text="Vui lòng tuân thủ nghiêm những quy tắc này. Nếu nhà sáng tạo có hành vi trong và/hoặc ngoài nền tảng YouTube gây hại cho người dùng, cộng đồng, nhân viên hoặc hệ sinh thái của YouTube, thì chúng tôi có thể xử lý dựa trên một số yếu tố bao gồm nhưng không giới hạn ở tính nghiêm trọng của hành động của nhà sáng tạo và việc họ có thực hiện hành vi gây hại theo khuôn mẫu nào không. Các biện pháp xử lý của chúng tôi bao gồm từ việc tạm ngưng các đặc quyền của nhà sáng tạo cho đến chấm dứt tài khoản.   "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView83" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
