@@ -262,13 +262,6 @@ public class videoLesson extends AppCompatActivity {
         }
     }
 
-    public EditText getCommentEditText() {
-        return dialog.getCommentEditText();
-    }
-
-    public void updateRecycler() {
-
-    }
 
     private void showDialog(String lessonId) {
 

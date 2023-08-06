@@ -228,6 +228,7 @@ public class CommentDialog extends Dialog {
                     showToast("Không được đăng bình luận khiếm nhã người khác", R.color.md_red_900, R.color.md_red_50);
                     return;
                 }
+                replySendButton.setClickable(false);
                 if (commentAdapter.getUserReplyIdGet().equals("")) {
                     Map<String, Object> data = new HashMap<>();
                     data.put("content", replyCommentField.getText().toString());
@@ -244,6 +245,7 @@ public class CommentDialog extends Dialog {
                                     replyCommentField.setText("");
                                     Log.v("Comment", "Reply1");
                                     showToast("Đã thêm bình luận", R.color.md_blue_900, R.color.md_blue_50);
+                                    replySendButton.setClickable(true);
                                 }
                             });
 
@@ -265,6 +267,7 @@ public class CommentDialog extends Dialog {
                                     replyCommentField.setText("");
                                     Log.v("Comment", "Reply2");
                                     showToast("Đã thêm bình luận", R.color.md_blue_900, R.color.md_blue_200);
+                                    replySendButton.setClickable(true);
                                 }
                             });
 
