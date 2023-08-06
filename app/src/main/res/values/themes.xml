@@ -2,14 +2,27 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ELearningApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/md_blue_300</item>
-         <item name="android:windowBackground">@color/md_white_1000</item>
-         <item name="colorPrimaryDark">@color/md_white_1000</item>
-         <item name="colorAccent">@color/md_grey_400</item>
+        <item name="colorPrimary">@color/md_blue_300</item>
+        <item name="android:windowBackground">@color/md_white_1000</item>
+        <item name="colorPrimaryDark">@color/md_white_1000</item>
+        <item name="colorAccent">@color/md_grey_400</item>
 
         <item name="android:windowLightStatusBar">true</item>
 
+        <item name="android:fontFamily">@font/gilroymedium</item>
+<!--        <item name="android:textViewStyle"></item>-->
+
     </style>
+    
+    <style name="GilroyTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/gilroymedium</item>
+    </style>
+    
+    <style name="AppScroll" parent="Theme.ELearningApp.AppBarOverlay">
+        <item name="android:textColorPrimary">@color/md_white_1000</item>
+        <item name="fontFamily">@font/gilroybold</item>
+    </style>
+        
 
     <style name="Theme.ELearningApp" parent="Base.Theme.ELearningApp" />
 
@@ -17,5 +30,14 @@
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
+
+    <style name="Theme.ELearningApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ELearningApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ELearningApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

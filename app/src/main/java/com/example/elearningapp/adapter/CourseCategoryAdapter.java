@@ -29,12 +29,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopCourseViewHolder> {
+public class CourseCategoryAdapter extends RecyclerView.Adapter<CourseCategoryAdapter.CategoryCourseViewHolder> {
     private final CourseClickHelper clickHelper;
     Context context;
     List<CourseListItem> courseListItemList;
 
-    public TopCourseAdapter(@NonNull Context context, List<CourseListItem> courseListItemList,
+    public CourseCategoryAdapter(@NonNull Context context, List<CourseListItem> courseListItemList,
                             CourseClickHelper clickHelper) {
         this.context = context;
         this.courseListItemList = courseListItemList;
@@ -43,28 +43,28 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
 
     @NonNull
     @Override
-    public TopCourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CategoryCourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.top_course_item, parent, false);
-        return new TopCourseAdapter.TopCourseViewHolder(view, clickHelper, context);
+        return new CourseCategoryAdapter.CategoryCourseViewHolder(view, clickHelper, context);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopCourseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryCourseViewHolder holder, int position) {
         CourseListItem courseObject = courseListItemList.get(position);
         FirebaseFirestore.getInstance().collection("users")
                 .document(courseObject.getOwner())
-                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                holder.nameView.setText(courseObject.getName());
-                                holder.ownerView.setText(value.getString("name"));
-                                Picasso.get().load(courseObject.getImage()).into(holder.imageView);
-                                holder.numStarView.setText(courseObject.getNumberStar() + " ");
-                                holder.numStudentView.setText(courseObject.getNumberStudent() + " người học");
-                                holder.id = courseObject.getId();
-                            }
-                        });
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        holder.nameView.setText(courseObject.getName());
+                        holder.ownerView.setText(value.getString("name"));
+                        Picasso.get().load(courseObject.getImage()).into(holder.imageView);
+                        holder.numStarView.setText(courseObject.getNumberStar() + " ");
+                        holder.numStudentView.setText(courseObject.getNumberStudent() + " người học");
+                        holder.id = courseObject.getId();
+                    }
+                });
 
     }
 
@@ -83,7 +83,7 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
         return courseListItemList.size();
     }
 
-    public static class TopCourseViewHolder extends RecyclerView.ViewHolder{
+    public static class CategoryCourseViewHolder extends RecyclerView.ViewHolder{
         TextView nameView;
         ShapeableImageView imageView;
         TextView ownerView;
@@ -97,7 +97,7 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
         String id;
 
 
-        public TopCourseViewHolder(@NonNull View itemView, CourseClickHelper clickHelper, Context context) {
+        public CategoryCourseViewHolder(@NonNull View itemView, CourseClickHelper clickHelper, Context context) {
             super(itemView);
             nameView = itemView.findViewById(R.id.top_course_item_name);
             imageView = itemView.findViewById(R.id.top_course_item_image);
@@ -113,10 +113,6 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
                     if (clickHelper != null) {
                         int pos = getAdapterPosition();
                         if (pos != RecyclerView.NO_POSITION) {
-                            if (context instanceof SearchActivity) {
-                                Log.v("Search", context.toString());
-                                ((SearchActivity) context).updateSearchCount();
-                            }
                             clickHelper.onItemClick(id);
                         }
                     }
