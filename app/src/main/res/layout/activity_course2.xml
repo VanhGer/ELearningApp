@@ -134,6 +134,8 @@
                         android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_user" />
@@ -143,6 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        android:layout_marginTop="16dp"
                         android:text="TextView"
                         android:textColor="#C1C1C1"
                         android:textSize="16sp"
@@ -153,7 +156,8 @@
                         android:id="@+id/imageView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="64dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="12dp"
                         app:layout_constraintStart_toEndOf="@+id/student"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_star" />
@@ -163,11 +167,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        android:layout_marginTop="16dp"
                         android:text="TextView"
                         android:textColor="#C1C1C1"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/imageView7"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:background="#E4DAC9"
+                        android:text="Báo cáo"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/imageView7"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

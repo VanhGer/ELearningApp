@@ -6,7 +6,7 @@
     <string name="create_your_account_string">Tạo tài khoản của bạn</string>
     <string name="enter_your_full_name_string">Nhập tên người dùng</string>
     <string name="confirm_password_string">Xác nhận mật khẩu</string>
-    <string name="create_password_string">Đặt mật khẩu</string>
+    <string name="create_password_string">Đặt mật khẩu (Có ít nhất 8 kí tự)</string>
     <string name="enter_you_email_string">Nhập email của bạn</string>
     <string name="do_you_have_an_account__sign_in_string">Bạn đã có tài khoản? Đăng nhập ngay!</string>
     <string name="sent_email_string">Sent email</string>
