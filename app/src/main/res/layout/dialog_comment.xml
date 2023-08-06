@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/commentRule"
         app:layout_constraintVertical_bias="1.0">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -168,7 +168,7 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/commentRule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/md_grey_50"
@@ -209,6 +209,6 @@
         app:layout_constraintBottom_toTopOf="@+id/view7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/commentRule" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,17 @@
 package com.example.elearningapp.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -73,14 +81,19 @@ public class CommentDialog extends Dialog {
     TextView noCommentText;
     ImageButton backComment;
 
+    TextView commentRule;
+
+    Activity activity;
+
     public CommentDialog(Context context,
                          String courseId,
                          String lessonId,
-                         String userId) {
+                         String userId, Activity activity) {
         super(context);
         this.courseId = courseId;
         this.lessonId = lessonId;
         this.userId = userId;
+        this.activity = activity;
     }
 
     public EditText getCommentEditText() {
@@ -180,6 +193,23 @@ public class CommentDialog extends Dialog {
 
         init(view);
 
+        SpannableString ss = new SpannableString("Hãy nhớ tôn trọng người dùng khác khi đăng bình luận và tuân thủ Nguyên tắc cộng đồng của chúng tôi");
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                openRuleActivity();
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+        ss.setSpan(clickableSpan, 65, 85, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        commentRule.setText(ss);
+        commentRule.setMovementMethod(LinkMovementMethod.getInstance());
+        commentRule.setHighlightColor(Color.TRANSPARENT);
+
         backComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,6 +308,10 @@ public class CommentDialog extends Dialog {
 
     }
 
+    public void openRuleActivity(){
+        activity.startActivity(new Intent(activity, CommentRule.class));
+    }
+
     private void init(View view) {
         this.thisView = view;
         replySendButton = view.findViewById(R.id.replySendButton);
@@ -290,6 +324,7 @@ public class CommentDialog extends Dialog {
         listComment = view.findViewById(R.id.listComment);
         backComment = view.findViewById(R.id.backComment);
         noCommentText = view.findViewById(R.id.noCommentText);
+        commentRule = view.findViewById(R.id.commentRule);
     }
 
     private void showToast(String message, int color, int backgroundColor) {

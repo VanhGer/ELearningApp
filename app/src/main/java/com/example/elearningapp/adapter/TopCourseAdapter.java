@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.activity.SearchActivity;
@@ -18,7 +19,12 @@ import com.example.elearningapp.interfaces.CourseClickHelper;
 import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.object.CourseListItem;
+import com.example.elearningapp.object.CourseObject;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -47,12 +53,31 @@ public class TopCourseAdapter extends RecyclerView.Adapter<TopCourseAdapter.TopC
 
     @Override
     public void onBindViewHolder(@NonNull TopCourseViewHolder holder, int position) {
-        holder.nameView.setText(courseListItemList.get(position).getName());
-        holder.ownerView.setText(courseListItemList.get(position).getOwner());
-        Picasso.get().load(courseListItemList.get(position).getImage()).into(holder.imageView);
-        holder.numStarView.setText(courseListItemList.get(position).getNumberStar() + " ");
-        holder.numStudentView.setText(courseListItemList.get(position).getNumberStudent() + " người học");
-        holder.id = courseListItemList.get(position).getId();
+        CourseListItem courseObject = courseListItemList.get(position);
+        FirebaseFirestore.getInstance().collection("users")
+                .document(courseObject.getOwner())
+                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                holder.nameView.setText(courseObject.getName());
+                                holder.ownerView.setText(value.getString("name"));
+                                Picasso.get().load(courseObject.getImage()).into(holder.imageView);
+                                holder.numStarView.setText(courseObject.getNumberStar() + " ");
+                                holder.numStudentView.setText(courseObject.getNumberStudent() + " người học");
+                                holder.id = courseObject.getId();
+                            }
+                        });
+
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override

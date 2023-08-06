@@ -145,7 +145,7 @@ public class textLesson extends AppCompatActivity {
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        dialog = new CommentDialog(this, courseId, lessonId, currentUserId);
+        dialog = new CommentDialog(this, courseId, lessonId, currentUserId, this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_comment);
