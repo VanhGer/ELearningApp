@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -81,6 +82,17 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
                                     document.getDouble("students").intValue(),
                                     document.getDouble("star")));
                 }
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        findViewById(R.id.progressBar).setVisibility(View.GONE);
+                        topCourseRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                };
+                handler.postDelayed(runnable, 1000);
+
                 topCourseAdapter.notifyDataSetChanged();
             }
         });

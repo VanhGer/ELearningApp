@@ -7,35 +7,57 @@
     tools:context=".activity.TopCourseActivity">
 
 
-
     <TextView
         android:id="@+id/yourCourse"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@drawable/title_top_course_bg"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/gilroybold"
         android:gravity="center_vertical"
-        android:paddingLeft="60dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
         android:text="Khóa học được theo dõi nhiều nhất"
-        android:textSize="16sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backBtnTopCourse" />
 
     <ImageButton
         android:id="@+id/backBtnTopCourse"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/ic_arrow_left"
         android:textColorHighlight="@color/md_black_1000"
         android:textColorLink="@color/md_black_1000"
-        app:layout_constraintBottom_toBottomOf="@+id/yourCourse"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yourCourse" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
@@ -52,7 +74,8 @@
                 android:id="@+id/yourCourseRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp" />
+                android:layout_marginTop="0dp"
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>
 
