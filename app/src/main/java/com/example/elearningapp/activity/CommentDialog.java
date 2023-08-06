@@ -70,6 +70,9 @@ public class CommentDialog extends Dialog {
 
     Toast toast;
 
+    TextView noCommentText;
+    ImageButton backComment;
+
     public CommentDialog(Context context,
                          String courseId,
                          String lessonId,
@@ -97,6 +100,7 @@ public class CommentDialog extends Dialog {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         for (DocumentChange doc: value.getDocumentChanges()) {
                             if (doc.getType() == DocumentChange.Type.ADDED) {
+                                noCommentText.setVisibility(View.GONE);
                                 QueryDocumentSnapshot documentSnapshot = doc.getDocument();
                                 List <String> likeList = (List<String>) documentSnapshot.get("like");
                                 commentObjects.add(new CommentObject(
@@ -138,6 +142,7 @@ public class CommentDialog extends Dialog {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         for (DocumentChange doc: value.getDocumentChanges()) {
                             if (doc.getType() == DocumentChange.Type.ADDED) {
+                                noCommentText.setVisibility(View.GONE);
                                 QueryDocumentSnapshot documentSnapshot = doc.getDocument();
                                 List <String> likeList = (List<String>) documentSnapshot.get("like");
                                 commentObjects.add(new CommentObject(
@@ -173,17 +178,14 @@ public class CommentDialog extends Dialog {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_comment, null);
         setContentView(view);
 
-        this.thisView = view;
+        init(view);
 
-
-        replySendButton = view.findViewById(R.id.replySendButton);
-        replyCommentField = view.findViewById(R.id.replyCommentField);
-        filterComment = view.findViewById(R.id.filterComment);
-        newFilterComment = view.findViewById(R.id.newFilterComment);
-        popularFilterComment = view.findViewById(R.id.popularFilterComment);
-        replyuserpic = view.findViewById(R.id.replyuserpic);
-        progressBar = view.findViewById(R.id.loadingComment);
-        listComment = view.findViewById(R.id.listComment);
+        backComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         newFilterComment.setChecked(true);
         setNewComment();
@@ -271,6 +273,20 @@ public class CommentDialog extends Dialog {
             }
         });
 
+    }
+
+    private void init(View view) {
+        this.thisView = view;
+        replySendButton = view.findViewById(R.id.replySendButton);
+        replyCommentField = view.findViewById(R.id.replyCommentField);
+        filterComment = view.findViewById(R.id.filterComment);
+        newFilterComment = view.findViewById(R.id.newFilterComment);
+        popularFilterComment = view.findViewById(R.id.popularFilterComment);
+        replyuserpic = view.findViewById(R.id.replyuserpic);
+        progressBar = view.findViewById(R.id.loadingComment);
+        listComment = view.findViewById(R.id.listComment);
+        backComment = view.findViewById(R.id.backComment);
+        noCommentText = view.findViewById(R.id.noCommentText);
     }
 
     private void showToast(String message, int color, int backgroundColor) {

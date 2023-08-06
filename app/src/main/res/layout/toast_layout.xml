@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/toastMessage"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/small_rounded_bg"
         android:backgroundTint="@color/md_blue_grey_100"

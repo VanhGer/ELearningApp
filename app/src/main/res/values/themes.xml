@@ -5,6 +5,7 @@
          <item name="colorPrimary">@color/md_blue_300</item>
          <item name="android:windowBackground">@color/md_white_1000</item>
          <item name="colorPrimaryDark">@color/md_white_1000</item>
+         <item name="colorAccent">@color/md_grey_400</item>
 
         <item name="android:windowLightStatusBar">true</item>
 

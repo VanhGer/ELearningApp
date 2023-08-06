@@ -34,7 +34,12 @@ import com.example.elearningapp.activity.CommentDialog;
 import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.object.CommentObject;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -63,6 +68,10 @@ public class videoLesson extends AppCompatActivity {
 
     CommentDialog dialog;
 
+    ShapeableImageView userPic;
+
+    TextView commentCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -79,6 +88,11 @@ public class videoLesson extends AppCompatActivity {
         back = findViewById(R.id.return_btn);
 
         showComment = findViewById(R.id.showComment);
+
+        userPic = findViewById(R.id.userPic);
+
+        commentCount = findViewById(R.id.commentCount);
+
 
         setLesson();
     }
@@ -180,6 +194,32 @@ public class videoLesson extends AppCompatActivity {
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
         courseId = getIntent().getStringExtra("courseId");
+
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("users")
+                .document(currentUserId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        Picasso.get().load(value.getString("image")).into(userPic);
+                    }
+                });
+
+        FirebaseFirestore.getInstance().collection("comments")
+                .whereEqualTo("courseId", courseId)
+                .whereEqualTo("lessonId", lessonItem.get(position).getLessonId())
+                .count()
+                .get(AggregateSource.SERVER).addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                        AggregateQuerySnapshot snapshot = task.getResult();
+                        if (snapshot.getCount() != 0) {
+                            commentCount.setText(snapshot.getCount() + "");
+                            commentCount.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
 
         title.setText(lessonItem.get(position).getName());
         script.setText(lessonItem.get(position).getScript());

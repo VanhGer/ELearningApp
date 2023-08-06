@@ -50,68 +50,54 @@
         app:layout_constraintTop_toBottomOf="@+id/lesson_title2"
         app:layout_constraintVertical_bias="1.0">
 
-        <FrameLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/text_lesson"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/tongquan"
+            android:backgroundTint="#D6A6A6"
+            android:text="Nội dung"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bgr_2"
+            android:backgroundTint="#F6F6F6"
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="4dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+            app:layout_constraintTop_toBottomOf="@+id/text_lesson">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/lesson_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text_lesson"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/tongquan"
-                    android:backgroundTint="#D6A6A6"
-                    android:text="Nội dung"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <ScrollView
-                    android:id="@+id/scrollView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:background="@drawable/bgr_2"
-                    android:backgroundTint="#F6F6F6"
-                    android:paddingLeft="4dp"
-                    android:paddingTop="4dp"
-                    android:paddingRight="4dp"
-                    android:paddingBottom="4dp"
-                    android:scrollbars="none">
-
-                    <TextView
-                        android:id="@+id/lesson_content"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bgr_2"
-                        android:backgroundTint="#F6F6F6"
-                        android:scrollbarAlwaysDrawHorizontalTrack="false"
-                        android:scrollbarAlwaysDrawVerticalTrack="true"
-                        android:text="text lessonslknskdnksdnfksdfhlskadfjkasdjfklsadjflasdjfklasdjfalsdjfalsdfjsadlfjasdlfjasdlfjasdlfjasdlfjsadlfjasdflasdfjsldfjasdlf lalsjfalsdfj sldf"
-                        android:textSize="16sp" />
-                </ScrollView>
-
-                <Button
-                    android:id="@+id/showComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="showComment" />
-            </LinearLayout>
-
-        </FrameLayout>
+                android:background="@drawable/bgr_2"
+                android:backgroundTint="#F6F6F6"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:text="text lessonslknskdnksdnfksdfhlskadfjkasdjfklsadjflasdjfklasdjfalsdjfalsdfjsadlfjasdlfjasdlfjasdlfjasdlfjsadlfjasdflasdfjsldfjasdlf lalsjfalsdfj sldf"
+                android:textSize="16sp" />
+        </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -129,8 +115,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:iconTint="#372B2B"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/btn_next_lesson"
@@ -144,9 +130,77 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bgr_2"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/userPic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/showComment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/showComment"
+                app:shapeAppearanceOverlay="@style/commentRoundedImage"
+                app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
+
+            <TextView
+                android:id="@+id/commentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroybold"
+                android:text="Bình luận"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/showComment"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bgr_2"
+                android:backgroundTint="@color/md_grey_200"
+                android:elevation="0dp"
+                android:fontFamily="@font/gilroymedium"
+                android:gravity="start|center_vertical"
+                android:paddingStart="10dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="Viết bình luận..."
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userPic"
+                app:layout_constraintTop_toBottomOf="@+id/commentTitle" />
+
+            <TextView
+                android:id="@+id/commentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/gilroymedium"
+                android:text="TextView"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/commentTitle"
+                app:layout_constraintStart_toEndOf="@+id/commentTitle"
+                app:layout_constraintTop_toTopOf="@+id/commentTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
@@ -170,10 +224,10 @@
                     android:id="@+id/lessonVideo"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerInParent="true"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
