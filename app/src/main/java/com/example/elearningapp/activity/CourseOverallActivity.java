@@ -3,6 +3,7 @@ package com.example.elearningapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class CourseOverallActivity extends AppCompatActivity {
     private String courseId = "";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Button report;
 
     TextView authorName, courseName, students, star, courseIntro;
     ShapeableImageView courseImg;
@@ -42,6 +44,17 @@ public class CourseOverallActivity extends AppCompatActivity {
         star = findViewById(R.id.mayLikeCourse);
         courseIntro = findViewById(R.id.courseIntro);
         courseImg = findViewById(R.id.continueCourse1);
+        report = findViewById(R.id.report);
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),ReportActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         readData(new CourseCallBack() {
             @Override

@@ -108,6 +108,15 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Hãy nhập tên của bạn", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (password.length() < 8) {
+                    Toast.makeText(RegisterActivity.this, "Mật khẩu phải có ít nhất 8 kí tự", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!password.equals(cfpassword)) {
+                    Toast.makeText(RegisterActivity.this, "Mật khẩu và xác nhận mật khẩu không giống nhau", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
