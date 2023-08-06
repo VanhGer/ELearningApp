@@ -40,7 +40,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseId = getIntent().getStringExtra("courseId");
         authorName = findViewById(R.id.authorName);
         courseName = findViewById(R.id.courseName2);
-        students = findViewById(R.id.student);
+        students = findViewById(R.id.seeMore1);
         star = findViewById(R.id.mayLikeCourse);
         courseIntro = findViewById(R.id.courseIntro);
         courseImg = findViewById(R.id.continueCourse1);

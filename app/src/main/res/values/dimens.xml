@@ -4,4 +4,5 @@
     <dimen name="titleTextSize">28sp</dimen>
     <dimen name="padding">20dp</dimen>
     <dimen name="bottomNavHeight">60dp</dimen>
+    <dimen name="topPadding">32dp</dimen>
 </resources>

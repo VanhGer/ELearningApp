@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +41,27 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private View rootView;
+    ImageView profilePic;
+    TextView titleView, seeMore1, seeMore2, seeMore3;
+    ImageView mostViewedCourse1, mostViewedCourse2;
+    TextView mostViewedCourseName1;
+    TextView mostViewedCourseName2;
+    TextView mostViewedCourseTeacher1;
+    TextView mostViewedCourseTeacher2;
+    TextView mostViewedCourseStar1;
+    TextView mostViewedCourseStar2;
+    TextView mostViewedCourseStudent1;
+    TextView mostViewedCourseStudent2;
+    ImageView continueCourse1, continueCourse2;
+    ImageView mayLikeCourse1, mayLikeCourse2;
+    TextView mayLikeCourseName1;
+    TextView mayLikeCourseName2;
+    TextView mayLikeCourseTeacher1;
+    TextView mayLikeCourseTeacher2;
+    TextView mayLikeCourseStar1;
+    TextView mayLikeCourseStar2;
+    TextView mayLikeCourseStudent1;
+    TextView mayLikeCourseStudent2;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -81,9 +101,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        TextView titleView = rootView.findViewById(R.id.greeting1);
+        titleView = rootView.findViewById(R.id.greeting1);
 
-        ImageView imageView = rootView.findViewById(R.id.profilePic);
+        profilePic = rootView.findViewById(R.id.profilePic);
 
         String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -93,12 +113,12 @@ public class HomeFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     titleView.setText("Xin chào, " + document.getString("name") + "!");
-                    Picasso.get().load(document.getString("image")).into(imageView);
+                    Picasso.get().load(document.getString("image")).into(profilePic);
                 }
             }
         });
 
-        TextView seeMore1 = rootView.findViewById(R.id.student);
+        seeMore1 = rootView.findViewById(R.id.seeMore1);
 
         seeMore1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +129,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        TextView seeMore2 = rootView.findViewById(R.id.seeMore2);
+        seeMore2 = rootView.findViewById(R.id.seeMore2);
 
         seeMore2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +140,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        TextView seeMore3 = rootView.findViewById(R.id.seeMore3);
+        seeMore3 = rootView.findViewById(R.id.seeMore3);
 
         seeMore3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +153,7 @@ public class HomeFragment extends Fragment {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        ImageView mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
+        mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
 
         mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +163,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageView mostViewedCourse2 = rootView.findViewById(R.id.mostViewedCourse2);
+        mostViewedCourse2 = rootView.findViewById(R.id.mostViewedCourse2);
 
         mostViewedCourse2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,14 +172,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        TextView mostViewedCourseName1 = rootView.findViewById(R.id.mostViewedCourseName1);
-        TextView mostViewedCourseName2 = rootView.findViewById(R.id.mostViewedCourseName2);
-        TextView mostViewedCourseTeacher1 = rootView.findViewById(R.id.mostViewedCourseTeacher1);
-        TextView mostViewedCourseTeacher2 = rootView.findViewById(R.id.mostViewedCourseTeacher2);
-        TextView mostViewedCourseStar1 = rootView.findViewById(R.id.mostViewedCourseStar1);
-        TextView mostViewedCourseStar2 = rootView.findViewById(R.id.mostViewedCourseStar2);
-        TextView mostViewedCourseStudent1 = rootView.findViewById(R.id.mostViewedCourseStudent1);
-        TextView mostViewedCourseStudent2 = rootView.findViewById(R.id.mostViewedCourseStudent2);
+        mostViewedCourseName1 = rootView.findViewById(R.id.mostViewedCourseName1);
+        mostViewedCourseName2 = rootView.findViewById(R.id.mostViewedCourseName2);
+        mostViewedCourseTeacher1 = rootView.findViewById(R.id.mostViewedCourseTeacher1);
+        mostViewedCourseTeacher2 = rootView.findViewById(R.id.mostViewedCourseTeacher2);
+        mostViewedCourseStar1 = rootView.findViewById(R.id.mostViewedCourseStar1);
+        mostViewedCourseStar2 = rootView.findViewById(R.id.mostViewedCourseStar2);
+        mostViewedCourseStudent1 = rootView.findViewById(R.id.mostViewedCourseStudent1);
+        mostViewedCourseStudent2 = rootView.findViewById(R.id.mostViewedCourseStudent2);
         db.collection("courses").orderBy("students", Query.Direction.DESCENDING).limit(2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -187,7 +207,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-        ImageView continueCourse1 = rootView.findViewById(R.id.continueCourse1);
+        continueCourse1 = rootView.findViewById(R.id.continueCourse1);
 
         continueCourse1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,7 +217,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageView continueCourse2 = rootView.findViewById(R.id.continueCourse2);
+        continueCourse2 = rootView.findViewById(R.id.continueCourse2);
 
         continueCourse2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +227,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageView mayLikeCourse1 = rootView.findViewById(R.id.mayLikeCourse1);
+        mayLikeCourse1 = rootView.findViewById(R.id.mayLikeCourse1);
 
         mayLikeCourse1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,7 +237,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageView mayLikeCourse2 = rootView.findViewById(R.id.mayLikeCourse2);
+        mayLikeCourse2 = rootView.findViewById(R.id.mayLikeCourse2);
 
         mayLikeCourse2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,14 +246,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        TextView mayLikeCourseName1 = rootView.findViewById(R.id.mayLikeCourseName1);
-        TextView mayLikeCourseName2 = rootView.findViewById(R.id.mayLikeCourseName2);
-        TextView mayLikeCourseTeacher1 = rootView.findViewById(R.id.mayLikeCourseTeacher1);
-        TextView mayLikeCourseTeacher2 = rootView.findViewById(R.id.mayLikeCourseTeacher2);
-        TextView mayLikeCourseStar1 = rootView.findViewById(R.id.mayLikeCourseStar1);
-        TextView mayLikeCourseStar2 = rootView.findViewById(R.id.mayLikeCourseStar2);
-        TextView mayLikeCourseStudent1 = rootView.findViewById(R.id.mayLikeCourseStudent1);
-        TextView mayLikeCourseStudent2 = rootView.findViewById(R.id.mayLikeCourseStudent2);
+        mayLikeCourseName1 = rootView.findViewById(R.id.mayLikeCourseName1);
+        mayLikeCourseName2 = rootView.findViewById(R.id.mayLikeCourseName2);
+        mayLikeCourseTeacher1 = rootView.findViewById(R.id.mayLikeCourseTeacher1);
+        mayLikeCourseTeacher2 = rootView.findViewById(R.id.mayLikeCourseTeacher2);
+        mayLikeCourseStar1 = rootView.findViewById(R.id.mayLikeCourseStar1);
+        mayLikeCourseStar2 = rootView.findViewById(R.id.mayLikeCourseStar2);
+        mayLikeCourseStudent1 = rootView.findViewById(R.id.mayLikeCourseStudent1);
+        mayLikeCourseStudent2 = rootView.findViewById(R.id.mayLikeCourseStudent2);
         db.collection("courses").orderBy("star", Query.Direction.DESCENDING).limit(2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

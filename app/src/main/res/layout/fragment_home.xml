@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/padding"
-    android:paddingTop="32dp"
+    android:paddingTop="@dimen/topPadding"
     android:paddingRight="@dimen/padding"
     android:paddingBottom="@dimen/padding">
 
@@ -74,7 +74,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/student"
+                android:id="@+id/seeMore1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
@@ -85,6 +85,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mostViewedCourse1"
+                style="@style/roundedImageview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
@@ -115,6 +116,7 @@
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseTeacher1"
                 app:layout_constraintEnd_toEndOf="@+id/mostViewedCourse1"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse1" />
@@ -136,7 +138,8 @@
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/mostViewedCourse2"
+                app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseTeacher2"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/mostViewedCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/mostViewedCourse2" />
 
@@ -289,6 +292,7 @@
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/continueCourseTeacher1"
                 app:layout_constraintEnd_toEndOf="@+id/continueCourse1"
                 app:layout_constraintStart_toStartOf="@+id/continueCourse1"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourse1" />
@@ -357,6 +361,7 @@
                 android:fontFamily="@font/gilroybold"
                 android:text="Tên khóa học"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/continueCourseTeacher2"
                 app:layout_constraintEnd_toEndOf="@+id/continueCourse2"
                 app:layout_constraintStart_toStartOf="@+id/continueCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourse2" />
@@ -453,6 +458,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/gilroyregular"
                 android:text="(1024)"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mayLikeCourseStar1"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourseTeacher1" />
 
