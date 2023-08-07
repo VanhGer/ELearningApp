@@ -9,7 +9,7 @@
     <string name="create_password_string">Đặt mật khẩu (Có ít nhất 8 kí tự)</string>
     <string name="enter_you_email_string">Nhập email của bạn</string>
     <string name="do_you_have_an_account__sign_in_string">Bạn đã có tài khoản? Đăng nhập ngay!</string>
-    <string name="sent_email_string">Sent email</string>
+    <string name="sent_email_string">Gửi email</string>
     <string name="already_have_an_account__sign_up_string">Bạn chưa có tài khoản? Đăng ký ngay!</string>
     <string name="enter_your_email_string">Enter your email</string>
     <string name="login_string">Đăng nhập</string>
