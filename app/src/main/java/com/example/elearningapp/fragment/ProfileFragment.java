@@ -120,7 +120,6 @@ public class ProfileFragment extends Fragment {
         go_to_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("Firebase", "ACV");
                 Intent intent = new Intent(getActivity(), ChangeUserProfile.class);
                 startActivity(intent);
             }
@@ -132,7 +131,6 @@ public class ProfileFragment extends Fragment {
         go_to_help_and_support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("Firebase", "ACV");
                 Intent intent = new Intent(getActivity(), HelpAndSupportActivity.class);
                 startActivity(intent);
             }
@@ -144,7 +142,6 @@ public class ProfileFragment extends Fragment {
         go_to_about_app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("Firebase", "ACV");
                 Intent intent = new Intent(getActivity(), AboutAppActivity.class);
                 startActivity(intent);
             }

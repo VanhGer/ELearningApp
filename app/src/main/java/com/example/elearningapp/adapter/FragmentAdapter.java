@@ -11,9 +11,15 @@ import com.example.elearningapp.fragment.FirstFragment;
 import com.example.elearningapp.fragment.SecondFragment;
 
 public class FragmentAdapter extends FragmentStateAdapter {
+    String userId;
 
-    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String userId) {
         super(fragmentManager, lifecycle);
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     @NonNull

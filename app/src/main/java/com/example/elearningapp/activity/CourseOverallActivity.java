@@ -123,14 +123,6 @@ public class CourseOverallActivity extends AppCompatActivity {
 
             }
         });
-        avatarImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Check_another_profile.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
 
         readData(new CourseCallBack() {
@@ -228,7 +220,14 @@ public class CourseOverallActivity extends AppCompatActivity {
                                     verified.setVisibility(View.VISIBLE);
                                 }
                                 Picasso.get().load(documentSnapshot.getString("image")).into(avatarImage);
-
+                                avatarImage.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(getBaseContext(), Check_another_profile.class);
+                                        intent.putExtra("userId", documentSnapshot.getId());
+                                        startActivity(intent);
+                                    }
+                                });
                                 myCallBack.onCourseCallback(courseListItem);
                             }
                         });

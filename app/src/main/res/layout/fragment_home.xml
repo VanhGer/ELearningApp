@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/padding"
-    android:paddingTop="@dimen/topPadding"
-    android:paddingRight="@dimen/padding"
-    android:paddingBottom="@dimen/padding">
+    android:paddingTop="0dp"
+    android:paddingRight="0dp"
+    android:paddingBottom="0dp">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -29,6 +28,8 @@
                 android:id="@+id/greeting1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/gilroyextrabold"
                 android:text="@string/greeting1"
@@ -41,6 +42,7 @@
                 android:id="@+id/greeting2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/gilroymedium"
                 android:text="@string/greeting2"
@@ -53,6 +55,8 @@
                 android:id="@+id/profilePic"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -63,6 +67,7 @@
                 android:id="@+id/mostViewedCourse"
                 android:layout_width="233dp"
                 android:layout_height="0dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/gilroyextrabold"
                 android:text="@string/mostViewedCourse"
@@ -74,6 +79,7 @@
                 android:id="@+id/seeMore1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/gilroyregular"
                 android:text="@string/seeMore"
                 android:textSize="16sp"
@@ -85,6 +91,7 @@
                 style="@style/roundedImageview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName1"
@@ -99,6 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/mostViewedCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -240,7 +248,7 @@
                 android:fontFamily="@font/gilroyextrabold"
                 android:text="@string/mayLikeCourse"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/continueCourse"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourseStudent1" />
 
             <TextView
@@ -251,7 +259,7 @@
                 android:text="@string/seeMore"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/continueCourse"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="@+id/seeMore1" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/continueCourse1"
@@ -262,7 +270,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/continueCourseName1"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/continueCourse2"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/continueCourse"
                 app:layout_constraintTop_toBottomOf="@+id/continueCourse"
                 app:srcCompat="@drawable/continue1" />
 
@@ -330,7 +338,7 @@
                 android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/continueCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/seeMore2"
                 app:layout_constraintStart_toEndOf="@+id/continueCourse1"
                 app:layout_constraintTop_toTopOf="@+id/continueCourse1"
                 app:srcCompat="@drawable/continue2" />
@@ -400,7 +408,7 @@
                 android:text="@string/seeMore"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/mayLikeCourse"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="@+id/seeMore2" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/mayLikeCourse1"
@@ -411,7 +419,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/mayLikeCourseName1"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/mayLikeCourse2"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mayLikeCourse"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse"
                 app:srcCompat="@drawable/recommend1" />
 
@@ -482,7 +490,7 @@
                 android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/mayLikeCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/seeMore3"
                 app:layout_constraintStart_toEndOf="@+id/mayLikeCourse1"
                 app:layout_constraintTop_toTopOf="@+id/mayLikeCourse1"
                 app:srcCompat="@drawable/recommend2" />
