@@ -1,6 +1,7 @@
 package com.example.elearningapp.activity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.SharedPreferences;
+
 
 public class CourseLessonsActivity extends AppCompatActivity implements LessonClickHelper {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -66,6 +69,29 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
         recyclerView.setAdapter(listAdapter);
         ImageButton lessonList_btn = findViewById(R.id.imageButton9);
         progressBar = findViewById(R.id.progressBar4);
+        boolean isNotificationEnabled = getNotificationState(); // Lấy trạng thái thông báo
+
+        btnReceiveCertificate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isCompleted = true; // Đã hoàn thành
+                if (isNotificationEnabled) { // Kiểm tra trạng thái thông báo
+                    // Gửi dữ liệu tới hoạt động NotificationActivity
+                    Intent notificationIntent = new Intent(CourseLessonsActivity.this, NotificationActivity.class);
+                    notificationIntent.putExtra("courseName", description);
+                    notificationIntent.putExtra("isNotificationEnabled", isNotificationEnabled); // Truyền giá trị thông báo
+                    startActivity(notificationIntent);
+
+                    // Đăng ký thông báo bằng NotificationManager
+                    NotificationManager notificationManager = new NotificationManager(CourseLessonsActivity.this);
+                    notificationManager.registerCourse(description);
+                } else {
+                    // Không gửi thông báo nếu thông báo bị tắt
+                }
+
+                // ... (Phần code khác)
+            }
+        });
 
         CollectionReference colRef = db.collection("courses").document(courseId).collection("lessons");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -152,7 +178,10 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
 
 
 
-
+    private boolean getNotificationState() {
+        SharedPreferences prefs = getSharedPreferences("notification_prefs", Context.MODE_PRIVATE);
+        return prefs.getBoolean("isNotificationEnabled", true); // Giá trị mặc định là true
+    }
     @Override
     public void onItemClick(int position) {
         if (lessonItemList.get(position).getType().equals("video")) {

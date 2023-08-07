@@ -1,10 +1,14 @@
 package com.example.elearningapp.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -21,7 +25,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private int currentLayout;
 
     ConstraintLayout delete , dieukhoan ;
-    Switch a ;
+    Switch notificationSwitch ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,34 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
         updateLayout(currentLayout);
 
+        notificationSwitch = findViewById(R.id.switch1); // Ánh xạ switch
+        notificationSwitch.setChecked(getNotificationState()); // Đặt trạng thái switch dựa trên trạng thái hiện tại
+
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setNotificationState(isChecked); // Lưu trạng thái thông báo vào SharedPreferences
+
+                // Hiển thị Toast tùy thuộc vào trạng thái bật/tắt
+                if (isChecked) {
+                    Toast.makeText(SettingActivity.this, "Đã bật thông báo", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SettingActivity.this, "Đã tắt thông báo", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private boolean getNotificationState() {
+        SharedPreferences prefs = getSharedPreferences("notification_prefs", Context.MODE_PRIVATE);
+        return prefs.getBoolean("isNotificationEnabled", true); // Giá trị mặc định là true
+    }
+
+    private void setNotificationState(boolean isEnabled) {
+        SharedPreferences prefs = getSharedPreferences("notification_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("isNotificationEnabled", isEnabled);
+        editor.apply();
     }
 
     private void updateLayout(int layoutId) {

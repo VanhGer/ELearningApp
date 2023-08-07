@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import android.content.SharedPreferences;
+
 
 public class NotificationManager {
 
@@ -29,17 +31,20 @@ public class NotificationManager {
         return completedCourses.contains(courseName);
     }
 
-    public ArrayList<String> getNotifications() {
+    public ArrayList<String> getNotifications(boolean isNotificationEnabled) {
         ArrayList<String> notifications = new ArrayList<>();
         Set<String> completedCourses = sharedPreferences.getStringSet(COMPLETED_COURSES_PREF, new HashSet<>());
 
         for (String courseName : completedCourses) {
-            notifications.add("Chúc mừng bạn đã hoàn thành khóa học " + courseName);
+            if (isNotificationEnabled) { // Kiểm tra trạng thái thông báo
+                notifications.add("Chúc mừng bạn đã hoàn thành khóa học " + courseName);
+            }
         }
 
-        // Add other notifications (e.g., registration notifications) here
+        // ... (Phần code khác)
 
         return notifications;
     }
+
 }
 
