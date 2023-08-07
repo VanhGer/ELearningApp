@@ -21,6 +21,7 @@ import com.example.elearningapp.lessonType.textLesson;
 import com.example.elearningapp.lessonType.videoLesson;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -45,7 +46,8 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
         courseId = getIntent().getStringExtra("courseId");
         recyclerView = findViewById(R.id.course_list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        listAdapter = new ListAdapter(getApplicationContext(), lessonItemList, this);
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        listAdapter = new ListAdapter(this, lessonItemList, this, userId);
         recyclerView.setAdapter(listAdapter);
         TextView lessonList_btn = findViewById(R.id.lesson_tongquan);
 
@@ -54,7 +56,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    lessonItemList.add(new LessonItem(document.getId(), document.getString("name"), document.getString("description"),
+                    lessonItemList.add(new LessonItem(document.getId(), courseId, document.getString("name"), document.getString("description"),
                             document.getString("type"), document.getString("image"), document.getString("script"),
                             document.getString("content"), document.getString("video")));
                 }

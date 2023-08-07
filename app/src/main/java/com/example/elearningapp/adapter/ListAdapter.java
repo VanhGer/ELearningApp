@@ -1,6 +1,7 @@
 package com.example.elearningapp.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.item.LessonItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,11 +33,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @NonNull
     Context context;
     List<LessonItem> lessonItemList;
+    String userId;
 
-    public ListAdapter(@NonNull Context context, List<LessonItem> lessonItemList, LessonClickHelper clickHelper) {
+    public ListAdapter(@NonNull Context context, List<LessonItem> lessonItemList,
+                       LessonClickHelper clickHelper,
+                       String userId) {
         this.context = context;
         this.lessonItemList = lessonItemList;
         this.clickHelper = clickHelper;
+        this.userId = userId;
     }
     @NonNull
     @Override
@@ -42,9 +55,29 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.nameView.setText(lessonItemList.get(position).getName());
         holder.desView.setText(lessonItemList.get(position).getDes());
+        String lessonId = lessonItemList.get(position).getLessonId();
+        if (lessonItemList.get(position).getType().equals("video")) {
+            holder.typeCourse.setImageResource(R.drawable.ic_video_lesson);
+        } else if (lessonItemList.get(position).getType().equals("test")) {
+            holder.typeCourse.setImageResource(R.drawable.ic_test_lesson);
+        } else {
+            holder.typeCourse.setImageResource(R.drawable.ic_text_lesson);
+        }
         holder.numView.setText("Bai " + (position + 1) +  "");
         Picasso.get().load(lessonItemList.get(position).getImage()).into(holder.picView);
         //holder.picView.setImageResource(lessonItemList.get(position).getImage());
+        FirebaseFirestore.getInstance().collection("users").document(userId)
+                .collection("learn").document(lessonItemList.get(position)
+                        .getCourseId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value.exists()) {
+                            if (value.getBoolean(lessonId) != null) {
+                                holder.lessonListChecked.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                });
     }
 
     @Override
@@ -55,6 +88,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         TextView nameView, desView, numView;
         ImageView picView;
+        ImageView typeCourse;
+        ImageView lessonListChecked;
 
         public ListViewHolder(@NonNull View itemView, LessonClickHelper clickHelper) {
             super(itemView);
@@ -62,6 +97,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             desView = itemView.findViewById(R.id.lesson_description);
             numView = itemView.findViewById(R.id.lesson_num);
             picView = itemView.findViewById(R.id.lesson_pic);
+            typeCourse = itemView.findViewById(R.id.typeCourse);
+            lessonListChecked = itemView.findViewById(R.id.lessonListChecked);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

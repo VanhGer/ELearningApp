@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,9 @@ public class textLesson extends AppCompatActivity {
 
     CommentDialog dialog;
 
+    Button tickDone;
+    String lessonId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -72,6 +76,8 @@ public class textLesson extends AppCompatActivity {
 
         commentCount = findViewById(R.id.commentCount);
 
+        tickDone = findViewById(R.id.tickDone);
+
         setLesson();
     }
 
@@ -80,8 +86,36 @@ public class textLesson extends AppCompatActivity {
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
         courseId = getIntent().getStringExtra("courseId");
+        lessonId = lessonItem.get(position).getLessonId();
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                        .collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+                            if (documentSnapshot.getBoolean(lessonId) != null) {
+                                Log.v("LearnXXX", "Not Done");
+                                tickDone.setVisibility(View.GONE);
+                                findViewById(R.id.checked).setVisibility(View.VISIBLE);
+                            } else {
+                                tickDone.setVisibility(View.VISIBLE);
+                                tickDone.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Log.v("Learn", courseId + " " + lessonId);
+                                        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                .collection("learn").document(courseId).update(lessonId, true);
+                                        tickDone.setVisibility(View.GONE);
+                                        findViewById(R.id.checked).setVisibility(View.VISIBLE);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
 
         FirebaseFirestore.getInstance().collection("users")
                 .document(currentUserId).addSnapshotListener(new EventListener<DocumentSnapshot>() {

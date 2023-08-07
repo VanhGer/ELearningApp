@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E4DAC9"
-    android:paddingTop="32dp">
+    android:background="@color/md_white_1000"
+    android:paddingTop="0dp">
 
     <ImageButton
         android:id="@+id/return_btn"
@@ -37,11 +37,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/bgr3"
         android:backgroundTint="#FFFFFF"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:paddingBottom="@dimen/padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +53,8 @@
             android:id="@+id/text_lesson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/tongquan"
             android:backgroundTint="#D6A6A6"
             android:text="Nội dung"
@@ -69,13 +70,15 @@
             android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/bgr_2"
             android:backgroundTint="#F6F6F6"
-            android:paddingLeft="4dp"
-            android:paddingTop="4dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout16"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,6 +101,8 @@
             android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -139,6 +144,8 @@
             android:id="@+id/constraintLayout16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/bgr_2"
             android:padding="10dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
@@ -215,10 +222,11 @@
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="16dp">
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp">
 
                 <VideoView
                     android:id="@+id/lessonVideo"
@@ -235,6 +243,17 @@
                     android:foregroundGravity="center_vertical|center|center_horizontal" />
             </FrameLayout>
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/checkedVideo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/text_lesson"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_lesson"
+            app:srcCompat="@drawable/ic_circle_check_filled" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
