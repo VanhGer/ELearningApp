@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,14 @@ public class HomeFragment extends Fragment {
     TextView mostViewedCourseStudent1;
     TextView mostViewedCourseStudent2;
     ImageView continueCourse1, continueCourse2;
+    TextView continueCourseName1;
+    TextView continueCourseName2;
+    TextView continueCourseTeacher1;
+    TextView continueCourseTeacher2;
+    TextView continueCourseStar1;
+    TextView continueCourseStar2;
+    TextView continueCourseStudent1;
+    TextView continueCourseStudent2;
     ImageView mayLikeCourse1, mayLikeCourse2;
     TextView mayLikeCourseName1;
     TextView mayLikeCourseName2;
@@ -155,11 +164,7 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
-
-
-
         mostViewedCourse2 = rootView.findViewById(R.id.mostViewedCourse2);
-
         mostViewedCourseName1 = rootView.findViewById(R.id.mostViewedCourseName1);
         mostViewedCourseName2 = rootView.findViewById(R.id.mostViewedCourseName2);
         mostViewedCourseTeacher1 = rootView.findViewById(R.id.mostViewedCourseTeacher1);
@@ -176,7 +181,15 @@ public class HomeFragment extends Fragment {
                     for (DocumentSnapshot document: task.getResult()) {
                         if (cur == 1) {
                             mostViewedCourseName1.setText(document.getString("name"));
-                            //mostViewedCourseTeacher1.setText(document.getString("owner"));
+                            db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        mostViewedCourseTeacher1.setText((document.getString("name")));
+                                    }
+                                }
+                            });
                             mostViewedCourseStar1.setText(document.getDouble("star") + "⭐");
                             mostViewedCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mostViewedCourse1);
@@ -191,7 +204,15 @@ public class HomeFragment extends Fragment {
                         }
                         else {
                             mostViewedCourseName2.setText(document.getString("name"));
-                            //mostViewedCourseTeacher2.setText(document.getString("owner"));
+                            db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        mostViewedCourseTeacher2.setText((document.getString("name")));
+                                    }
+                                }
+                            });
                             mostViewedCourseStar2.setText(document.getDouble("star") + "⭐");
                             mostViewedCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mostViewedCourse2);
@@ -210,27 +231,75 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-
+        
         continueCourse1 = rootView.findViewById(R.id.continueCourse1);
-
-//        continueCourse1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         continueCourse2 = rootView.findViewById(R.id.continueCourse2);
+        continueCourseName1 = rootView.findViewById(R.id.continueCourseName1);
+        continueCourseName2 = rootView.findViewById(R.id.continueCourseName2);
+        continueCourseTeacher1 = rootView.findViewById(R.id.continueCourseTeacher1);
+        continueCourseTeacher2 = rootView.findViewById(R.id.continueCourseTeacher2);
+        continueCourseStar1 = rootView.findViewById(R.id.continueCourseStar1);
+        continueCourseStar2 = rootView.findViewById(R.id.continueCourseStar2);
+        continueCourseStudent1 = rootView.findViewById(R.id.continueCourseStudent1);
+        continueCourseStudent2 = rootView.findViewById(R.id.continueCourseStudent2);
+        db.collection("courses").orderBy("star", Query.Direction.ASCENDING).limit(2).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int cur = 1;
+                    for (DocumentSnapshot document: task.getResult()) {
+                        if (cur == 1) {
+                            continueCourseName1.setText(document.getString("name"));
+                            db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        continueCourseTeacher1.setText((document.getString("name")));
+                                    }
+                                }
+                            });
+                            continueCourseStar1.setText(document.getDouble("star") + "⭐");
+                            continueCourseStudent1.setText("(" + document.getLong("students") + ")");
+                            Picasso.get().load(document.getString("image")).into(continueCourse1);
+                            continueCourse1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                                    intent.putExtra("courseId", document.getId());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                        else {
+                            continueCourseName2.setText(document.getString("name"));
+                            db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        continueCourseTeacher2.setText((document.getString("name")));
+                                    }
+                                }
+                            });
+                            continueCourseStar2.setText(document.getDouble("star") + "⭐");
+                            continueCourseStudent2.setText("(" + document.getLong("students") + ")");
+                            Picasso.get().load(document.getString("image")).into(continueCourse2);
+                            continueCourse2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                                    intent.putExtra("courseId", document.getId());
+                                    startActivity(intent);
+                                }
+                            });
 
-//        continueCourse2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+                        }
+                        cur++;
+                    }
+                }
+            }
+        });
 
         mayLikeCourse1 = rootView.findViewById(R.id.mayLikeCourse1);
 
@@ -255,7 +324,15 @@ public class HomeFragment extends Fragment {
                     for (DocumentSnapshot document: task.getResult()) {
                         if (cur == 1) {
                             mayLikeCourseName1.setText(document.getString("name"));
-                            //mayLikeCourseTeacher1.setText(document.getString("owner"));
+                            db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        mayLikeCourseTeacher1.setText((document.getString("name")));
+                                    }
+                                }
+                            });
                             mayLikeCourseStar1.setText(document.getDouble("star") + "⭐");
                             mayLikeCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mayLikeCourse1);
@@ -270,7 +347,15 @@ public class HomeFragment extends Fragment {
                         }
                         else {
                             mayLikeCourseName2.setText(document.getString("name"));
-                            //mayLikeCourseTeacher2.setText(document.getString("owner"));
+                            db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        mayLikeCourseTeacher2.setText((document.getString("name")));
+                                    }
+                                }
+                            });
                             mayLikeCourseStar2.setText(document.getDouble("star") + "⭐");
                             mayLikeCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mayLikeCourse2);
