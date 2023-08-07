@@ -190,7 +190,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
                             });
-                            mostViewedCourseStar1.setText(document.getDouble("star") + "⭐");
+                            mostViewedCourseStar1.setText(Math.round(document.getDouble("star") * 10) / 10.0 + "⭐");
                             mostViewedCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mostViewedCourse1);
                             mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +213,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
                             });
-                            mostViewedCourseStar2.setText(document.getDouble("star") + "⭐");
+                            mostViewedCourseStar2.setText(Math.round(document.getDouble("star") * 10) / 10.0 + "⭐");
                             mostViewedCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mostViewedCourse2);
                             mostViewedCourse2.setOnClickListener(new View.OnClickListener() {
@@ -259,7 +259,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
                             });
-                            continueCourseStar1.setText(document.getDouble("star") + "⭐");
+                            continueCourseStar1.setText(Math.round(document.getDouble("star") * 10) / 10.0 + "⭐");
                             continueCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(continueCourse1);
                             continueCourse1.setOnClickListener(new View.OnClickListener() {
@@ -282,7 +282,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
                             });
-                            continueCourseStar2.setText(document.getDouble("star") + "⭐");
+                            continueCourseStar2.setText(Math.round(document.getDouble("star") * 10) / 10.0 + "⭐");
                             continueCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(continueCourse2);
                             continueCourse2.setOnClickListener(new View.OnClickListener() {
@@ -333,7 +333,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
                             });
-                            mayLikeCourseStar1.setText(document.getDouble("star") + "⭐");
+                            mayLikeCourseStar1.setText(Math.round(document.getDouble("star") * 10) / 10.0 + "⭐");
                             mayLikeCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mayLikeCourse1);
                             mayLikeCourse1.setOnClickListener(new View.OnClickListener() {
@@ -356,7 +356,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
                             });
-                            mayLikeCourseStar2.setText(document.getDouble("star") + "⭐");
+                            mayLikeCourseStar2.setText(Math.round(document.getDouble("star") * 10) / 10.0 + "⭐");
                             mayLikeCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mayLikeCourse2);
                             mayLikeCourse2.setOnClickListener(new View.OnClickListener() {
