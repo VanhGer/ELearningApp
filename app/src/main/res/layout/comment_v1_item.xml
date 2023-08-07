@@ -11,25 +11,23 @@
         android:id="@+id/v1content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/gilroymedium"
         android:text="Comment 1"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/v1userpic"
+        app:layout_constraintStart_toStartOf="@+id/v1username"
         app:layout_constraintTop_toBottomOf="@+id/v1username" />
 
     <LinearLayout
         android:id="@+id/commentv2layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/v1userpic"
+        app:layout_constraintStart_toStartOf="@+id/v1username"
         app:layout_constraintTop_toBottomOf="@+id/commentShowReply" />
 
     <TextView
@@ -57,19 +55,18 @@
         android:id="@+id/v1time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/gilroymedium"
         android:text="2022-11-03"
         android:textColor="@color/md_grey_400"
-        app:layout_constraintStart_toEndOf="@+id/v1userpic"
+        app:layout_constraintStart_toStartOf="@+id/v1username"
         app:layout_constraintTop_toBottomOf="@+id/v1content" />
 
     <TextView
         android:id="@+id/v1username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/gilroybold"
         android:text="Bui Tuan Dung"
         android:textColor="@color/md_grey_700"
@@ -120,6 +117,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/commentShowReply"
         app:layout_constraintTop_toBottomOf="@+id/commentShowReply" />
+
+    <TextView
+        android:id="@+id/creator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/comment_bg"
+        android:backgroundTint="@color/md_red_50"
+        android:fontFamily="@font/gilroybold"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Creator"
+        android:textColor="@color/md_red_900"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/v1username"
+        app:layout_constraintStart_toEndOf="@+id/verified"
+        app:layout_constraintTop_toTopOf="@+id/v1username" />
+
+    <ImageView
+        android:id="@+id/verified"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/v1username"
+        app:layout_constraintStart_toEndOf="@+id/v1username"
+        app:layout_constraintTop_toTopOf="@+id/v1username"
+        app:srcCompat="@drawable/ic_checked" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

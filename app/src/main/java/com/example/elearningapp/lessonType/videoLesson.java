@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -35,6 +36,7 @@ import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.object.CommentObject;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -265,27 +267,26 @@ public class videoLesson extends AppCompatActivity {
 
     private void showDialog(String lessonId) {
 
+        final Activity activity = this;
+
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore.getInstance().collection("courses")
+                .document(courseId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String ownerID = documentSnapshot.getString("owner");
+                        dialog = new CommentDialog(activity, courseId, lessonId, currentUserId, activity, ownerID);
 
-        dialog = new CommentDialog(this, courseId, lessonId, currentUserId, this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.dialog_comment);
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_comment);
-
-
-        EditText replyEditText = dialog.findViewById(R.id.replyCommentField);
-
-
-//        Log.v("Comment", replyEditText.toString());
-
-//        swipeListener = new SwipeListener(dialog.findViewById(R.id.commentDialogTitle), dialog);
-//        dialog.findViewById(R.id.commentDialogTitle).setOnTouchListener(swipeListener);
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
+                        dialog.show();
+                        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                        dialog.getWindow().setGravity(Gravity.BOTTOM);
+                    }
+                });
     }
 
     void buttonOnClick(int position, int maxPosition, List<LessonItem> lessonItemList) {

@@ -34,6 +34,7 @@ import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.CommentAdapter;
 import com.example.elearningapp.object.CommentObject;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -85,15 +86,20 @@ public class CommentDialog extends Dialog {
 
     Activity activity;
 
+    String ownerID;
+
     public CommentDialog(Context context,
                          String courseId,
                          String lessonId,
-                         String userId, Activity activity) {
+                         String userId,
+                         Activity activity,
+                         String ownerID) {
         super(context);
         this.courseId = courseId;
         this.lessonId = lessonId;
         this.userId = userId;
         this.activity = activity;
+        this.ownerID = ownerID;
     }
 
     public EditText getCommentEditText() {
@@ -193,6 +199,7 @@ public class CommentDialog extends Dialog {
 
         init(view);
 
+
         SpannableString ss = new SpannableString("Hãy nhớ tôn trọng người dùng khác khi đăng bình luận và tuân thủ Nguyên tắc cộng đồng của chúng tôi");
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
@@ -217,8 +224,8 @@ public class CommentDialog extends Dialog {
             }
         });
 
-        newFilterComment.setChecked(true);
-        setNewComment();
+        popularFilterComment.setChecked(true);
+        setPopularComment();
 
 
         FirebaseFirestore.getInstance().collection("users").document(userId)
@@ -356,7 +363,7 @@ public class CommentDialog extends Dialog {
 
     private void setUpRecyclerView(View view) {
         commentObjects = new ArrayList<>();
-        commentAdapter = new CommentAdapter(getContext(), commentObjects);
+        commentAdapter = new CommentAdapter(getContext(), commentObjects, ownerID);
 
         commentAdapter.setDialog(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
