@@ -75,7 +75,11 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
                                 if (value.exists()) {
                                     progressBar.setMax(100);
                                     Long num = value.getLong("cnt");
-                                    num = num * 100 / lessonItemList.size();
+                                    if (lessonItemList.size() > 0) {
+                                        num = num * 100 / lessonItemList.size();
+                                    } else {
+                                        num = 0L;
+                                    }
                                     Log.v("Course", Math.toIntExact(num) + "");
                                     TextView cc = findViewById(R.id.textView96);
                                     if (num < 100) {
