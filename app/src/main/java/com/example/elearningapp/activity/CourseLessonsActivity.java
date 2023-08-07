@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,12 +46,16 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
     ListAdapter listAdapter;
     RecyclerView recyclerView;
     ProgressBar progressBar;
+    Button btnReceiveCertificate;
+    String description;
+
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
         courseId = getIntent().getStringExtra("courseId");
+        btnReceiveCertificate=findViewById(R.id.btnReceiveCertificate);
         recyclerView = findViewById(R.id.course_list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -64,6 +69,8 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
+                    description = document.getString("description");
+
                     lessonItemList.add(new LessonItem(document.getId(), courseId, document.getString("name"), document.getString("description"),
                             document.getString("type"), document.getString("image"), document.getString("script"),
                             document.getString("content"), document.getString("video"), document.getLong("time")));
@@ -86,6 +93,16 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
                                         cc.setText("Quá trình học hiện tại (" + num + " %)");
                                     } else {
                                         cc.setText("Wow, giỏi quá! Chúc mừng bạn đã hoàn thành xong khóa học! Mau đi nhận chứng chỉ thôi nào!");
+                                        btnReceiveCertificate.setVisibility(View.VISIBLE);
+                                        btnReceiveCertificate.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                // Gửi dữ liệu tới hoạt động CertificateActivity
+                                                Intent intent = new Intent(CourseLessonsActivity.this, CertificateActivity.class);
+                                                intent.putExtra("courseName", description); // Thay bằng tên khóa học thích hợp
+                                                startActivity(intent);
+                                            }
+                                        });
                                     }
                                     progressBar.setProgress(Math.toIntExact(num));
                                 }
@@ -106,6 +123,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
         });
 
     }
+
 
 
 
