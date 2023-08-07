@@ -2,21 +2,20 @@ package com.example.elearningapp.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.TextView;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.SearchActivity;
@@ -29,7 +28,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.wefika.flowlayout.FlowLayout;
 
@@ -188,7 +186,7 @@ public class SearchFragment extends Fragment {
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
                     textView.setTypeface(ResourcesCompat.getFont(getContext(), R.font.gilroymedium));
                     topSearchLayout.addView(textView);
-                    Log.v("Firebase", document.getString("name"));
+//                    Log.v("Firebase", document.getString("name"));
                 }
             }
         });

@@ -14,6 +14,8 @@ public class CourseListItem {
     private int numberStudent;
 
     private double numberStar;
+    private String ownerName; // Thêm trường để lưu tên người đăng
+
 
 
     public CourseListItem(String id, String image, String name, String owner, String description, int numberStudent, double numberStar) {
@@ -24,6 +26,8 @@ public class CourseListItem {
         this.description = description;
         this.numberStar = numberStar;
         this.owner = owner;
+        this.ownerName = ownerName;
+
     }
 
     public String getId() {
@@ -80,5 +84,9 @@ public class CourseListItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getOwnerName() {
+        return ownerName; // Phương thức mới thêm
     }
 }
