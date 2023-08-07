@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course2);
 
+        ImageView image = findViewById(R.id.avatar);
         TextView lessonList_btn = findViewById(R.id.lesson_baihoc);
         courseId = getIntent().getStringExtra("courseId");
         authorName = findViewById(R.id.authorName);
@@ -74,6 +76,14 @@ public class CourseOverallActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendToVoteActivity(courseId); // Gọi phương thức để gửi courseId khi nhấn vào nút "vote"
+            }
+        });
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Check_another_profile.class);
+                startActivity(intent);
+                finish();
             }
         });
 
