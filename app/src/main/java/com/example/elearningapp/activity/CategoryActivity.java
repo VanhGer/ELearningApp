@@ -3,6 +3,7 @@ package com.example.elearningapp.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -33,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity implements CourseClickHelper  {
@@ -50,6 +53,9 @@ public class CategoryActivity extends AppCompatActivity implements CourseClickHe
 
     RecyclerView topCourseRecyclerView;
     CourseCategoryAdapter topCourseAdapter;
+    ImageButton share;
+
+    AppCompatButton follow;
 
     List<CourseListItem> courseListItemList = new ArrayList<>();
 
@@ -67,6 +73,60 @@ public class CategoryActivity extends AppCompatActivity implements CourseClickHe
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        follow.setClickable(false);
+
+        String currentId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore.getInstance().collection("users")
+                        .document(currentId).collection("categories")
+                        .document(categoryID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+                            follow.setText("Đã theo dõi");
+                            follow.setBackgroundTintList(getResources().getColorStateList(R.color.md_white_1000));
+                            follow.setTextColor(getResources().getColorStateList(R.color.md_blue_500));
+                        }
+                        follow.setClickable(true);
+                    }
+                });
+
+        follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                follow.setClickable(false);
+                if (follow.getText().toString().equals("Theo dõi")) {
+                    HashMap<String, Object> data = new HashMap<>();
+                    data.put("timestamp", System.currentTimeMillis());
+                    FirebaseFirestore.getInstance().collection("users")
+                            .document(currentId).collection("categories")
+                            .document(categoryID).set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    follow.setText("Đã theo dõi");
+                                    follow.setBackgroundTintList(getResources().getColorStateList(R.color.md_white_1000));
+                                    follow.setTextColor(getResources().getColorStateList(R.color.md_blue_500));
+                                    follow.setClickable(true);
+                                }
+                            });
+
+                } else {
+                    FirebaseFirestore.getInstance().collection("users")
+                            .document(currentId).collection("categories")
+                            .document(categoryID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    follow.setText("Theo dõi");
+                                    follow.setBackgroundTintList(getResources().getColorStateList(R.color.md_blue_300));
+                                    follow.setTextColor(getResources().getColorStateList(R.color.md_white_1000));
+                                    follow.setClickable(true);
+                                }
+                            });
+                }
+
             }
         });
 
@@ -88,6 +148,8 @@ public class CategoryActivity extends AppCompatActivity implements CourseClickHe
         featureDes = findViewById(R.id.textView90);
         featureOwnerName = findViewById(R.id.textView91);
         ownerPic = findViewById(R.id.ownerPic);
+        share = findViewById(R.id.imageButton7);
+        follow = findViewById(R.id.button2);
     }
 
     private void loadDataFromFirestore() {
@@ -99,6 +161,18 @@ public class CategoryActivity extends AppCompatActivity implements CourseClickHe
                         DocumentSnapshot documentSnapshot = task.getResult();
                         titleText.setText(documentSnapshot.getString("name"));
                         Picasso.get().load(documentSnapshot.getString("image")).into(titlePic);
+                        share.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent sendIntent = new Intent();
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, "https://coursecloud.io/category/" + documentSnapshot.getString("name"));
+                                sendIntent.setType("text/plain");
+
+                                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                                startActivity(shareIntent);
+                            }
+                        });
                     }
                 });
 

@@ -115,6 +115,8 @@ public class CourseOverallActivity extends AppCompatActivity {
                                                     }
                                                 }
                                             });
+                                } else {
+                                    Toast.makeText(CourseOverallActivity.this, "Tham gia khóa học và hoàn thành ít nhất 20% để tiến hành đánh giá khóa học.", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
