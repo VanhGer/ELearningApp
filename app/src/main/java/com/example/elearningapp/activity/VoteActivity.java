@@ -11,26 +11,58 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.elearningapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 
 public class VoteActivity extends AppCompatActivity {
     private int currentVote = 0;
     ImageView star1, star2, star3, star4, star5;
-    Button confirmButton;
+    Button confirmButton, cancelButton;
     EditText voteComment;
+    FirebaseFirestore db;
+    private String courseId;
+    ImageView voteCourseImg;
+    TextView voteCourseName, voteCourseOwner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vote);
-        DialogFragment dialog = new voteDialog();
-        dialog.show(getSupportFragmentManager(), "voteDialogTag");
+
+        courseId = getIntent().getStringExtra("courseId");
+        db = FirebaseFirestore.getInstance();
+        voteCourseImg = findViewById(R.id.voteCourseImg);
+        voteCourseName = findViewById(R.id.voteCourseName);
+        voteCourseOwner = findViewById(R.id.voteCourseAuthor);
+
+        db.collection("courses").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    voteCourseName.setText(document.getString("name"));
+                    //voteCourseOwner.setText(document.getString("owner"));
+                    Picasso.get().load(document.getString("image")).into(voteCourseImg);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Hãy kiểm tra lại kết nối của bạn", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+
+        //DialogFragment dialog = new voteDialog();
+        //dialog.show(getSupportFragmentManager(), "voteDialogTag");
 
         star1 = findViewById(R.id.star1);
         star2 = findViewById(R.id.star2);
@@ -42,6 +74,10 @@ public class VoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 star1.setImageResource(R.drawable.star1);
+                star2.setImageResource(R.drawable.ic_star);
+                star3.setImageResource(R.drawable.ic_star);
+                star4.setImageResource(R.drawable.ic_star);
+                star5.setImageResource(R.drawable.ic_star);
                 currentVote = 1;
             }
         });
@@ -51,6 +87,9 @@ public class VoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 star1.setImageResource(R.drawable.star1);
                 star2.setImageResource(R.drawable.star1);
+                star3.setImageResource(R.drawable.ic_star);
+                star4.setImageResource(R.drawable.ic_star);
+                star5.setImageResource(R.drawable.ic_star);
                 currentVote = 2;
             }
         });
@@ -61,6 +100,8 @@ public class VoteActivity extends AppCompatActivity {
                 star1.setImageResource(R.drawable.star1);
                 star2.setImageResource(R.drawable.star1);
                 star3.setImageResource(R.drawable.star1);
+                star4.setImageResource(R.drawable.ic_star);
+                star5.setImageResource(R.drawable.ic_star);
                 currentVote = 3;
             }
         });
@@ -72,6 +113,7 @@ public class VoteActivity extends AppCompatActivity {
                 star2.setImageResource(R.drawable.star1);
                 star3.setImageResource(R.drawable.star1);
                 star4.setImageResource(R.drawable.star1);
+                star5.setImageResource(R.drawable.ic_star);
                 currentVote = 4;
             }
         });
@@ -100,7 +142,17 @@ public class VoteActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Đánh giá khóa học thành công", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+            }
+        });
+
+        cancelButton = findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Đã huỷ bỏ đánh giá", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

@@ -27,13 +27,19 @@ public class CourseOverallActivity extends AppCompatActivity {
     private String courseId = "";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private Button report;
+    private Button report, vote;
 
     TextView authorName, courseName, students, star, courseIntro;
     ShapeableImageView courseImg;
 
     private void sendToReportActivity(String courseId) {
         Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
+        intent.putExtra("courseId", courseId); // Gửi courseId qua Intent
+        startActivity(intent);
+    }
+
+    private void sendToVoteActivity(String courseId) {
+        Intent intent = new Intent(getApplicationContext(), VoteActivity.class);
         intent.putExtra("courseId", courseId); // Gửi courseId qua Intent
         startActivity(intent);
     }
@@ -54,12 +60,20 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseIntro = findViewById(R.id.courseIntro);
         courseImg = findViewById(R.id.continueCourse1);
         report = findViewById(R.id.report);
+        vote = findViewById(R.id.vote);
 
 
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendToReportActivity(courseId); // Gọi phương thức để gửi courseId khi nhấn vào nút "report"
+            }
+        });
+
+        vote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendToVoteActivity(courseId); // Gọi phương thức để gửi courseId khi nhấn vào nút "vote"
             }
         });
 
