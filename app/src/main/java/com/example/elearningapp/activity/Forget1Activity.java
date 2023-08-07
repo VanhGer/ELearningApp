@@ -1,6 +1,7 @@
 package com.example.elearningapp.activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.elearningapp.R;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class Forget1Activity extends AppCompatActivity {
 
@@ -49,13 +51,26 @@ public class Forget1Activity extends AppCompatActivity {
                 String emailAddress = email.getText().toString().trim();
 
                 if (emailAddress.isEmpty()) {
-                    Intent intent = new Intent(getApplicationContext(), Forget2Activity.class);
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    resetPassword(emailAddress);
+                    // Nếu textbox nhập email trống, hiển thị thông báo lỗi
+                    Toast.makeText(Forget1Activity.this, "Hãy nhập email của bạn", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                // Kiểm tra xem email có tồn tại trên Firebase hay không
+                auth.fetchSignInMethodsForEmail(emailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                boolean isEmailExists = !task.getResult().getSignInMethods().isEmpty();
+                                if (isEmailExists) {
+                                    // Nếu email tồn tại trên Firebase, thực hiện yêu cầu đặt lại mật khẩu
+                                    resetPassword(emailAddress);
+                                } else {
+                                    // Nếu email không tồn tại trên Firebase, hiển thị thông báo lỗi
+                                    Toast.makeText(Forget1Activity.this, "Email không tồn tại trên hệ thống", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
         });
     }
