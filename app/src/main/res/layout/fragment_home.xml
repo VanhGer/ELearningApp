@@ -10,68 +10,65 @@
     android:paddingRight="@dimen/padding"
     android:paddingBottom="@dimen/padding">
 
-    <TextView
-        android:id="@+id/greeting1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/gilroyextrabold"
-        android:text="@string/greeting1"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/profilePic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/greeting2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/gilroymedium"
-        android:text="@string/greeting2"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/profilePic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/greeting1" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profilePic"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="4dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/fullRoundedImage"
-        app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greeting2"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/greeting1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/gilroyextrabold"
+                android:text="@string/greeting1"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toStartOf="@+id/profilePic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/greeting2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/gilroymedium"
+                android:text="@string/greeting2"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/profilePic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/greeting1" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profilePic"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/fullRoundedImage"
+                app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
+
+            <TextView
                 android:id="@+id/mostViewedCourse"
                 android:layout_width="233dp"
-                android:layout_height="49dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="@font/gilroyextrabold"
                 android:text="@string/mostViewedCourse"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/greeting2" />
 
             <TextView
                 android:id="@+id/seeMore1"

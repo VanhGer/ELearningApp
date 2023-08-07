@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.ChangeUserProfile;
 import com.example.elearningapp.activity.CourseOverallActivity;
 import com.example.elearningapp.activity.TopCourseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -114,6 +115,14 @@ public class HomeFragment extends Fragment {
         titleView = rootView.findViewById(R.id.greeting1);
 
         profilePic = rootView.findViewById(R.id.profilePic);
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChangeUserProfile.class);
+                startActivity(intent);
+            }
+        });
 
         String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
