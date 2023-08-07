@@ -104,8 +104,6 @@ public class ReportActivity extends AppCompatActivity {
                             // Gửi thành công, hiển thị thông báo thành công
                             Toast.makeText(ReportActivity.this, "Gửi báo cáo thành công", Toast.LENGTH_SHORT).show();
                             // Chuyển hướng về MainActivity
-                            Intent intent = new Intent(ReportActivity.this, MainActivity.class);
-                            startActivity(intent);
                             finish();
                         } else {
                             // Gửi thất bại, hiển thị thông báo lỗi
