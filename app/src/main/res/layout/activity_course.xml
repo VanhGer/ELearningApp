@@ -105,6 +105,19 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/btnReceiveCertificate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="130dp"
+            android:layout_marginEnd="111dp"
+            android:text="Nhận chứng chỉ"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/course_list_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/course_list_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

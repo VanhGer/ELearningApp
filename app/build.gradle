@@ -4,16 +4,15 @@ plugins {
 }
 
 android {
-    namespace 'com.example.elearningapp'
+    namespace 'com.example.elearningapp' // Thay bằng tên không gian thích hợp
     compileSdk 33
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
     }
 
-
     defaultConfig {
-        applicationId "com.example.elearningapp"
+        applicationId "com.example.elearningapp" // Thay bằng tên không gian thích hợp
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -39,16 +38,13 @@ android {
     }
 
     configurations {
-        implementation.exclude group: 'org.jetbrains', module: 'annotations' 
+        implementation.exclude group: 'org.jetbrains', module: 'annotations'
     }
 }
 
 apply plugin: 'com.android.application'
 
-apply plugin: 'com.google.gms.google-services'
-
 dependencies {
-
     implementation platform('com.google.firebase:firebase-bom:32.2.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.1'
@@ -61,7 +57,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.7.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.2'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
-
+    implementation 'com.google.firebase:firebase-storage:20.2.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -73,5 +69,6 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'org.apache.pdfbox:pdfbox:2.0.27'
-
 }
+
+apply plugin: 'com.google.gms.google-services'
