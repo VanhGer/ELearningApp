@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +18,19 @@ import com.example.elearningapp.R;
 import com.example.elearningapp.interfaces.CourseCallBack;
 import com.example.elearningapp.object.CourseListItem;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class CourseOverallActivity extends AppCompatActivity {
 
@@ -32,6 +41,11 @@ public class CourseOverallActivity extends AppCompatActivity {
 
     TextView authorName, courseName, students, star, courseIntro;
     ShapeableImageView courseImg;
+    ImageButton backBtn;
+
+    ShapeableImageView avatarImage;
+
+    Button enrollButton;
 
     private void sendToReportActivity(String courseId) {
         Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
@@ -52,7 +66,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course2);
 
-        ImageView image = findViewById(R.id.avatar);
+        avatarImage = findViewById(R.id.avatar);
         TextView lessonList_btn = findViewById(R.id.lesson_baihoc);
         courseId = getIntent().getStringExtra("courseId");
         authorName = findViewById(R.id.authorName);
@@ -63,6 +77,8 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseImg = findViewById(R.id.continueCourse1);
         report = findViewById(R.id.report);
         vote = findViewById(R.id.vote);
+        backBtn = findViewById(R.id.imageButton8);
+        enrollButton = findViewById(R.id.enroll);
 
 
         report.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +94,7 @@ public class CourseOverallActivity extends AppCompatActivity {
                 sendToVoteActivity(courseId); // Gọi phương thức để gửi courseId khi nhấn vào nút "vote"
             }
         });
-        image.setOnClickListener(new View.OnClickListener() {
+        avatarImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Check_another_profile.class);
@@ -96,18 +112,6 @@ public class CourseOverallActivity extends AppCompatActivity {
         });
 
 
-
-
-
-//        Picasso.get().load(courseListItem.getImage()).into(courseImg);
-//        authorName.setText(courseListItem.getOwner());
-//        courseName.setText(courseListItem.getName());
-//        students.setText(courseListItem.getNumberStudent() + "");
-//        star.setText(courseListItem.getNumberStar() + "");
-//        courseIntro.setText(courseListItem.getDescription());
-
-
-
         lessonList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +119,13 @@ public class CourseOverallActivity extends AppCompatActivity {
                 lessonActivity.putExtra("courseId", courseId);
                 startActivity(lessonActivity);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });
@@ -130,16 +141,53 @@ public class CourseOverallActivity extends AppCompatActivity {
     }
 
     public void readData(CourseCallBack myCallBack) {
+        String currentUId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore.getInstance().collection("users")
+                .document(currentUId).collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+
+                        } else {
+                            enrollButton.setVisibility(View.VISIBLE);
+                            enrollButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    HashMap<String, Object> data = new HashMap<>();
+                                    enrollButton.setVisibility(View.GONE);
+                                    data.put("timestamp", System.currentTimeMillis());
+                                    FirebaseFirestore.getInstance().collection("users")
+                                            .document(currentUId).collection("learn").document(courseId).set(data);
+                                    Toast.makeText(CourseOverallActivity.this, "Tham gia khóa học thành công", Toast.LENGTH_SHORT).show();
+                                    Intent lessonActivity = new Intent(getBaseContext(), CourseLessonsActivity.class);
+                                    lessonActivity.putExtra("courseId", courseId);
+                                    startActivity(lessonActivity);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    finish();
+                                }
+                            });
+                        }
+                    }
+                });
         DocumentReference docRef = db.collection("courses").document(courseId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
                 DocumentSnapshot document = task.getResult();
-                CourseListItem courseListItem = new CourseListItem(document.getId(), document.getString("image"), document.getString("name"),
-                        "Bùi Tuấn Dũng", document.getString("description"),
-                        document.getDouble("students").intValue(), document.getDouble("star"));
-                myCallBack.onCourseCallback(courseListItem);
+                FirebaseFirestore.getInstance().collection("users")
+                        .document(document.getString("owner")).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                CourseListItem courseListItem = new CourseListItem(document.getId(), document.getString("image"), document.getString("name"),
+                                        documentSnapshot.getString("name"), document.getString("description"),
+                                        document.getDouble("students").intValue(), document.getDouble("star"));
+                                Picasso.get().load(documentSnapshot.getString("image")).into(avatarImage);
+
+                                myCallBack.onCourseCallback(courseListItem);
+                            }
+                        });
+
             }
         });
     }

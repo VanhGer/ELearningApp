@@ -9,15 +9,15 @@
     android:background="@drawable/bgr_2"
     android:clickable="true"
     android:paddingLeft="8dp"
-    android:paddingTop="4dp"
+    android:paddingTop="10dp"
     android:paddingRight="8dp"
-    android:paddingBottom="4dp">
+    android:paddingBottom="10dp">
 
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/lesson_pic"
-        android:layout_width="147dp"
-        android:layout_height="99dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="@drawable/radio_rectangle_group_bg"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,40 +29,75 @@
         android:id="@+id/lesson_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroymedium"
         android:text="descskfjsdfksdf kfjsfksf kà sìuk sfkjsfknf ronaldo msfjksanvs"
-        android:textColor="#504F4F"
+        android:textColor="@color/md_grey_700"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lesson_pic" />
+        app:layout_constraintStart_toEndOf="@+id/lesson_pic"
+        app:layout_constraintTop_toBottomOf="@+id/lesson_title" />
 
     <TextView
         android:id="@+id/lesson_num"
         android:layout_width="0dp"
         android:layout_height="22dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="Bài số"
-        android:textAllCaps="true"
-        android:textColor="#B1AEAE"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/gilroymedium"
+        android:text="Video - 3 min"
+        android:textAllCaps="false"
+        android:textColor="@color/md_grey_700"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/lesson_pic"
-        app:layout_constraintTop_toBottomOf="@+id/lesson_title" />
+        app:layout_constraintTop_toBottomOf="@+id/lesson_description" />
 
     <TextView
         android:id="@+id/lesson_title"
         android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/gilroybold"
         android:text="@string/lessonTitle"
-        android:textSize="16sp"
+        android:textColor="@color/md_black_1000"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/lesson_pic"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView95"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/comment_bg"
+        android:backgroundTint="#99000000"
+        app:layout_constraintBottom_toBottomOf="@+id/lesson_pic"
+        app:layout_constraintEnd_toEndOf="@+id/lesson_pic"
+        app:layout_constraintStart_toStartOf="@+id/lesson_pic"
+        app:layout_constraintTop_toTopOf="@+id/lesson_pic" />
+
+    <ImageView
+        android:id="@+id/typeCourse"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lesson_pic"
+        app:layout_constraintEnd_toEndOf="@+id/lesson_pic"
+        app:layout_constraintStart_toStartOf="@+id/lesson_pic"
+        app:layout_constraintTop_toTopOf="@+id/lesson_pic"
+        app:srcCompat="@drawable/ic_video_lesson" />
+
+    <ImageView
+        android:id="@+id/lessonListChecked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lesson_num"
+        app:srcCompat="@drawable/ic_circle_check_filled" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,11 +42,11 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         Log.w("positionn", position + "");
         if (ansRes.get(position)) {
             holder.answer.setTextColor(Color.parseColor("#FF558B2F"));
-            holder.answer.setText("Chính xác! " + "Đáp án là: " + ansList.get(position));
+            holder.answer.setText("Chính xác! ");
         }
         else {
             holder.answer.setTextColor(Color.parseColor("#FFC62828"));
-            holder.answer.setText("Sai! Đáp án đúng là: " + ansList.get(position));
+            holder.answer.setText("Sai!");
         }
     }
 

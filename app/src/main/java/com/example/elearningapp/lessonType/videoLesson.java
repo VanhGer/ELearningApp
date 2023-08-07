@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,7 @@ public class videoLesson extends AppCompatActivity {
     VideoView video;
     ImageButton back;
     String courseId;
+    String lessonId;
 
     Button showComment;
 
@@ -74,6 +76,8 @@ public class videoLesson extends AppCompatActivity {
 
     TextView commentCount;
 
+    ImageView checked;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -82,6 +86,7 @@ public class videoLesson extends AppCompatActivity {
 
         title = findViewById(R.id.lesson_title2);
         script = findViewById(R.id.lesson_content);
+        checked = findViewById(R.id.checkedVideo);
 
         nxt = findViewById(R.id.btn_next_lesson);
         pre = findViewById(R.id.btn_pre_lesson);
@@ -196,6 +201,7 @@ public class videoLesson extends AppCompatActivity {
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
         courseId = getIntent().getStringExtra("courseId");
+        lessonId = lessonItem.get(position).getLessonId();
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -223,11 +229,34 @@ public class videoLesson extends AppCompatActivity {
                 });
 
 
+        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                .collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+                            if (documentSnapshot.getBoolean(lessonId) != null) {
+                                checked.setVisibility(View.VISIBLE);
+                            } else {
+                                checked.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+                });
+
         title.setText(lessonItem.get(position).getName());
         script.setText(lessonItem.get(position).getScript());
         video.setVideoURI(Uri.parse(lessonItem.get(position).getVideo()));
         video.setMediaController(new MediaController(this));
         video.requestFocus();
+        video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                checked.setVisibility(View.VISIBLE);
+                FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                        .collection("learn").document(courseId).update(lessonId, true);
+            }
+        });
         video.start();
 
         showComment.setOnClickListener(new View.OnClickListener() {

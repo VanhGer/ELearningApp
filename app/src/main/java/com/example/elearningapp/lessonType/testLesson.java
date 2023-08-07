@@ -20,6 +20,7 @@ import com.example.elearningapp.item.LessonItem;
 import com.example.elearningapp.item.QuestionItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,8 +39,13 @@ public class testLesson extends AppCompatActivity {
     AnswerAdapter answerAdapter;
     List<QuestionItem> questionItemList = new ArrayList<>();
 
+    int correct = 0;
+    int total = 1;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String courseId;
+    String lessonId;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class testLesson extends AppCompatActivity {
         result = findViewById(R.id.result);
         recyclerView = findViewById(R.id.questionList);
         back = findViewById(R.id.return_btn);
+
         setLesson();
     }
 
@@ -62,6 +69,9 @@ public class testLesson extends AppCompatActivity {
         int position = getIntent().getIntExtra("position", 0);
         int maxPosition = getIntent().getIntExtra("maxPosition", 0);
         courseId = getIntent().getStringExtra("courseId");
+        lessonId = lessonItem.get(position).getLessonId();
+
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         testAdapter = new TestAdapter(getApplicationContext(), questionItemList);
@@ -97,6 +107,10 @@ public class testLesson extends AppCompatActivity {
                 submit.setVisibility(View.GONE);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(answerAdapter);
+                if (4 * correct >= 3 * total) {
+                    FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                            .collection("learn").document(courseId).update(lessonId, true);
+                }
             }
         });
 
@@ -138,8 +152,8 @@ public class testLesson extends AppCompatActivity {
     }
 
     List<Boolean> getResult() {
-        int total = questionItemList.size();
-        int correct = 0;
+        total = questionItemList.size();
+        correct = 0;
         List<Boolean> ansList = new ArrayList<Boolean>();
         for(int i =0; i < recyclerView.getAdapter().getItemCount();i++){
             RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(i);
