@@ -7,18 +7,38 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="fill_parent"
+        style="@style/MyTabLayout"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/_bg__register_shape"
+
+        android:backgroundTint="@color/_bg__register_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout15"
+        app:tabGravity="fill"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabTextColor="@color/black"
-        app:tabIndicatorGravity="stretch"
+        app:tabIndicatorGravity="bottom"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/black" />
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin">
+
+        </com.google.android.material.tabs.TabItem>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Khóa học">
+
+        </com.google.android.material.tabs.TabItem>
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
@@ -34,11 +54,74 @@
         android:id="@+id/constraintLayout15"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_grey_200"
+        android:background="@color/md_grey_50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="-70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/half_circle_bg" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView80">
+
+            <TextView
+                android:id="@+id/textView98"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroybold"
+                android:text="100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView97"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="người theo dõi"
+                android:textColor="@color/md_grey_500"
+                app:layout_constraintBottom_toBottomOf="@+id/textView98"
+                app:layout_constraintStart_toEndOf="@+id/textView98"
+                app:layout_constraintTop_toTopOf="@+id/textView98" />
+
+            <TextView
+                android:id="@+id/textView99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/gilroybold"
+                android:text="99"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView100" />
+
+            <TextView
+                android:id="@+id/textView100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="đang theo dõi"
+                android:textColor="@color/md_grey_500"
+                app:layout_constraintBottom_toBottomOf="@+id/textView99"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView99" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView24"
@@ -49,7 +132,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView76"
-            app:shapeAppearanceOverlay="@style/commentRoundedImage"
+            app:shapeAppearanceOverlay="@style/fullRoundedImage"
             app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
 
         <TextView
@@ -57,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin tài khoản"
-            android:textSize="25sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton10"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,23 +163,62 @@
 
         <TextView
             android:id="@+id/textView81"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="dungbuit1k28@gmail.com"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:text="AMEE - Artist from ST.319 Entertainment \nBooking Contact:\n0889990319\work@st319.vn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView80" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 
-        <TextView
-            android:id="@+id/textView82"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Số người đăng ký "
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button2"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/comment_bg"
+            android:backgroundTint="@color/md_blue_300"
+            android:fontFamily="@font/gilroymedium"
+            android:padding="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:text="Theo dõi"
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView81" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonEdit"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/comment_bg"
+            android:backgroundTint="@color/md_blue_300"
+            android:fontFamily="@font/gilroymedium"
+            android:padding="0dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="0dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="0dp"
+            android:text="Chỉnh sửa trang cá nhân"
+            android:textAllCaps="false"
+            android:textColor="@color/md_white_1000"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView81" />
 
@@ -116,10 +238,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/textView80"
             app:layout_constraintStart_toEndOf="@+id/textView80"
             app:layout_constraintTop_toTopOf="@+id/textView80"
             app:srcCompat="@drawable/ic_checked" />
+
+        <ImageButton
+            android:id="@+id/imageButton11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_share" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

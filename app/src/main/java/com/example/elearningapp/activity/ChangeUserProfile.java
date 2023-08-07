@@ -120,6 +120,7 @@ public class ChangeUserProfile extends AppCompatActivity {
             });
         }
 
+
         confirmText.setOnClickListener(view -> ChangeProfile());
 
         buttonSave.setOnClickListener(view -> saveUserProfile());

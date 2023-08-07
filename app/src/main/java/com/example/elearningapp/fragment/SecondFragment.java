@@ -7,13 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.Check_another_profile;
 import com.example.elearningapp.activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -35,6 +41,8 @@ public class SecondFragment extends Fragment {
 
     private String mParam2;
     private FirebaseFirestore firestore;
+
+    String userId;
 
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
@@ -88,39 +96,31 @@ public class SecondFragment extends Fragment {
     }
 
     private void linkdatabase() {
-        String userNameToSearch = "Bùi Tuấn Dũng";
+        Check_another_profile check_another_profile = (Check_another_profile) getActivity();
+        userId = check_another_profile.getUserId();
+
         TextView username = rootView .findViewById(R.id.textView85);
         TextView nhapJob = rootView .findViewById(R.id.nhapJob);
         TextView nhapEmail = rootView .findViewById(R.id.nhapEmail);
         TextView nhapPhonenumber = rootView .findViewById(R.id.sodienthoai);
 
-        Query query = firestore.collection("users")
-                .whereEqualTo("name", userNameToSearch);
-
-        query.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    // Dữ liệu của người dùng được tìm thấy
-                    String email = document.getString("email");
-                    String job = document.getString("job");
-                    String phoneNumber = document.getString("phoneNumber");
-//
-//                    String ten = documentSnapshot.getString("name");
-//                    String birth = documentSnapshot.getString("birth");
-//                    String phonenumber = documentSnapshot.getString("phonenumber");
-//                    String sex = documentSnapshot.getString("sex");
-//                    String job = documentSnapshot.getString("job");
-//                    String level = documentSnapshot.getString("level");
-//                    String image = documentSnapshot.getString("image");
-//                    String email = documentSnapshot.getString("email");
-                    username.setText(userNameToSearch);
-                    nhapJob.setText(job);
-                    nhapPhonenumber.setText(phoneNumber);
-                    nhapEmail.setText(email);
-
-                }
-            }
+        FirebaseFirestore.getInstance().collection("users")
+                .document(userId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot document, @Nullable FirebaseFirestoreException error) {
+                        if (document.exists()) {
+                            String email = document.getString("email");
+                            String job = document.getString("job");
+                            String phoneNumber = document.getString("phonenumber");
+                            username.setText(document.getString("name"));
+                            nhapJob.setText(job);
+                            nhapPhonenumber.setText(phoneNumber);
+                            nhapEmail.setText(email);
+                        }
+                    }
+                });
 
 
-    })
-;}}
+    }
+
+}

@@ -3,6 +3,7 @@ package com.example.elearningapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.activity.Check_another_profile;
 import com.example.elearningapp.activity.CourseOverallActivity;
 import com.example.elearningapp.adapter.FilterableTopCourseAdapter;
+import com.example.elearningapp.adapter.FragmentAdapter;
 import com.example.elearningapp.interfaces.CourseClickHelper;
 import com.example.elearningapp.object.CourseListItem;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,6 +54,7 @@ public class FirstFragment extends Fragment implements CourseClickHelper{
     View rootView;
 
 
+    String userId;
 
 
 
@@ -103,9 +107,11 @@ public class FirstFragment extends Fragment implements CourseClickHelper{
     }
 
     private void loadDataFromFirestore() {
-        String userNameToSearch = "kxbPW27DzYQnlayRxkgPebGadJi2";
+        Check_another_profile check_another_profile = (Check_another_profile) getActivity();
+        userId = check_another_profile.getUserId();
+
         Query query = FirebaseFirestore.getInstance().collection("courses")
-                .whereEqualTo("owner", userNameToSearch);
+                .whereEqualTo("owner", userId);
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
