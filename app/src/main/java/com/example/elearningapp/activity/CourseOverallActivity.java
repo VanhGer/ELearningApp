@@ -157,6 +157,7 @@ public class CourseOverallActivity extends AppCompatActivity {
                                     HashMap<String, Object> data = new HashMap<>();
                                     enrollButton.setVisibility(View.GONE);
                                     data.put("timestamp", System.currentTimeMillis());
+                                    data.put("cnt", 0);
                                     FirebaseFirestore.getInstance().collection("users")
                                             .document(currentUId).collection("learn").document(courseId).set(data);
                                     Toast.makeText(CourseOverallActivity.this, "Tham gia khóa học thành công", Toast.LENGTH_SHORT).show();

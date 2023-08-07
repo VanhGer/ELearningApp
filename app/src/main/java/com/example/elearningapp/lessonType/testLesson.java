@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -107,10 +108,34 @@ public class testLesson extends AppCompatActivity {
                 submit.setVisibility(View.GONE);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(answerAdapter);
-                if (4 * correct >= 3 * total) {
-                    FirebaseFirestore.getInstance().collection("users").document(currentUserId)
-                            .collection("learn").document(courseId).update(lessonId, true);
-                }
+                FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                        .collection("learn").document(courseId).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                if (documentSnapshot.exists() && documentSnapshot.getBoolean(lessonId) == null) {
+                                    if (4 * correct >= 3 * total) {
+                                        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                .collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        DocumentSnapshot documentSnapshot1 = task.getResult();
+                                                        if (documentSnapshot1.exists()) {
+                                                            Long cnt = documentSnapshot1.getLong("cnt");
+                                                            FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                                    .collection("learn").document(courseId).update("cnt", cnt + 1);
+                                                        }
+                                                    }
+                                                });
+                                        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                .collection("learn").document(courseId).update(lessonId, true);
+
+                                    }
+                                }
+                            }
+                        });
+
             }
         });
 

@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 public class LessonItem implements Serializable {
     String name, des, type, script, content, image, video, lessonId, courseId;
+    Long time;
 
-    public LessonItem(String lessonId, String courseId, String name, String des, String type, String image, String script, String content, String video) {
+    public LessonItem(String lessonId, String courseId, String name, String des, String type, String image, String script, String content, String video, Long time) {
         this.name = name;
         this.des = des;
         this.type = type;
@@ -15,10 +16,19 @@ public class LessonItem implements Serializable {
         this.image = image;
         this.lessonId = lessonId;
         this.courseId = courseId;
+        this.time = time;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 
     public void setName(String name) {

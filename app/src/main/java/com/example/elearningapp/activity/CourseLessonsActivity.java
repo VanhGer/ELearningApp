@@ -3,7 +3,10 @@ package com.example.elearningapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +26,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -38,6 +44,7 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
 
     ListAdapter listAdapter;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +56,8 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         listAdapter = new ListAdapter(this, lessonItemList, this, userId);
         recyclerView.setAdapter(listAdapter);
-        TextView lessonList_btn = findViewById(R.id.lesson_tongquan);
+        ImageButton lessonList_btn = findViewById(R.id.imageButton9);
+        progressBar = findViewById(R.id.progressBar4);
 
         CollectionReference colRef = db.collection("courses").document(courseId).collection("lessons");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -58,8 +66,27 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     lessonItemList.add(new LessonItem(document.getId(), courseId, document.getString("name"), document.getString("description"),
                             document.getString("type"), document.getString("image"), document.getString("script"),
-                            document.getString("content"), document.getString("video")));
+                            document.getString("content"), document.getString("video"), document.getLong("time")));
                 }
+                FirebaseFirestore.getInstance().collection("users").document(userId)
+                        .collection("learn").document(courseId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (value.exists()) {
+                                    progressBar.setMax(100);
+                                    Long num = value.getLong("cnt");
+                                    num = num * 100 / lessonItemList.size();
+                                    Log.v("Course", Math.toIntExact(num) + "");
+                                    TextView cc = findViewById(R.id.textView96);
+                                    if (num < 100) {
+                                        cc.setText("Quá trình học hiện tại (" + num + " %)");
+                                    } else {
+                                        cc.setText("Wow, giỏi quá! Chúc mừng bạn đã hoàn thành xong khóa học! Mau đi nhận chứng chỉ thôi nào!");
+                                    }
+                                    progressBar.setProgress(Math.toIntExact(num));
+                                }
+                            }
+                        });
                 listAdapter.notifyDataSetChanged();
             }
         });
