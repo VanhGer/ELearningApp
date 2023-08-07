@@ -137,7 +137,7 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
                                             document.getId(),
                                             document.getString("image"),
                                             document.getString("name")
-                                            , userName, document.getString("description"),
+                                            , document.getString("owner"), document.getString("description"),
                                             document.getDouble("students").intValue(),
                                             document.getDouble("star")));
                             topCourseAdapter.notifyDataSetChanged();
@@ -147,6 +147,7 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
 
             }
         });
+
     }
     @Override
     public void onItemClick(String id) {

@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
+    android:paddingLeft="0dp"
     android:paddingTop="32dp"
-    android:paddingRight="20dp"
+    android:paddingRight="0dp"
     android:paddingBottom="20dp">
 
     <TextView
         android:id="@+id/myCourseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:fontFamily="@font/gilroyextrabold"
         android:text="Khoá học của tôi"
         android:textSize="@dimen/titleTextSize"
@@ -35,6 +36,7 @@
         android:id="@+id/textView60"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Danh sách khoá học đã tải lên"
         app:layout_constraintStart_toStartOf="parent"
