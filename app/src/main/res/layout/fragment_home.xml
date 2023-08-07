@@ -483,12 +483,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/mayLikeCourseName2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mayLikeCourse1"
-                app:layout_constraintTop_toBottomOf="@+id/mayLikeCourse"
+                app:layout_constraintTop_toTopOf="@+id/mayLikeCourse1"
                 app:srcCompat="@drawable/recommend2" />
 
             <TextView
@@ -508,6 +507,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroyregular"
                 android:text="Giảng viên 2"
+                app:layout_constraintBottom_toTopOf="@+id/mayLikeCourseStar2"
                 app:layout_constraintEnd_toEndOf="@+id/mayLikeCourse2"
                 app:layout_constraintStart_toStartOf="@+id/mayLikeCourse2"
                 app:layout_constraintTop_toBottomOf="@+id/mayLikeCourseName2" />
