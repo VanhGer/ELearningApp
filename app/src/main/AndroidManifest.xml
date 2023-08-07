@@ -99,6 +99,9 @@
         <activity
             android:name=".activity.DeleteAccountActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.VoteActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
