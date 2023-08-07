@@ -32,6 +32,14 @@ public class CourseOverallActivity extends AppCompatActivity {
     TextView authorName, courseName, students, star, courseIntro;
     ShapeableImageView courseImg;
 
+    private void sendToReportActivity(String courseId) {
+        Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
+        intent.putExtra("courseId", courseId); // Gửi courseId qua Intent
+        startActivity(intent);
+    }
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +55,11 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseImg = findViewById(R.id.continueCourse1);
         report = findViewById(R.id.report);
 
+
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),ReportActivity.class);
-                startActivity(intent);
-                finish();
+                sendToReportActivity(courseId); // Gọi phương thức để gửi courseId khi nhấn vào nút "report"
             }
         });
 
@@ -63,6 +70,8 @@ public class CourseOverallActivity extends AppCompatActivity {
                 settingLayout(courseListItem);
             }
         });
+
+
 
 
 

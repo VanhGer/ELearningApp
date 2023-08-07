@@ -32,21 +32,23 @@ public class ReportActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private ImageButton back1;
+    private String courseId;
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
-
-        reasonEditText = findViewById(R.id.reasonEditText);
-        reasonRadioGroup = findViewById(R.id.reasonRadioGroup);
+        courseId = getIntent().getStringExtra("courseId");
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        reasonEditText = findViewById(R.id.reasonEditText);
+        reasonRadioGroup = findViewById(R.id.reasonRadioGroup);
         back1 = findViewById(R.id.back1);
+
         back1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -82,10 +84,15 @@ public class ReportActivity extends AppCompatActivity {
         // Lấy email của người dùng từ ID của họ
         String userEmail = user.getEmail();
 
+        // Lấy userId của người dùng
+        userId = user.getUid();
+
         // Gửi dữ liệu lên Firestore
-        // Tạo một map để lưu trữ dữ liệu báo cáo cùng với email và nội dung RadioButton
+        // Tạo một map để lưu trữ dữ liệu báo cáo cùng với email, userId và nội dung RadioButton
         Map<String, Object> reportData = new HashMap<>();
         reportData.put("email", userEmail);
+        reportData.put("userId", userId);
+        reportData.put("courseId", courseId);
         reportData.put("reason", reportReason);
 
         // Lấy nội dung của RadioButton được chọn
@@ -113,4 +120,3 @@ public class ReportActivity extends AppCompatActivity {
                 });
     }
 }
-
