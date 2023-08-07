@@ -102,6 +102,9 @@
         <activity
             android:name=".activity.VoteActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.NotificationActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

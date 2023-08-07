@@ -48,6 +48,9 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
     ProgressBar progressBar;
     Button btnReceiveCertificate;
     String description;
+    boolean isCompleted = false; // Mặc định là chưa hoàn thành
+
+    private static final int REQUEST_CERTIFICATE = 1; // Mã yêu cầu cho CertificateActivity
 
     @Override
 
@@ -97,10 +100,17 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
                                         btnReceiveCertificate.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
+                                                isCompleted = true; // Đã hoàn thành
                                                 // Gửi dữ liệu tới hoạt động CertificateActivity
                                                 Intent intent = new Intent(CourseLessonsActivity.this, CertificateActivity.class);
                                                 intent.putExtra("courseName", description); // Thay bằng tên khóa học thích hợp
                                                 startActivity(intent);
+                                                if (isCompleted) {
+                                                    NotificationManager notificationManager = new NotificationManager(CourseLessonsActivity.this);
+                                                    notificationManager.registerCourse(description);
+                                                }
+
+
                                             }
                                         });
                                     }
@@ -123,6 +133,22 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
         });
 
     }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == REQUEST_CERTIFICATE) {
+//            if (resultCode == RESULT_OK) {
+//                // Nhận dữ liệu từ CertificateActivity (nếu cần)
+//
+//                // Gửi dữ liệu tới hoạt động NotificationActivity
+//                Intent notificationIntent = new Intent(CourseLessonsActivity.this, NotificationActivity.class);
+//                notificationIntent.putExtra("courseName", "abcdefghtajlsfkl");
+//                notificationIntent.putExtra("isCompleted", isCompleted); // Truyền giá trị isCompleted
+//                startActivity(notificationIntent);
+//            }
+//        }
+//    }
 
 
 

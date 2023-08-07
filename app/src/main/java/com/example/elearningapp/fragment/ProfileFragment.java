@@ -16,6 +16,7 @@ import com.example.elearningapp.activity.ChangeUserProfile;
 import com.example.elearningapp.activity.DownloadActivity;
 import com.example.elearningapp.activity.HelpAndSupportActivity;
 import com.example.elearningapp.activity.LoginActivity;
+import com.example.elearningapp.activity.NotificationActivity;
 import com.example.elearningapp.activity.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -149,6 +150,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //thông báo
+        ConstraintLayout notification =  rootView.findViewById(R.id.constraintLayout21);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Firebase", "ACV");
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // đăng xuất
         ConstraintLayout logout =  rootView.findViewById(R.id.logout);
