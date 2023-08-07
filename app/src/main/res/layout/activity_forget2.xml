@@ -34,19 +34,21 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Hình ảnh -->
+
+    <!-- Nút bấm: Mở ứng dụng mail -->
+
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/forget"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewNx"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/login_string"
+        android:src="@drawable/forgot"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/login_string" />
-
-    <!-- Nút bấm: Mở ứng dụng mail -->
-
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewNx" />
 
     <Button
         android:id="@+id/buttonLogin"
