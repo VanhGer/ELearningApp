@@ -2,9 +2,9 @@ package com.example.elearningapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,13 +38,18 @@ public class CourseOverallActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    private void sendToCheckAnotherProfile(String courseId, String authorName) {
+        Intent intent = new Intent(getApplicationContext(), Check_another_profile.class);
+        intent.putExtra("courseId", courseId);
+        intent.putExtra("authorName", authorName);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course2);
-
+        ImageView avatar =findViewById(R.id.avatar);
         TextView lessonList_btn = findViewById(R.id.lesson_baihoc);
         courseId = getIntent().getStringExtra("courseId");
         authorName = findViewById(R.id.authorName);
@@ -54,12 +59,23 @@ public class CourseOverallActivity extends AppCompatActivity {
         courseIntro = findViewById(R.id.courseIntro);
         courseImg = findViewById(R.id.continueCourse1);
         report = findViewById(R.id.report);
+        authorName.setText("Bùi tuần dũng");
 
 
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendToReportActivity(courseId); // Gọi phương thức để gửi courseId khi nhấn vào nút "report"
+            }
+        });
+
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendToCheckAnotherProfile(courseId, authorName.getText().toString());
+                Intent intent = new Intent(getApplicationContext(),Check_another_profile.class);
+                startActivity(intent);
+                finish();
             }
         });
 

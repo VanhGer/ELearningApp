@@ -38,6 +38,7 @@ public class DeleteAccountActivity extends AppCompatActivity {
             }
         });
     }
+
     private void showConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xác nhận xóa tài khoản");
@@ -52,6 +53,7 @@ public class DeleteAccountActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     private void deleteAccount() {
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -60,14 +62,21 @@ public class DeleteAccountActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
                                 // Xóa tài khoản thành công
                                 Toast.makeText(DeleteAccountActivity.this, "Tài khoản đã được xóa",
                                         Toast.LENGTH_SHORT).show();
                                 deleteUserDataFromFirestore(user.getUid());
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                            finish();
+                                FirebaseAuth.getInstance().signOut(); // Đăng xuất người dùng
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(intent);
+                                finish();
 
+                            } else {
+                                // Xóa tài khoản không thành công
+                                Toast.makeText(DeleteAccountActivity.this, "Xóa tài khoản không thành công",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
         } else {
