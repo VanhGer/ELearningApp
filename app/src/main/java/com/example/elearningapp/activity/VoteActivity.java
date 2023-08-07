@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,8 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.elearningapp.R;
+import com.example.elearningapp.item.Vote;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -36,6 +39,8 @@ public class VoteActivity extends AppCompatActivity {
     private String courseId;
     ImageView voteCourseImg;
     TextView voteCourseName, voteCourseOwner;
+    Double currentStar;
+    Double voteNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +58,15 @@ public class VoteActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     voteCourseName.setText(document.getString("name"));
-                    //voteCourseOwner.setText(document.getString("owner"));
+                    db.collection("users").document(document.getString("owner")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                voteCourseOwner.setText((document.getString("name")));
+                            }
+                        }
+                    });
                     Picasso.get().load(document.getString("image")).into(voteCourseImg);
                 } else {
                     Toast.makeText(getApplicationContext(), "Hãy kiểm tra lại kết nối của bạn", Toast.LENGTH_SHORT);
@@ -142,7 +155,24 @@ public class VoteActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Đánh giá khóa học thành công", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Vote vote = new Vote(currentVote, comment, FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    db.collection("courses").document(courseId).collection("votes").add(vote);
+                    db.collection("courses").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                currentStar = document.getDouble("star");
+                                voteNumber = document.getDouble("vote");
+                                Double newVote = voteNumber + 1;
+                                db.collection("courses").document(courseId).update("vote", newVote);
+                                Double newStar = (currentStar * voteNumber + currentVote) / newVote;
+                                db.collection("courses").document(courseId).update("star", newStar);
+                                finish();
+                            }
+                        }
+                    });
+
                 }
             }
         });
