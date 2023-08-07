@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
     TextView mayLikeCourseStar2;
     TextView mayLikeCourseStudent1;
     TextView mayLikeCourseStudent2;
+    FirebaseFirestore db;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -151,7 +152,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
 
