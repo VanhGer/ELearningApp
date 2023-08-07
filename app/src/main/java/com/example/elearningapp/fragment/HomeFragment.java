@@ -155,23 +155,10 @@ public class HomeFragment extends Fragment {
 
         mostViewedCourse1 = rootView.findViewById(R.id.mostViewedCourse1);
 
-        mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         mostViewedCourse2 = rootView.findViewById(R.id.mostViewedCourse2);
 
-        mostViewedCourse2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-                startActivity(intent);
-            }
-        });
         mostViewedCourseName1 = rootView.findViewById(R.id.mostViewedCourseName1);
         mostViewedCourseName2 = rootView.findViewById(R.id.mostViewedCourseName2);
         mostViewedCourseTeacher1 = rootView.findViewById(R.id.mostViewedCourseTeacher1);
@@ -192,6 +179,14 @@ public class HomeFragment extends Fragment {
                             mostViewedCourseStar1.setText(document.getDouble("star") + "⭐");
                             mostViewedCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mostViewedCourse1);
+                            mostViewedCourse1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                                    intent.putExtra("courseId", document.getId());
+                                    startActivity(intent);
+                                }
+                            });
                         }
                         else {
                             mostViewedCourseName2.setText(document.getString("name"));
@@ -199,6 +194,15 @@ public class HomeFragment extends Fragment {
                             mostViewedCourseStar2.setText(document.getDouble("star") + "⭐");
                             mostViewedCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mostViewedCourse2);
+                            mostViewedCourse2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                                    intent.putExtra("courseId", document.getId());
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
                         cur++;
                     }
@@ -209,43 +213,31 @@ public class HomeFragment extends Fragment {
 
         continueCourse1 = rootView.findViewById(R.id.continueCourse1);
 
-        continueCourse1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-                startActivity(intent);
-            }
-        });
+//        continueCourse1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         continueCourse2 = rootView.findViewById(R.id.continueCourse2);
 
-        continueCourse2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-                startActivity(intent);
-            }
-        });
+//        continueCourse2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         mayLikeCourse1 = rootView.findViewById(R.id.mayLikeCourse1);
 
-        mayLikeCourse1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         mayLikeCourse2 = rootView.findViewById(R.id.mayLikeCourse2);
 
-        mayLikeCourse2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
-                startActivity(intent);
-            }
-        });
+
         mayLikeCourseName1 = rootView.findViewById(R.id.mayLikeCourseName1);
         mayLikeCourseName2 = rootView.findViewById(R.id.mayLikeCourseName2);
         mayLikeCourseTeacher1 = rootView.findViewById(R.id.mayLikeCourseTeacher1);
@@ -266,6 +258,14 @@ public class HomeFragment extends Fragment {
                             mayLikeCourseStar1.setText(document.getDouble("star") + "⭐");
                             mayLikeCourseStudent1.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mayLikeCourse1);
+                            mayLikeCourse1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                                    intent.putExtra("courseId", document.getId());
+                                    startActivity(intent);
+                                }
+                            });
                         }
                         else {
                             mayLikeCourseName2.setText(document.getString("name"));
@@ -273,6 +273,14 @@ public class HomeFragment extends Fragment {
                             mayLikeCourseStar2.setText(document.getDouble("star") + "⭐");
                             mayLikeCourseStudent2.setText("(" + document.getLong("students") + ")");
                             Picasso.get().load(document.getString("image")).into(mayLikeCourse2);
+                            mayLikeCourse2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), CourseOverallActivity.class);
+                                    intent.putExtra("courseId", document.getId());
+                                    startActivity(intent);
+                                }
+                            });
                         }
                         cur++;
                     }
