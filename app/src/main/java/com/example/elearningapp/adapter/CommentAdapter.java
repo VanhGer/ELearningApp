@@ -59,11 +59,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     ProgressBar commentLoading;
 
     private LoadingDialog loadingDialog;
+    String ownerID;
 
 
-    public CommentAdapter(@NonNull Context context, List<CommentObject> courseObjectList) {
+    public CommentAdapter(@NonNull Context context, List<CommentObject> courseObjectList, String ownerID) {
         this.context = context;
         this.courseObjectList = courseObjectList;
+        this.ownerID = ownerID;
     }
 
     public String getUserReplyIdGet(){
@@ -154,6 +156,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         v1username.setText(value.getString("name"));
                         Picasso.get().load(value.getString("image")).into(v1userpic);
+                        Boolean ok = value.getBoolean("verified");
+                        if (ok != null && ok.equals(true)) {
+                            holder.verified.setVisibility(View.VISIBLE);
+                        }
+                        Log.v("Comment", ownerID);
+                        if (value.getId().equals(ownerID)) {
+                            holder.creator.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
@@ -369,6 +379,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                         String date = changetoDate(documentSnapshot.getLong("timestamp"));
                                                         time.setText(date);
 
+                                                        Boolean ok = value.getBoolean("verified");
+                                                        if (ok != null && ok.equals(true)) {
+                                                            newView.findViewById(R.id.verified).setVisibility(View.VISIBLE);
+                                                        }
+                                                        Log.v("Comment", ownerID);
+                                                        if (value.getId().equals(ownerID)) {
+                                                            newView.findViewById(R.id.creator).setVisibility(View.VISIBLE);
+                                                        }
+
                                                         FirebaseFirestore.getInstance()
                                                                 .collection("users")
                                                                 .document(documentSnapshot.getString("userReplyId"))
@@ -376,6 +395,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                                     @Override
                                                                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                                                                         userReplyName.setText(value.getString("name"));
+                                                                        Boolean ok = value.getBoolean("verified");
+                                                                        if (ok != null && ok.equals(true)) {
+                                                                            newView.findViewById(R.id.verifiedReply).setVisibility(View.VISIBLE);
+                                                                        }
+                                                                        Log.v("Comment", ownerID);
+                                                                        if (value.getId().equals(ownerID)) {
+                                                                            newView.findViewById(R.id.creatorReply).setVisibility(View.VISIBLE);
+                                                                        }
                                                                     }
                                                                 });
 
@@ -418,6 +445,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             } else if (timeChange < 36400) {
                 timeChange /= 3600;
                 return timeChange + " giờ trước";
+            } else if (timeChange < 1092000) {
+                timeChange /= 36400;
+                return timeChange + " ngày trước";
+            } else if (timeChange < 13104000){
+                timeChange /= 1092000;
+                return timeChange + " tháng trước";
             } else {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String dateFormat = simpleDateFormat.format(dateThen);
@@ -452,6 +485,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         ProgressBar commentV2Loading;
 
+        ImageView verified;
+
+        TextView creator;
+
         public CommentViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             contentView = itemView.findViewById(R.id.v1content);
@@ -464,6 +501,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             likev1Button = itemView.findViewById(R.id.likev1Button);
             ReplyV1 = itemView.findViewById(R.id.ReplyV1);
             commentV2Loading = itemView.findViewById(R.id.commentV2Loading);
+            verified = itemView.findViewById(R.id.verified);
+            creator = itemView.findViewById(R.id.creator);
 
         }
     }
