@@ -281,6 +281,8 @@ public class videoLesson extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 }
             });
+        } else {
+            pre.setVisibility(View.INVISIBLE);
         }
         if (position != maxPosition - 1) {
             nxt.setOnClickListener(new View.OnClickListener() {
@@ -290,6 +292,8 @@ public class videoLesson extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             });
+        } else {
+            nxt.setVisibility(View.INVISIBLE);
         }
     }
 
