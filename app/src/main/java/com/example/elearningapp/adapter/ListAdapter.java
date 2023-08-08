@@ -63,7 +63,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         } else {
             holder.typeCourse.setImageResource(R.drawable.ic_text_lesson);
         }
-        holder.numView.setText("Bai " + (position + 1) +  "");
+        String str = lessonItemList.get(position).getType();
+        if (str.equals("text")) str = "Văn bản";
+        if (str.equals("test")) str = "Kiểm tra";
+        if (str.equals("video"))  str = "Video";
+
+        str += " - " + lessonItemList.get(position).getTime() + " phút";
+        holder.numView.setText(str);
         Picasso.get().load(lessonItemList.get(position).getImage()).into(holder.picView);
         //holder.picView.setImageResource(lessonItemList.get(position).getImage());
         FirebaseFirestore.getInstance().collection("users").document(userId)

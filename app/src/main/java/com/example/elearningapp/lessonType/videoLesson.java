@@ -254,7 +254,31 @@ public class videoLesson extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 checked.setVisibility(View.VISIBLE);
                 FirebaseFirestore.getInstance().collection("users").document(currentUserId)
-                        .collection("learn").document(courseId).update(lessonId, true);
+                        .collection("learn").document(courseId).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                if (documentSnapshot.exists() && documentSnapshot.getBoolean(lessonId) == null) {
+                                        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                .collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        DocumentSnapshot documentSnapshot1 = task.getResult();
+                                                        if (documentSnapshot1.exists()) {
+                                                            Long cnt = documentSnapshot1.getLong("cnt");
+                                                            FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                                    .collection("learn").document(courseId).update("cnt", cnt + 1);
+                                                        }
+                                                    }
+                                                });
+                                        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                .collection("learn").document(courseId).update(lessonId, true);
+
+                                }
+                            }
+                        });
+
             }
         });
         video.start();

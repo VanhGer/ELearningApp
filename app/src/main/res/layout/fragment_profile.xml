@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/textView59"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="20dp"
         android:text="Họ và tên : "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,9 +21,11 @@
 
     <TextView
         android:id="@+id/textView60"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
         android:text="Ngày tháng năm sinh "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,9 +33,11 @@
 
     <TextView
         android:id="@+id/textView61"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
         android:text="Số điện thoại "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +45,11 @@
 
     <TextView
         android:id="@+id/textView62"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         android:text="Nghề nghiệp "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,9 +57,11 @@
 
     <TextView
         android:id="@+id/textView63"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
         android:text="Giới tính "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,9 +69,11 @@
 
     <TextView
         android:id="@+id/textView64"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
         android:text="Trình độ học vấn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,9 +83,9 @@
         android:id="@+id/textView56"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="81dp"
+        android:layout_marginEnd="10dp"
         android:text="Thông tin cá nhân"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -97,8 +109,8 @@
         android:id="@+id/textView5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="63dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
         android:text="Hãy giới thiệu về bản thân bạn."
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView8"
@@ -107,8 +119,10 @@
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="UserName"
@@ -118,8 +132,10 @@
 
     <EditText
         android:id="@+id/editTextText5"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="Birth"
@@ -129,8 +145,10 @@
 
     <EditText
         android:id="@+id/editTextText6"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="PhoneNumber"
@@ -140,8 +158,10 @@
 
     <Spinner
         android:id="@+id/editTextText7"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="Sex"
@@ -151,8 +171,10 @@
 
     <EditText
         android:id="@+id/editTextText8"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="Job"
@@ -162,8 +184,10 @@
 
     <EditText
         android:id="@+id/editTextText9"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="Level"

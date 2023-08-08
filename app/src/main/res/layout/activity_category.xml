@@ -64,19 +64,21 @@
                 app:shapeAppearanceOverlay="@style/commentRoundedImage"
                 app:srcCompat="@drawable/a" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button2"
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/comment_bg"
+                android:backgroundTint="@color/md_blue_300"
                 android:fontFamily="@font/gilroymedium"
                 android:padding="0dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:text="Theo dõi"
                 android:textAllCaps="false"
+                android:textColor="@color/md_white_1000"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView24"
                 app:layout_constraintEnd_toEndOf="parent"

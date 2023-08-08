@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -62,10 +63,15 @@ public class SearchFragment extends Fragment {
 
     ProgressDialog TemDialog;
 
+    ProgressBar progressBar6;
+
+    ProgressBar progressBar7;
+
     private CategoryAdapter searchAdapter;
 
     private List<PopularCategoryItem> popularCategoryItemList = new ArrayList<>();
     private List<String> topSearchList = new ArrayList<>();
+
 
     public SearchFragment() {
         // Required empty public constructor
@@ -129,6 +135,8 @@ public class SearchFragment extends Fragment {
 //                LinearLayoutManager.VERTICAL, false));
 
         topSearchLayout = rootView.findViewById(R.id.topSearchLayout);
+        progressBar6 = rootView.findViewById(R.id.progressBar6);
+        progressBar7 = rootView.findViewById(R.id.progressBar7);
 
 //        FirebaseAuth auth  = FirebaseAuth.getInstance();
 //        user = auth.getCurrentUser();
@@ -141,6 +149,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void loadDataFromFirestore() {
+        progressBar7.setVisibility(View.VISIBLE);
         CollectionReference categoryRef = FirebaseFirestore.getInstance().collection("categories");
         categoryRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -154,6 +163,7 @@ public class SearchFragment extends Fragment {
                                     document.getString("image")));
                     Log.v("Firebase", document.getString("name"));
                 }
+                progressBar7.setVisibility(View.GONE);
                 searchAdapter.notifyDataSetChanged();
             }
         });
@@ -164,12 +174,13 @@ public class SearchFragment extends Fragment {
         if (topSearchLayout == null) {
             return;
         }
-
+        progressBar6.setVisibility(View.VISIBLE);
         Query topSearchRef = FirebaseFirestore.getInstance().collection("topsearches").orderBy("count", Query.Direction.DESCENDING).limit(10);
         topSearchRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 topSearchLayout.removeAllViews();
+                progressBar6.setVisibility(View.VISIBLE);
                 for (DocumentSnapshot document : value.getDocuments()) {
                     TextView textView = new TextView(getActivity());
                     FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(
@@ -188,6 +199,7 @@ public class SearchFragment extends Fragment {
                     topSearchLayout.addView(textView);
 //                    Log.v("Firebase", document.getString("name"));
                 }
+                progressBar6.setVisibility(View.GONE);
             }
         });
 

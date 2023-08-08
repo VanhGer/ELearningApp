@@ -6,21 +6,12 @@
     android:layout_height="match_parent"
     android:background="#202AAC6F">
 
-    <ImageButton
-        android:id="@+id/imageButton_back_history_of_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_arrow_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/top_course_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Histoy of Download"
+        android:text="Lịch sử tải xuống"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"

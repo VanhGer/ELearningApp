@@ -7,18 +7,19 @@
     android:layout_marginBottom="8dp"
     android:background="@drawable/bgr_2"
     android:backgroundTint="@color/md_grey_200"
-    android:paddingLeft="4dp"
-    android:paddingTop="4dp"
-    android:paddingRight="4dp"
-    android:paddingBottom="2dp">
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/questionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:fontFamily="@font/gilroymedium"
         android:text="Question Title"
-        android:textSize="16sp"
+        android:textColor="@color/md_black_1000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_num" />
@@ -27,6 +28,7 @@
         android:id="@+id/question_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroybold"
         android:text="Câu số:"
         android:textAllCaps="true"
         android:textSize="14sp"
@@ -38,7 +40,7 @@
         android:id="@+id/choiceGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionTitle">
@@ -47,24 +49,36 @@
             android:id="@+id/choice1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="choice1" />
+            android:fontFamily="@font/gilroymedium"
+            android:paddingLeft="10dp"
+            android:text="choice1"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/choice2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="choice2" />
+            android:fontFamily="@font/gilroymedium"
+            android:paddingLeft="10dp"
+            android:text="choice2"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/choice3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="choice3" />
+            android:fontFamily="@font/gilroymedium"
+            android:paddingLeft="10dp"
+            android:text="choice3"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/choice4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="choice4" />
+            android:fontFamily="@font/gilroymedium"
+            android:paddingLeft="10dp"
+            android:text="choice4"
+            android:textSize="16sp" />
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

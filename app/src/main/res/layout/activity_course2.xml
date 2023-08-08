@@ -4,72 +4,200 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E4DAC9">
+    android:background="@color/md_grey_300">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/continueCourse1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ccccc"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/a" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView94"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/md_white_1000"
-        android:backgroundTint="#B3000000"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintEnd_toEndOf="@+id/continueCourse1"
-        app:layout_constraintStart_toStartOf="@+id/continueCourse1"
-        app:layout_constraintTop_toTopOf="@+id/continueCourse1" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/continueCourse1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/a" />
+
+        <TextView
+            android:id="@+id/textView94"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/md_white_1000"
+            android:backgroundTint="#B3000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/courseName2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/gilroyextrabold"
+            android:lineSpacingExtra="8sp"
+            android:text="@string/courseName"
+            android:textColor="@color/md_white_1000"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/courseName2"
+            app:layout_constraintTop_toBottomOf="@+id/courseName2"
+            app:srcCompat="@drawable/user" />
+
+        <TextView
+            android:id="@+id/seeMore1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="TextView"
+            android:textColor="@color/md_white_1000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/seeMore1"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:srcCompat="@drawable/star1" />
+
+        <TextView
+            android:id="@+id/mayLikeCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="TextView"
+            android:textColor="@color/md_white_1000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_arrow_left_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/continueCourse1" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:shapeAppearanceOverlay="@style/commentRoundedImage"
+            app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
+
+        <TextView
+            android:id="@+id/authorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/authorName"
+            android:textColor="@color/md_white_1000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toTopOf="@+id/avatar" />
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/authorName"
+            app:layout_constraintStart_toEndOf="@+id/authorName"
+            app:layout_constraintTop_toTopOf="@+id/authorName"
+            app:srcCompat="@drawable/ic_checked" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/continueCourse1">
+        app:layout_constraintTop_toBottomOf="@id/ccccc">
 
         <TextView
             android:id="@+id/lesson_tongquan"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/tongquan"
-            android:backgroundTint="@color/md_brown_900"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/search_bg"
+            android:backgroundTint="@color/md_grey_900"
             android:clickable="true"
             android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp"
             android:text="Tổng Quan"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textColor="@color/md_white_1000"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/lesson_baihoc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lesson_baihoc"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/tongquan"
-            android:backgroundTint="#C1C1C1"
+            android:background="@drawable/search_bg"
+            android:backgroundTint="@color/md_grey_400"
             android:clickable="true"
             android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp"
             android:text="Bài Học"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textColor="@color/md_white_1000"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lesson_tongquan"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,7 +205,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/bgr3"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/_bg__register_shape"
         android:backgroundTint="#FFFFFF"
         android:paddingLeft="@dimen/padding"
         android:paddingRight="@dimen/padding"
@@ -136,100 +265,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/courseName2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/courseName"
-        android:textColor="@color/md_white_1000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/continueCourse1"
-        app:layout_constraintTop_toTopOf="@+id/continueCourse1" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseName2"
-        app:srcCompat="@drawable/ic_user_white" />
-
-    <TextView
-        android:id="@+id/seeMore1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textColor="@color/md_white_1000"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toEndOf="@+id/seeMore1"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/ic_star_white" />
-
-    <TextView
-        android:id="@+id/mayLikeCourse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textColor="@color/md_white_1000"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7" />
-
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_arrow_left_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:shapeAppearanceOverlay="@style/commentRoundedImage"
-        app:srcCompat="@drawable/gettyimages_1200911481_f607d5c6347f4918b4ded26e96fb7247" />
-
-    <TextView
-        android:id="@+id/authorName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/authorName"
-        android:textColor="@color/md_white_1000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/avatar"
-        app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toTopOf="@+id/avatar" />
-
     <Button
         android:id="@+id/enroll"
         android:layout_width="0dp"
@@ -243,26 +278,24 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/vote"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        android:background="#E4DAC9"
-        android:backgroundTint="#E4DAC9"
-        android:text="Đánh giá"
+        android:background="@drawable/ic_clipboard_text"
+        android:backgroundTint="@color/md_white_1000"
         android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/report"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/report"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="#E4DAC9"
-        android:backgroundTint="#E4DAC9"
-        android:text="Báo cáo"
+        android:background="@drawable/ic_flag_filled"
+        android:backgroundTint="@color/md_white_1000"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

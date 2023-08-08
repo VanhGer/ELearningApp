@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.elearningapp.interfaces.CourseClickHelper;
@@ -73,6 +75,8 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
 
     LayoutInflater factory;
 
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +116,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
         recentSearch = findViewById(R.id.recentSearch);
         searchResultTitle = findViewById(R.id.searchResultTitle);
         resetSearch = findViewById(R.id.resetSearch);
+        progressBar = findViewById(R.id.progressBar5);
     }
 
     private void backBtnClick() {
@@ -135,6 +140,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
         resetSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 FirebaseFirestore.getInstance().collection("users").
                         document(currentUser.getUid()).collection("searches").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -145,6 +151,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
                                                 document(currentUser.getUid()).collection("searches").document(documentSnapshot.getId()).delete();
                                     }
                                     recentSearch.setVisibility(View.INVISIBLE);
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             }
                         });
@@ -183,7 +190,6 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
                     recentSearch.setVisibility(View.INVISIBLE);
                     clearButton.setVisibility(View.VISIBLE);
                     resetSearch.setVisibility(View.INVISIBLE);
-                    searchResultRecyclerView.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -208,6 +214,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
 
     private void recentSearchGet() {
          recentSearch.removeAllViews();
+         progressBar.setVisibility(View.VISIBLE);
          FirebaseFirestore.getInstance().collection("users").
                 document(currentUser.getUid()).collection("searches").orderBy("timestamp", Query.Direction.DESCENDING).limit(10).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -218,6 +225,7 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
                             text.setText(documentSnapshot.getString("name").toString());
                             recentSearch.addView(newView);
                         }
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 
@@ -225,7 +233,8 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
     }
 
     private void textSearch(String str) {
-
+        progressBar.setVisibility(View.VISIBLE);
+        searchResultRecyclerView.setVisibility(View.INVISIBLE);
         FirebaseFirestore.getInstance().collection("courses")
                 .orderBy("name")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -251,6 +260,18 @@ public class SearchActivity extends AppCompatActivity implements CourseClickHelp
                         }
 
                         searchResultTitle.setText("Có tất cả " + courseListItemList.size() + " kết quả được tìm thấy");
+
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!searchText.getText().toString().matches("")){
+                                    searchResultRecyclerView.setVisibility(View.VISIBLE);
+                                }
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        };
+                        handler.postDelayed(runnable, 500);
 
                         searchCourseAdapter.notifyDataSetChanged();
                     }

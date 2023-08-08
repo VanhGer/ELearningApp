@@ -108,6 +108,18 @@ public class textLesson extends AppCompatActivity {
                                         Log.v("Learn", courseId + " " + lessonId);
                                         FirebaseFirestore.getInstance().collection("users").document(currentUserId)
                                                 .collection("learn").document(courseId).update(lessonId, true);
+                                        FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                .collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        DocumentSnapshot documentSnapshot1 = task.getResult();
+                                                        if (documentSnapshot1.exists()) {
+                                                            Long cnt = documentSnapshot1.getLong("cnt");
+                                                            FirebaseFirestore.getInstance().collection("users").document(currentUserId)
+                                                                    .collection("learn").document(courseId).update("cnt", cnt + 1);
+                                                        }
+                                                    }
+                                                });
                                         tickDone.setVisibility(View.GONE);
                                         findViewById(R.id.checked).setVisibility(View.VISIBLE);
                                     }
