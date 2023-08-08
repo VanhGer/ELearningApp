@@ -129,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Map<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("name", user);
                                     userInfo.put("email", email);
+                                    userInfo.put("image", "https://thuthuatnhanh.com/wp-content/uploads/2022/03/Avatar-TikTok.jpg");
                                     FirebaseFirestore.getInstance().collection("users")
                                             .document(mAuth.getUid()).
                                             set(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {

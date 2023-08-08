@@ -2,6 +2,7 @@ package com.example.elearningapp.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.elearningapp.R;
 import com.example.elearningapp.activity.CommentDialog;
 import com.example.elearningapp.activity.LoadingDialog;
+import com.example.elearningapp.activity.ReportActivity;
 import com.example.elearningapp.object.CommentObject;
 import com.example.elearningapp.object.CourseObject;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,6 +62,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     private LoadingDialog loadingDialog;
     String ownerID;
+    ImageButton reportcmt1;
 
 
     public CommentAdapter(@NonNull Context context, List<CommentObject> courseObjectList, String ownerID) {
@@ -90,6 +93,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 //        Log.v("CommentX", view.getContext().toString());
 //        Log.v("CommentX1", commentDialog.getContext().toString());
 //        Log.v("CommentX2", commentDialog.getRecyclerView().getContext().toString());
+        // Khởi tạo button reportcmt và gán sự kiện click
+        reportcmt1 = view.findViewById(R.id.reportcmt1);
+        reportcmt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Khi ấn vào button reportcmt, gửi ownerID và chuyển hướng sang ReportActivity
+                Intent intent = new Intent(context, ReportActivity.class);
+                intent.putExtra("commentIdReply", commentIdReply);
+                context.startActivity(intent);
+            }
+        });
+
 //
 //        loadingDialog.show();
         commentLoading = commentDialog.findViewById(R.id.loadingComment);
@@ -297,6 +312,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                                                         ImageButton likeButton = newView.findViewById(R.id.likev2Button);
                                                         TextView userReplyName = newView.findViewById(R.id.userReplyName);
                                                         TextView ReplyV2 = newView.findViewById(R.id.ReplyV2);
+
+                                                        // Khởi tạo button reportcmt và gán sự kiện click
+                                                        reportcmt1 = newView.findViewById(R.id.reportcmt1);
+                                                        reportcmt1.setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View view) {
+                                                                // Khi ấn vào button reportcmt, gửi ownerID và chuyển hướng sang ReportActivity
+                                                                Intent intent = new Intent(context, ReportActivity.class);
+                                                                intent.putExtra("commentIdReply", commentIdReply);
+                                                                context.startActivity(intent);
+                                                            }
+                                                        });
+
 
                                                         ReplyV2.setOnClickListener(new View.OnClickListener() {
                                                             @Override

@@ -101,6 +101,20 @@
         app:srcCompat="@drawable/ic_caret_right_filled" />
 
     <ImageButton
+        android:id="@+id/reportcmt1"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toEndOf="@+id/verified"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reportcmt" />
+
+
+    <ImageButton
         android:id="@+id/likev2Button"
         android:layout_width="16dp"
         android:layout_height="16dp"
