@@ -34,6 +34,7 @@ public class ReportActivity extends AppCompatActivity {
     private ImageButton back1;
     private String courseId;
     private String userId;
+    private String commentIdReply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class ReportActivity extends AppCompatActivity {
         reasonEditText = findViewById(R.id.reasonEditText);
         reasonRadioGroup = findViewById(R.id.reasonRadioGroup);
         back1 = findViewById(R.id.back1);
+        commentIdReply = getIntent().getStringExtra("commentIdReply");
 
         back1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +96,7 @@ public class ReportActivity extends AppCompatActivity {
         reportData.put("userId", userId);
         reportData.put("courseId", courseId);
         reportData.put("reason", reportReason);
+        reportData.put("commentID", commentIdReply);
 
         // Lấy nội dung của RadioButton được chọn
         RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
