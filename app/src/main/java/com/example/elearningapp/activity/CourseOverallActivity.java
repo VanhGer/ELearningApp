@@ -2,6 +2,7 @@ package com.example.elearningapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.elearningapp.R;
 import com.example.elearningapp.interfaces.CourseCallBack;
@@ -44,6 +46,7 @@ public class CourseOverallActivity extends AppCompatActivity {
     ShapeableImageView courseImg;
     ImageButton backBtn;
     ImageView verified;
+    ConstraintLayout loadingCourse;
 
     ShapeableImageView avatarImage;
     TextView lessonList_btn;
@@ -84,6 +87,7 @@ public class CourseOverallActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.imageButton8);
         enrollButton = findViewById(R.id.enroll);
         verified = findViewById(R.id.imageView27);
+        loadingCourse = findViewById(R.id.LoadingCourse);
 
         report.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +232,16 @@ public class CourseOverallActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        loadingCourse.setVisibility(View.INVISIBLE);
+                                    }
+                                };
+                                handler.postDelayed(runnable, 500);
+
+
                                 myCallBack.onCourseCallback(courseListItem);
                             }
                         });

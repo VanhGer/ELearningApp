@@ -7,7 +7,7 @@
     android:paddingLeft="0dp"
     android:paddingTop="32dp"
     android:paddingRight="0dp"
-    android:paddingBottom="20dp">
+    android:paddingBottom="0dp">
 
     <TextView
         android:id="@+id/myCourseText"
@@ -23,9 +23,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/course_list_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="220dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView60">
@@ -34,12 +33,38 @@
 
     <TextView
         android:id="@+id/textView60"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/gilroybold"
         android:text="Danh sách khoá học đã tải lên"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myCourseText" />
+
+    <TextView
+        android:id="@+id/textView101"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gilroybold"
+        android:text="Tiếp tục học"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_list_view" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/course_next_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView101" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
