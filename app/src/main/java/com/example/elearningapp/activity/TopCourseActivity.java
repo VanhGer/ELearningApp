@@ -17,11 +17,14 @@ import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
 import com.example.elearningapp.object.CourseListItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
     TopCourseAdapter topCourseAdapter;
 
     FirebaseFirestore db;
-
+    int type = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,10 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
 
         String title = getIntent().getStringExtra("title");
 
+        if(title.charAt(0) == 'K') type = 0;
+        else if (title.charAt(0) == 'T') type = 1;
+        else type = 2;
+
         TextView titleView = findViewById(R.id.yourCourse);
         titleView.setText(title);
 
@@ -55,7 +62,11 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
         topCourseAdapter = new TopCourseAdapter(this, courseListItemList, this);
         topCourseRecyclerView.setAdapter(topCourseAdapter);
 
-        loadDataFromFirestore();
+        if (type == 0)
+            loadTopCourse();
+        else if (type == 1) {
+            loadContinueCourse();
+        } else loadMayLikeCourse();
         backBtnClick();
     }
 
@@ -65,35 +76,104 @@ public class TopCourseActivity extends AppCompatActivity implements CourseClickH
         topCourseRecyclerView = findViewById(R.id.yourCourseRecycler);
     }
 
-    private void loadDataFromFirestore() {
-        CollectionReference categoryRef = FirebaseFirestore.getInstance().collection("courses");
-        categoryRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+    private void loadTopCourse() {
+        FirebaseFirestore.getInstance().collection("courses").orderBy("students", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                courseListItemList.clear();
-                for (DocumentSnapshot document : value.getDocuments()) {
-                    courseListItemList.add(
-                            new CourseListItem(
-                                    document.getId(),
-                                    document.getString("image"),
-                                    document.getString("name"),
-                                    document.getString("owner"),
-                                    document.getString("description"),
-                                    document.getDouble("students").intValue(),
-                                    document.getDouble("star")));
-                }
-
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        findViewById(R.id.progressBar).setVisibility(View.GONE);
-                        topCourseRecyclerView.setVisibility(View.VISIBLE);
+            public void onComplete(@Nullable Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    courseListItemList.clear();
+                    for (DocumentSnapshot document : task.getResult()) {
+                        courseListItemList.add(
+                                new CourseListItem(
+                                        document.getId(),
+                                        document.getString("image"),
+                                        document.getString("name"),
+                                        document.getString("owner"),
+                                        document.getString("description"),
+                                        document.getDouble("students").intValue(),
+                                        document.getDouble("star")));
                     }
-                };
-                handler.postDelayed(runnable, 1000);
 
-                topCourseAdapter.notifyDataSetChanged();
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            topCourseRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                    };
+                    handler.postDelayed(runnable, 1000);
+
+                    topCourseAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+    private void loadContinueCourse() {
+        FirebaseFirestore.getInstance().collection("courses").orderBy("students", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@Nullable Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    courseListItemList.clear();
+                    for (DocumentSnapshot document : task.getResult()) {
+                        courseListItemList.add(
+                                new CourseListItem(
+                                        document.getId(),
+                                        document.getString("image"),
+                                        document.getString("name"),
+                                        document.getString("owner"),
+                                        document.getString("description"),
+                                        document.getDouble("students").intValue(),
+                                        document.getDouble("star")));
+                    }
+
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            topCourseRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                    };
+                    handler.postDelayed(runnable, 1000);
+
+                    topCourseAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+    private void loadMayLikeCourse() {
+        FirebaseFirestore.getInstance().collection("courses").orderBy("star", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@Nullable Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    courseListItemList.clear();
+                    for (DocumentSnapshot document : task.getResult()) {
+                        courseListItemList.add(
+                                new CourseListItem(
+                                        document.getId(),
+                                        document.getString("image"),
+                                        document.getString("name"),
+                                        document.getString("owner"),
+                                        document.getString("description"),
+                                        document.getDouble("students").intValue(),
+                                        document.getDouble("star")));
+                    }
+
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            topCourseRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                    };
+                    handler.postDelayed(runnable, 1000);
+
+                    topCourseAdapter.notifyDataSetChanged();
+                }
             }
         });
     }
