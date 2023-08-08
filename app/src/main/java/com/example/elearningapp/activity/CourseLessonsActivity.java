@@ -4,6 +4,7 @@ package com.example.elearningapp.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,8 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
     ProgressBar progressBar;
     Button btnReceiveCertificate;
     String description;
+
+    ProgressBar loading;
     boolean isCompleted = false; // Mặc định là chưa hoàn thành
 
     private static final int REQUEST_CERTIFICATE = 1; // Mã yêu cầu cho CertificateActivity
@@ -69,6 +72,8 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
         recyclerView.setAdapter(listAdapter);
         ImageButton lessonList_btn = findViewById(R.id.imageButton9);
         progressBar = findViewById(R.id.progressBar4);
+        loading = findViewById(R.id.progressBar9);
+        recyclerView.setVisibility(View.INVISIBLE);
         boolean isNotificationEnabled = getNotificationState(); // Lấy trạng thái thông báo
 
         btnReceiveCertificate.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +149,15 @@ public class CourseLessonsActivity extends AppCompatActivity implements LessonCl
                                 }
                             }
                         });
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        loading.setVisibility(View.INVISIBLE);
+                    }
+                };
+                handler.postDelayed(runnable, 500);
                 listAdapter.notifyDataSetChanged();
             }
         });

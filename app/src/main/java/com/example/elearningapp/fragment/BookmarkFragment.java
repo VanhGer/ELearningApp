@@ -9,21 +9,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.elearningapp.activity.CourseOverallActivity;
+import com.example.elearningapp.adapter.ContinueCourseAdapter;
 import com.example.elearningapp.interfaces.CourseClickHelper;
 import com.example.elearningapp.interfaces.LessonClickHelper;
 import com.example.elearningapp.R;
 import com.example.elearningapp.adapter.TopCourseAdapter;
+import com.example.elearningapp.object.ContinueCourseObject;
 import com.example.elearningapp.object.CourseListItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -56,8 +60,11 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
     FirebaseAuth mAuth;
     private View rootView;
     private RecyclerView recyclerView;
+    private RecyclerView continueRecyclerView;
     private List<CourseListItem> courseListItemList = new ArrayList<>();
+    private List<ContinueCourseObject> courseContinueList = new ArrayList<>();
     TopCourseAdapter topCourseAdapter;
+    ContinueCourseAdapter continueCourseAdapter;
 
     FirebaseFirestore db;
 
@@ -105,6 +112,11 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
         recyclerView.setAdapter(topCourseAdapter);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        continueRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        continueCourseAdapter = new ContinueCourseAdapter(this.getContext(), courseContinueList, this);
+        continueRecyclerView.setAdapter(continueCourseAdapter);
+
         loadDataFromFirestore(currentUser.getUid(), currentUser.getDisplayName());
         return  rootView;
 
@@ -112,6 +124,7 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
 
     void init(View rootView) {
         recyclerView = rootView.findViewById(R.id.course_list_view);
+        continueRecyclerView = rootView.findViewById(R.id.course_next_item);
     }
 
     private void loadDataFromFirestore(String userId, String userName) {
@@ -121,9 +134,6 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
         colRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-
-
                 for (DocumentSnapshot document : value.getDocuments()) {
                     String courseId = document.getString("courseId");
                     DocumentReference docRef = FirebaseFirestore.getInstance().collection("courses").document(courseId);
@@ -147,6 +157,51 @@ public class BookmarkFragment extends Fragment implements CourseClickHelper {
 
             }
         });
+
+        FirebaseFirestore.getInstance().collection("users")
+                .document(userId).collection("learn").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for (DocumentSnapshot documentSnapshot: value.getDocuments()) {
+                            Log.v("Continue", documentSnapshot.getId());
+                            courseContinueList.clear();
+                            FirebaseFirestore.getInstance()
+                                    .collection("courses")
+                                    .document(documentSnapshot.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            DocumentSnapshot documentSnapshot1 = task.getResult();
+                                            String name = documentSnapshot1.getString("name");
+                                            String image = documentSnapshot1.getString("image");
+                                            Long numLesson = documentSnapshot1.getLong("lesson");
+
+                                            FirebaseFirestore.getInstance().collection("users")
+                                                    .document(userId).collection("learn")
+                                                    .document(documentSnapshot.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            Long cnt = task.getResult().getLong("cnt");
+                                                            if (numLesson != 0) {
+                                                                cnt = cnt * 100 / numLesson;
+                                                            } else {
+                                                                cnt = 0L;
+                                                            }
+                                                            int cntInt = Math.toIntExact(cnt);
+                                                            courseContinueList.add(
+                                                                    new ContinueCourseObject(
+                                                                            documentSnapshot.getId(),
+                                                                            name,
+                                                                            image,
+                                                                            cntInt
+                                                                            ));
+                                                            continueCourseAdapter.notifyDataSetChanged();
+                                                        }
+                                                    });
+                                        }
+                                    });
+                        }
+                    }
+                });
 
     }
     @Override
