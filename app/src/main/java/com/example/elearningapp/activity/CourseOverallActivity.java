@@ -100,9 +100,10 @@ public class CourseOverallActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseFirestore.getInstance().collection("users").document(userId)
-                        .collection("learn").document(courseId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        .collection("learn").document(courseId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
-                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                DocumentSnapshot value = task.getResult();
                                 if (value.exists()) {
                                     Long num = value.getLong("cnt");
                                     FirebaseFirestore.getInstance().collection("courses")
